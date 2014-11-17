@@ -1,10 +1,11 @@
 #include "Edge.h"
 
 
-Edge::Edge(int p_weight) : weight(p_weight)
+Edge::Edge(int p_weight, Vertex dest1, Vertex dest2) : weight(p_weight)
 {
+	destinations.push_back(dest1);
+	destinations.push_back(dest2);
 }
-
 
 Edge::~Edge()
 {
