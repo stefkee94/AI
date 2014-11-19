@@ -66,9 +66,6 @@
     <ClCompile Include="Controller.cpp">
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files\QT</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Controller.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -81,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_MainWindow.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files\QT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
