@@ -1,11 +1,11 @@
 #include "Controller.h"
 
-
-Controller::Controller()
+Controller::Controller() : QObject()
 {
-
+	mainWindow.setWindowTitle(QObject::tr("Short C Editor"));
+	mainWindow.resize(640, 360);
+	mainWindow.show();
 }
-
 
 Controller::~Controller()
 {

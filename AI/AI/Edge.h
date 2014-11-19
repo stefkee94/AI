@@ -1,8 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Vertex.h"
-
+class Vertex;
 class Edge
 {
 private:
