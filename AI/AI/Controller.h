@@ -1,6 +1,7 @@
 #pragma once
+#include <iostream>
 #include <QObject>
-#include <QWidget>
+#include <QtWidgets>
 #include "MainWindow.h"
 
 #include <memory>

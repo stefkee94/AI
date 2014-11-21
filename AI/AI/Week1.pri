@@ -12,13 +12,13 @@ HEADERS += ./Cow.h \
     ./Graph.h \
     ./Hare.h \
     ./Vertex.h \
-    ./Controller.h \
-    ./MainWindow.h
+    ./MainWindow.h \
+    ./Controller.h
 SOURCES += ./Main.cpp \
     ./Cow.cpp \
     ./Edge.cpp \
     ./Graph.cpp \
     ./Hare.cpp \
     ./Vertex.cpp \
-    ./Controller.cpp \
-    ./MainWindow.cpp
+    ./MainWindow.cpp \
+    ./Controller.cpp

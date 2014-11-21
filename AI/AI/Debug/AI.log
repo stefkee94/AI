@@ -1,20 +1,14 @@
-﻿Build started 11/19/2014 10:55:03 PM.
+﻿Build started 11/21/2014 6:37:41 PM.
      1>Project "C:\Users\stefan\Documents\SourceTree\AI\AI\AI\AI.vcxproj" on node 2 (Build target(s)).
-     1>CustomBuild:
-         Moc'ing MainWindow.h...
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_Controller.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_Controller.cpp, GeneratedFiles\Release\moc_Controller.cpp.
      1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(935,5): warning MSB8027: Two or more files with the name of moc_MainWindow.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are GeneratedFiles\Debug\moc_MainWindow.cpp, GeneratedFiles\Release\moc_MainWindow.cpp.
-       ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\stefan\Documents\SourceTree\AI\AI\packages\SDL.1.2.15.15\build\native\../..//build/native/include/ /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include /I.\GeneratedFiles\Debug /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtCore /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtGui /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtOpenGL /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtWidgets /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_SDL /D QT_DLL /D QWT_DLL /D _CRT_SECURE_NO_WARNINGS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Controller.cpp GeneratedFiles\Debug\moc_Controller.cpp GeneratedFiles\Debug\moc_MainWindow.cpp Main.cpp MainWindow.cpp
-         moc_MainWindow.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\stefan\Documents\SourceTree\AI\AI\packages\SDL.1.2.15.15\build\native\../..//build/native/include/ /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include /I.\GeneratedFiles\Debug /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtCore /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtGui /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtWidgets /IC:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\include\QtOpenGL /Zi /nologo /W3 /WX- /sdl /Od /Oy- /GL /D HAS_SDL /D QT_DLL /D QWT_DLL /D _CRT_SECURE_NO_WARNINGS /D QT_WIDGETS_LIB /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt MainWindow.cpp
          MainWindow.cpp
-         Main.cpp
-         moc_Controller.cpp
-         Controller.cpp
+     1>MainWindow.cpp(17): warning C4129: 'R' : unrecognized character escape sequence
+     1>MainWindow.cpp(17): warning C4129: 'c' : unrecognized character escape sequence
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.lib" /MACHINE:X86 Debug\Controller.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Qt\Qt5.3.2.1\5.3\msvc2013_opengl\lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib qtmaind.lib Qt5Cored.lib Qt5Guid.lib Qt5OpenGLd.lib opengl32.lib glu32.lib Qt5Widgetsd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.pdb" /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.lib" /MACHINE:X86 Debug\Controller.obj
          Debug\Cow.obj
          Debug\Edge.obj
          Debug\moc_Controller.obj
@@ -24,86 +18,12 @@
          Debug\Main.obj
          Debug\MainWindow.obj
          Debug\Vertex.obj
-     1>Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall QString::~QString(void)" (__imp_??1QString@@QAE@XZ) referenced in function "public: __thiscall Controller::Controller(void)" (??0Controller@@QAE@XZ)
-     1>Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: static class QString __cdecl QObject::tr(char const *,char const *,int)" (__imp_?tr@QObject@@SA?AVQString@@PBD0H@Z) referenced in function "public: __thiscall Controller::Controller(void)" (??0Controller@@QAE@XZ)
-     1>Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall QObject::QObject(class QObject *)" (__imp_??0QObject@@QAE@PAV0@@Z) referenced in function "public: __thiscall Controller::Controller(void)" (??0Controller@@QAE@XZ)
-     1>Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall QObject::~QObject(void)" (__imp_??1QObject@@UAE@XZ) referenced in function __unwindfunclet$??0Controller@@QAE@XZ$0
-     1>Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __thiscall QWidget::setWindowTitle(class QString const &)" (__imp_?setWindowTitle@QWidget@@QAEXABVQString@@@Z) referenced in function "public: __thiscall Controller::Controller(void)" (??0Controller@@QAE@XZ)
-     1>Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __thiscall QWidget::show(void)" (__imp_?show@QWidget@@QAEXXZ) referenced in function "public: __thiscall Controller::Controller(void)" (??0Controller@@QAE@XZ)
-     1>Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __thiscall QWidget::resize(int,int)" (__imp_?resize@QWidget@@QAEXHH@Z) referenced in function "public: __thiscall Controller::Controller(void)" (??0Controller@@QAE@XZ)
-     1>Controller.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::childEvent(class QChildEvent *)" (?childEvent@QObject@@MAEXPAVQChildEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::childEvent(class QChildEvent *)" (?childEvent@QObject@@MAEXPAVQChildEvent@@@Z)
-     1>Controller.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::connectNotify(class QMetaMethod const &)" (?connectNotify@QObject@@MAEXABVQMetaMethod@@@Z)
-     1>MainWindow.obj : error LNK2019: unresolved external symbol "protected: virtual void __thiscall QObject::connectNotify(class QMetaMethod const &)" (?connectNotify@QObject@@MAEXABVQMetaMethod@@@Z) referenced in function __ehhandler$?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXII@Z
-     1>Controller.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::customEvent(class QEvent *)" (?customEvent@QObject@@MAEXPAVQEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::customEvent(class QEvent *)" (?customEvent@QObject@@MAEXPAVQEvent@@@Z)
-     1>Controller.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::disconnectNotify(class QMetaMethod const &)" (?disconnectNotify@QObject@@MAEXABVQMetaMethod@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::disconnectNotify(class QMetaMethod const &)" (?disconnectNotify@QObject@@MAEXABVQMetaMethod@@@Z)
-     1>Controller.obj : error LNK2001: unresolved external symbol "public: virtual bool __thiscall QObject::event(class QEvent *)" (?event@QObject@@UAE_NPAVQEvent@@@Z)
-     1>Controller.obj : error LNK2001: unresolved external symbol "public: virtual bool __thiscall QObject::eventFilter(class QObject *,class QEvent *)" (?eventFilter@QObject@@UAE_NPAV1@PAVQEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual bool __thiscall QObject::eventFilter(class QObject *,class QEvent *)" (?eventFilter@QObject@@UAE_NPAV1@PAVQEvent@@@Z)
-     1>Controller.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::timerEvent(class QTimerEvent *)" (?timerEvent@QObject@@MAEXPAVQTimerEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QObject::timerEvent(class QTimerEvent *)" (?timerEvent@QObject@@MAEXPAVQTimerEvent@@@Z)
-     1>moc_Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) void __cdecl qt_assert(char const *,char const *,int)" (__imp_?qt_assert@@YAXPBD0H@Z) referenced in function "public: class QObjectData * __thiscall QScopedPointer<class QObjectData,struct QScopedPointerDeleter<class QObjectData> >::operator->(void)const " (??C?$QScopedPointer@VQObjectData@@U?$QScopedPointerDeleter@VQObjectData@@@@@@QBEPAVQObjectData@@XZ)
-     1>moc_MainWindow.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) void __cdecl qt_assert(char const *,char const *,int)" (__imp_?qt_assert@@YAXPBD0H@Z)
-     1>moc_Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: struct QMetaObject * __thiscall QObjectData::dynamicMetaObject(void)const " (__imp_?dynamicMetaObject@QObjectData@@QBEPAUQMetaObject@@XZ) referenced in function "public: virtual struct QMetaObject const * __thiscall Controller::metaObject(void)const " (?metaObject@Controller@@UBEPBUQMetaObject@@XZ)
-     1>moc_MainWindow.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: struct QMetaObject * __thiscall QObjectData::dynamicMetaObject(void)const " (__imp_?dynamicMetaObject@QObjectData@@QBEPAUQMetaObject@@XZ)
-     1>moc_Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual void * __thiscall QObject::qt_metacast(char const *)" (__imp_?qt_metacast@QObject@@UAEPAXPBD@Z) referenced in function "public: virtual void * __thiscall Controller::qt_metacast(char const *)" (?qt_metacast@Controller@@UAEPAXPBD@Z)
-     1>moc_Controller.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual int __thiscall QObject::qt_metacall(enum QMetaObject::Call,int,void * *)" (__imp_?qt_metacall@QObject@@UAEHW4Call@QMetaObject@@HPAPAX@Z) referenced in function "public: virtual int __thiscall Controller::qt_metacall(enum QMetaObject::Call,int,void * *)" (?qt_metacall@Controller@@UAEHW4Call@QMetaObject@@HPAPAX@Z)
-     1>moc_Controller.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: static struct QMetaObject const QObject::staticMetaObject" (__imp_?staticMetaObject@QObject@@2UQMetaObject@@B)
-     1>moc_MainWindow.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual void * __thiscall QMainWindow::qt_metacast(char const *)" (__imp_?qt_metacast@QMainWindow@@UAEPAXPBD@Z) referenced in function "public: virtual void * __thiscall MainWindow::qt_metacast(char const *)" (?qt_metacast@MainWindow@@UAEPAXPBD@Z)
-     1>moc_MainWindow.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual int __thiscall QMainWindow::qt_metacall(enum QMetaObject::Call,int,void * *)" (__imp_?qt_metacall@QMainWindow@@UAEHW4Call@QMetaObject@@HPAPAX@Z) referenced in function "public: virtual int __thiscall MainWindow::qt_metacall(enum QMetaObject::Call,int,void * *)" (?qt_metacall@MainWindow@@UAEHW4Call@QMetaObject@@HPAPAX@Z)
-     1>moc_MainWindow.obj : error LNK2001: unresolved external symbol "__declspec(dllimport) public: static struct QMetaObject const QMainWindow::staticMetaObject" (__imp_?staticMetaObject@QMainWindow@@2UQMetaObject@@B)
-     1>Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall QApplication::QApplication(int &,char * *,int)" (__imp_??0QApplication@@QAE@AAHPAPADH@Z) referenced in function _main
-     1>Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall QApplication::~QApplication(void)" (__imp_??1QApplication@@UAE@XZ) referenced in function _main
-     1>Main.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: static int __cdecl QApplication::exec(void)" (__imp_?exec@QApplication@@SAHXZ) referenced in function _main
-     1>MainWindow.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: __thiscall QMainWindow::QMainWindow(class QWidget *,class QFlags<enum Qt::WindowType>)" (__imp_??0QMainWindow@@QAE@PAVQWidget@@V?$QFlags@W4WindowType@Qt@@@@@Z) referenced in function "public: __thiscall MainWindow::MainWindow(class QWidget *)" (??0MainWindow@@QAE@PAVQWidget@@@Z)
-     1>MainWindow.obj : error LNK2019: unresolved external symbol "__declspec(dllimport) public: virtual __thiscall QMainWindow::~QMainWindow(void)" (__imp_??1QMainWindow@@UAE@XZ) referenced in function "public: virtual __thiscall MainWindow::~MainWindow(void)" (??1MainWindow@@UAE@XZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::actionEvent(class QActionEvent *)" (?actionEvent@QWidget@@MAEXPAVQActionEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::changeEvent(class QEvent *)" (?changeEvent@QWidget@@MAEXPAVQEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::closeEvent(class QCloseEvent *)" (?closeEvent@QWidget@@MAEXPAVQCloseEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QMainWindow::contextMenuEvent(class QContextMenuEvent *)" (?contextMenuEvent@QMainWindow@@MAEXPAVQContextMenuEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual class QMenu * __thiscall QMainWindow::createPopupMenu(void)" (?createPopupMenu@QMainWindow@@UAEPAVQMenu@@XZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual int __thiscall QWidget::devType(void)const " (?devType@QWidget@@UBEHXZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::dragEnterEvent(class QDragEnterEvent *)" (?dragEnterEvent@QWidget@@MAEXPAVQDragEnterEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::dragLeaveEvent(class QDragLeaveEvent *)" (?dragLeaveEvent@QWidget@@MAEXPAVQDragLeaveEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::dragMoveEvent(class QDragMoveEvent *)" (?dragMoveEvent@QWidget@@MAEXPAVQDragMoveEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::dropEvent(class QDropEvent *)" (?dropEvent@QWidget@@MAEXPAVQDropEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::enterEvent(class QEvent *)" (?enterEvent@QWidget@@MAEXPAVQEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual bool __thiscall QMainWindow::event(class QEvent *)" (?event@QMainWindow@@MAE_NPAVQEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::focusInEvent(class QFocusEvent *)" (?focusInEvent@QWidget@@MAEXPAVQFocusEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual bool __thiscall QWidget::focusNextPrevChild(bool)" (?focusNextPrevChild@QWidget@@MAE_N_N@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::focusOutEvent(class QFocusEvent *)" (?focusOutEvent@QWidget@@MAEXPAVQFocusEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual bool __thiscall QWidget::hasHeightForWidth(void)const " (?hasHeightForWidth@QWidget@@UBE_NXZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual int __thiscall QWidget::heightForWidth(int)const " (?heightForWidth@QWidget@@UBEHH@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::hideEvent(class QHideEvent *)" (?hideEvent@QWidget@@MAEXPAVQHideEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::initPainter(class QPainter *)const " (?initPainter@QWidget@@MBEXPAVQPainter@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::inputMethodEvent(class QInputMethodEvent *)" (?inputMethodEvent@QWidget@@MAEXPAVQInputMethodEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual class QVariant __thiscall QWidget::inputMethodQuery(enum Qt::InputMethodQuery)const " (?inputMethodQuery@QWidget@@UBE?AVQVariant@@W4InputMethodQuery@Qt@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::keyPressEvent(class QKeyEvent *)" (?keyPressEvent@QWidget@@MAEXPAVQKeyEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::keyReleaseEvent(class QKeyEvent *)" (?keyReleaseEvent@QWidget@@MAEXPAVQKeyEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::leaveEvent(class QEvent *)" (?leaveEvent@QWidget@@MAEXPAVQEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual int __thiscall QWidget::metric(enum QPaintDevice::PaintDeviceMetric)const " (?metric@QWidget@@MBEHW4PaintDeviceMetric@QPaintDevice@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual class QSize __thiscall QWidget::minimumSizeHint(void)const " (?minimumSizeHint@QWidget@@UBE?AVQSize@@XZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::mouseDoubleClickEvent(class QMouseEvent *)" (?mouseDoubleClickEvent@QWidget@@MAEXPAVQMouseEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::mouseMoveEvent(class QMouseEvent *)" (?mouseMoveEvent@QWidget@@MAEXPAVQMouseEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::mousePressEvent(class QMouseEvent *)" (?mousePressEvent@QWidget@@MAEXPAVQMouseEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::mouseReleaseEvent(class QMouseEvent *)" (?mouseReleaseEvent@QWidget@@MAEXPAVQMouseEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::moveEvent(class QMoveEvent *)" (?moveEvent@QWidget@@MAEXPAVQMoveEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual bool __thiscall QWidget::nativeEvent(class QByteArray const &,void *,long *)" (?nativeEvent@QWidget@@MAE_NABVQByteArray@@PAXPAJ@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual class QPaintEngine * __thiscall QWidget::paintEngine(void)const " (?paintEngine@QWidget@@UBEPAVQPaintEngine@@XZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::paintEvent(class QPaintEvent *)" (?paintEvent@QWidget@@MAEXPAVQPaintEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual class QPaintDevice * __thiscall QWidget::redirected(class QPoint *)const " (?redirected@QWidget@@MBEPAVQPaintDevice@@PAVQPoint@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::resizeEvent(class QResizeEvent *)" (?resizeEvent@QWidget@@MAEXPAVQResizeEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual void __thiscall QWidget::setVisible(bool)" (?setVisible@QWidget@@UAEX_N@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual class QPainter * __thiscall QWidget::sharedPainter(void)const " (?sharedPainter@QWidget@@MBEPAVQPainter@@XZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::showEvent(class QShowEvent *)" (?showEvent@QWidget@@MAEXPAVQShowEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "public: virtual class QSize __thiscall QWidget::sizeHint(void)const " (?sizeHint@QWidget@@UBE?AVQSize@@XZ)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::tabletEvent(class QTabletEvent *)" (?tabletEvent@QWidget@@MAEXPAVQTabletEvent@@@Z)
-     1>MainWindow.obj : error LNK2001: unresolved external symbol "protected: virtual void __thiscall QWidget::wheelEvent(class QWheelEvent *)" (?wheelEvent@QWidget@@MAEXPAVQWheelEvent@@@Z)
-     1>C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.exe : fatal error LNK1120: 69 unresolved externals
-     1>Done Building Project "C:\Users\stefan\Documents\SourceTree\AI\AI\AI\AI.vcxproj" (Build target(s)) -- FAILED.
+     1>LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/LTCG' specification
+         Generating code
+         Finished generating code
+         AI.vcxproj -> C:\Users\stefan\Documents\SourceTree\AI\AI\Debug\Week1.exe
+     1>Done Building Project "C:\Users\stefan\Documents\SourceTree\AI\AI\AI\AI.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:03.22
+Time Elapsed 00:00:05.11

@@ -46,6 +46,9 @@
       <Extensions>cpp;moc</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{080764e2-2270-461c-a3bb-57450ebd2d3c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graph.cpp">
@@ -67,6 +70,9 @@
       <Filter>Source Files\Controller</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files\QT</Filter>
+    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_Controller.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
@@ -78,9 +84,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_MainWindow.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="MainWindow.cpp">
-      <Filter>Source Files\QT</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,5 +109,13 @@
     <CustomBuild Include="MainWindow.h">
       <Filter>Header Files\QT</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\cow.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="..\Resources\chicken.png">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

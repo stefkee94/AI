@@ -2,7 +2,9 @@
 
 Controller::Controller() : QObject()
 {
-	mainWindow.setWindowTitle(QObject::tr("Short C Editor"));
+	Graph graph = Graph();
+
+	mainWindow.setWindowTitle(QObject::tr("Week 1 AI"));
 	mainWindow.resize(640, 360);
 	mainWindow.show();
 }

@@ -22,7 +22,7 @@ LIBS += -lkernel32 \
     -lodbc32 \
     -lodbccp32
 DEPENDPATH += .
-MOC_DIR += ./GeneratedFiles/debug
+MOC_DIR += ./GeneratedFiles/Debug
 OBJECTS_DIR += debug
 UI_DIR += ./GeneratedFiles
 RCC_DIR += ./GeneratedFiles
