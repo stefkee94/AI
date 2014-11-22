@@ -21,6 +21,7 @@ LIBS += -lkernel32 \
     -luuid \
     -lodbc32 \
     -lodbccp32
+RESOURCES += myresourcefile.qrc
 DEPENDPATH += .
 MOC_DIR += ./GeneratedFiles/Debug
 OBJECTS_DIR += debug

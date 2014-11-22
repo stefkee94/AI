@@ -3,6 +3,7 @@
 #include <QObject>
 #include <QtWidgets>
 #include <qpainter.h>
+#include "Graph.h"
 
 class MainWindow : public QWidget
 {
@@ -12,5 +13,10 @@ public:
 	MainWindow(QWidget *parent = 0);
 	virtual ~MainWindow();
 	void paintEvent(QPaintEvent *e);
+	void showGraph(Graph graph);
+	void showPlayers(Graph graph);
+private:
+	std::vector<Vertex> vertices;
+	std::vector<Edge> edges;
 };
 

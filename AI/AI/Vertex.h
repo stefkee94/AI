@@ -10,13 +10,14 @@
 class Vertex
 {
 private:
-	std::vector<Edge> edges;
+	//std::vector<Edge> edges;
 	bool visited;
+	int x_pos, y_pos;
 	std::weak_ptr<Cow> cow;
 	std::weak_ptr<Hare> hare;
 
 public:
-	Vertex();
+	Vertex(int x_pos, int y_pos);
 	~Vertex();
 
 	// Functions
@@ -26,8 +27,12 @@ public:
 	void SetHare(std::shared_ptr<Hare> p_hare);
 
 	bool IsVisited();
-	std::vector<Edge> GetEdges();
+	//std::vector<Edge> GetEdges();
 	std::shared_ptr<Cow> GetCow();
 	std::shared_ptr<Hare> GetHare();
+	int getXPos();
+	void setXPos(int position);
+	int getYPos();
+	void setYPos(int position);
 };
 

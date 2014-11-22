@@ -1,8 +1,9 @@
 #include "Vertex.h"
 
 
-Vertex::Vertex()
+Vertex::Vertex(int x_pos, int y_pos) : x_pos(x_pos), y_pos(y_pos)
 {
+	visited = false;
 }
 
 
@@ -17,7 +18,7 @@ void Vertex::SetVisited(bool value)
 
 void Vertex::AddObject(Edge edge)
 {
-	edges.push_back(edge);
+	//edges.push_back(edge);
 }
 
 void Vertex::SetCow(std::shared_ptr<Cow> p_cow)
@@ -35,10 +36,10 @@ bool Vertex::IsVisited()
 	return visited;
 }
 
-std::vector<Edge> Vertex::GetEdges()
-{
-	return edges;
-}
+//std::vector<Edge> Vertex::GetEdges()
+//{
+//	return edges;
+//}
 
 std::shared_ptr<Cow> Vertex::GetCow()
 {
@@ -48,4 +49,24 @@ std::shared_ptr<Cow> Vertex::GetCow()
 std::shared_ptr<Hare> Vertex::GetHare()
 {
 	return hare.lock();
+}
+
+int Vertex::getXPos()
+{
+	return x_pos;
+}
+
+void Vertex::setXPos(int position)
+{
+	x_pos = position;
+}
+
+int Vertex::getYPos()
+{
+	return y_pos;
+}
+
+void Vertex::setYPos(int position)
+{
+	y_pos = position;
 }

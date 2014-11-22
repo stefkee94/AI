@@ -15,6 +15,7 @@ public:
 	// Functions
 	int GetWeight();
 	std::vector<Vertex> GetDestinations();
+	void setPosition(Vertex dests);
 	void AddDestination(Vertex destination);
 };
 

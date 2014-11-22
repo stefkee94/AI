@@ -3,8 +3,8 @@
 
 Edge::Edge(int p_weight, Vertex dest1, Vertex dest2) : weight(p_weight)
 {
-	destinations.push_back(dest1);
-	destinations.push_back(dest2);
+	setPosition(dest1);
+	setPosition(dest2);
 }
 
 Edge::~Edge()
@@ -24,4 +24,11 @@ std::vector<Vertex> Edge::GetDestinations()
 void Edge::AddDestination(Vertex destination)
 {
 	destinations.push_back(destination);
+}
+
+void Edge::setPosition(Vertex pos)
+{
+	pos.setXPos(pos.getXPos() + 10);
+	pos.setYPos(pos.getYPos() + 10);
+	destinations.push_back(pos);
 }

@@ -3,15 +3,15 @@
 Controller::Controller() : QObject()
 {
 	Graph graph = Graph();
-
+	
 	mainWindow.setWindowTitle(QObject::tr("Week 1 AI"));
-	mainWindow.resize(640, 360);
+	mainWindow.resize(1000,500);
+	mainWindow.showGraph(graph);
 	mainWindow.show();
 }
 
 Controller::~Controller()
 {
-
 }
 
 
