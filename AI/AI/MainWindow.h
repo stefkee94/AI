@@ -15,8 +15,14 @@ public:
 	void paintEvent(QPaintEvent *e);
 	void showGraph(Graph graph);
 	void showPlayers(Graph graph);
+
+protected:
+	virtual void keyPressEvent(QKeyEvent* e);
+
 private:
 	std::vector<Vertex> vertices;
 	std::vector<Edge> edges;
+	QImage image;
+	Graph graph;
 };
 
