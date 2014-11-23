@@ -7,6 +7,8 @@
 #include "Cow.h"
 #include "Hare.h"
 
+class Cow;
+class Hare;
 class Vertex
 {
 private:

@@ -105,13 +105,11 @@
     <CustomBuild Include="MainWindow.h">
       <Filter>Header Files\QT</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Resources\cow.png">
+    <CustomBuild Include="..\Resources\chicken.png">
       <Filter>Resources</Filter>
-    </Image>
-    <Image Include="..\Resources\chicken.png">
+    </CustomBuild>
+    <CustomBuild Include="..\Resources\cow.png">
       <Filter>Resources</Filter>
-    </Image>
+    </CustomBuild>
   </ItemGroup>
 </Project>

@@ -1,21 +1,23 @@
 #pragma once
 
 #include <vector>
+#include <memory>
+
 class Vertex;
 class Edge
 {
 private:
 	int weight;
-	std::vector<Vertex> destinations;
+	std::vector<std::shared_ptr<Vertex>> destinations;
 
 public:
-	Edge(int p_weight, Vertex dest1, Vertex dest2);
+	Edge(int p_weight, std::shared_ptr<Vertex> dest1, std::shared_ptr<Vertex> dest2);
 	~Edge();
 
 	// Functions
 	int GetWeight();
-	std::vector<Vertex> GetDestinations();
-	void setPosition(Vertex dests);
-	void AddDestination(Vertex destination);
+	std::vector<std::shared_ptr<Vertex>> GetDestinations();
+	void setPosition(std::shared_ptr<Vertex> dests);
+	void AddDestination(std::shared_ptr<Vertex> destination);
 };
 

@@ -2,22 +2,36 @@
 
 Controller::Controller() : QObject()
 {
-	Graph graph = Graph();
+	cow = std::make_shared<Cow>();
+	hare = std::make_shared<Hare>();
+
+	graph.Init(cow, hare);
 	
 	mainWindow.setWindowTitle(QObject::tr("Week 1 AI"));
 	mainWindow.resize(1000,500);
-	mainWindow.showGraph(graph);
-	mainWindow.show();
+	
+	Repaint();
 }
 
 Controller::~Controller()
 {
 }
 
-
 void Controller::Click()
 {
-	// Handle user input click
+	Update();
+}
+
+void Controller::Update()
+{
+
+}
+
+void Controller::Repaint()
+{
+	mainWindow.showGraph(graph);
+	mainWindow.showPlayers(cow, hare);
+	mainWindow.show();//QWidget::update();
 }
 
 void Controller::MoveCow()
@@ -30,4 +44,3 @@ void Controller::MoveHare()
 	// Only called when the cow is on the same position as the hare
 	// Move the hare to a random position
 }
-

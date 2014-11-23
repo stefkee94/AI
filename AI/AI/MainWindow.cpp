@@ -12,34 +12,39 @@ void MainWindow::showGraph(Graph graph)
 	vertices = graph.getPositions();
 	edges = graph.getEdges();
 	QWidget::update();
-
-	showPlayers(graph);
 }
 
-void MainWindow::showPlayers(Graph graph)
+void MainWindow::showPlayers(std::shared_ptr<Cow> p_cow, std::shared_ptr<Hare> p_hare)
 {
-	
+	cow = p_cow;
+	hare = p_hare;
 }
 
 void MainWindow::paintEvent(QPaintEvent *e)
 {
-
 	QPainter painter(this);
 	for (int i = 0; i < vertices.size(); i++)
 	{
 		painter.setBrush(Qt::darkBlue);
-		painter.drawEllipse(vertices[i].getXPos(), vertices[i].getYPos(), 20, 20);
+		painter.drawEllipse(vertices[i]->getXPos(), vertices[i]->getYPos(), 20, 20);
 	}
 
 	for (int j = 0; j < edges.size(); j++)
 	{
 		painter.setPen(QPen(QColor(Qt::red), 3, Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));
-		painter.drawLine(edges[j].GetDestinations()[0].getXPos(), edges[j].GetDestinations()[0].getYPos(),
-						 edges[j].GetDestinations()[1].getXPos(),edges[j].GetDestinations()[1].getYPos());
+		painter.drawLine(edges[j]->GetDestinations()[0]->getXPos(), edges[j]->GetDestinations()[0]->getYPos(),
+			edges[j]->GetDestinations()[1]->getXPos(), edges[j]->GetDestinations()[1]->getYPos());
 	}
-	// Not working 
-	/*QImage img("C:\42IN14SAi\chicken.png");
-	painter.drawImage(QRect(100, 50, 100, 100), img);*/
+
+	// Paint the sprites
+	std::shared_ptr<Cow> t_cow = cow.lock();
+	std::shared_ptr<Hare> t_hare = hare.lock();
+
+	QImage img_cow(t_cow->GetImageLink());
+	QImage img_hare(t_hare->GetImageLink());
+
+	painter.drawImage(t_cow->GetVertex()->getXPos(), t_cow->GetVertex()->getYPos(), img_cow);
+	painter.drawImage(t_hare->GetVertex()->getXPos(), t_hare->GetVertex()->getYPos(), img_hare);
 }
 
 MainWindow::~MainWindow()
