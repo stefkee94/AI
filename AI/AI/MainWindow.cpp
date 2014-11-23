@@ -1,14 +1,14 @@
 #include <QtWidgets>
 #include "MainWindow.h"
-
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
-{
-
+{ 
 }
 
 void MainWindow::showGraph(Graph graph)
 {
+	graph = graph;
 	vertices = graph.getPositions();
 	edges = graph.getEdges();
 	QWidget::update();
@@ -18,6 +18,16 @@ void MainWindow::showPlayers(std::shared_ptr<Cow> p_cow, std::shared_ptr<Hare> p
 {
 	cow = p_cow;
 	hare = p_hare;
+}
+
+void MainWindow::keyPressEvent(QKeyEvent *e)
+{
+	if (e->key() == Qt::Key_Space)
+	{
+		std::cout << "space key pressed " << std::endl;
+		// search closest and move
+		//graph.Search()
+	}
 }
 
 void MainWindow::paintEvent(QPaintEvent *e)
@@ -45,6 +55,17 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 	painter.drawImage(t_cow->GetVertex()->getXPos(), t_cow->GetVertex()->getYPos(), img_cow);
 	painter.drawImage(t_hare->GetVertex()->getXPos(), t_hare->GetVertex()->getYPos(), img_hare);
+
+	//QRectF target(edges[0].GetDestinations()[0].getXPos()-10, edges[0].GetDestinations()[0].getYPos()-10, 50.0, 50.0);
+	//QRectF source(0.0, 0.0, 70.0, 40.0);
+	//QImage image("C:\\42IN14SAi\\chicken.png");
+	//painter.drawImage(target, image, source);
+
+	//QRectF target2(edges[2].GetDestinations()[0].getXPos() - 10, edges[2].GetDestinations()[0].getYPos() - 10, 50.0, 50.0);
+	//QRectF source2(0.0, 0.0, 70.0, 40.0);
+	//QImage image2("C:\\42IN14SAi\\cow.png");
+	//painter.drawImage(target2, image2, source2);
+	// Not working 
 }
 
 MainWindow::~MainWindow()

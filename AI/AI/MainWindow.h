@@ -25,5 +25,8 @@ private:
 	std::vector<std::shared_ptr<Edge>> edges;
 	std::weak_ptr<Cow> cow;
 	std::weak_ptr<Hare> hare;
+
+protected:
+	virtual void keyPressEvent(QKeyEvent* e);
 };
 

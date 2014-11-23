@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Build started 23-11-2014 15:16:10.
      1>Project "C:\Users\Sjoerd\Documents\School\Jaar4\Artificial intelligence\AI\Week2\Week2.vcxproj" on node 3 (Rebuild target(s)).
      1>Building with tools version "12.0".
@@ -494,6 +495,9 @@
      1>Target "Rebuild" in file "C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.BuildSteps.Targets" from project "C:\Users\Sjoerd\Documents\School\Jaar4\Artificial intelligence\AI\Week2\Week2.vcxproj" (entry point):
      1>Done building target "Rebuild" in project "Week2.vcxproj".
      1>Done Building Project "C:\Users\Sjoerd\Documents\School\Jaar4\Artificial intelligence\AI\Week2\Week2.vcxproj" (Rebuild target(s)).
+=======
+﻿Build started 11/23/2014 2:50:15 PM.
+>>>>>>> fd4fbdb33b598cedd7997a3f54c234ff2b4f59b7
 
 Build succeeded.
 
