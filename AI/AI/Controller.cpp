@@ -7,8 +7,9 @@ Controller::Controller() : QObject()
 
 	graph.Init(cow, hare);
 	
-	mainWindow.setWindowTitle(QObject::tr("Week 1 AI"));
-	mainWindow.resize(1000,500);
+	mainWindow = new MainWindow();
+	mainWindow->setWindowTitle(QObject::tr("Week 1 AI"));
+	mainWindow->resize(1000,500);
 	
 	Repaint();
 }
@@ -24,19 +25,19 @@ void Controller::Click()
 
 void Controller::Update()
 {
-
+	MoveCow();
 }
 
 void Controller::Repaint()
 {
-	mainWindow.showGraph(graph);
-	mainWindow.showPlayers(cow, hare);
-	mainWindow.show();//QWidget::update();
+	mainWindow->showGraph(graph, this);
+	mainWindow->showPlayers(cow, hare);
+	mainWindow->show();//QWidget::update();
 }
 
 void Controller::MoveCow()
 {
-	// Move the cow to the position closest to the hare
+	
 }
 
 void Controller::MoveHare()

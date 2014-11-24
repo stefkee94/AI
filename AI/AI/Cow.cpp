@@ -2,7 +2,7 @@
 
 Cow::Cow()
 {
-	img_link = "C:\\Users\\Sjoerd\\Pictures\\KMINT_Sprites\\cow-2.png";
+	img_link = "C:\\Users\\Sjoerd Nijhof\\Desktop\\KMINT_Sprites\\lemmling_Cartoon_cow.png";
 }
 
 Cow::~Cow()

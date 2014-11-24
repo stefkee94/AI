@@ -10,6 +10,7 @@
 #include "Hare.h"
 #include "Graph.h"
 
+class MainWindow;
 class Controller : public QObject
 {
 	Q_OBJECT
@@ -17,12 +18,13 @@ class Controller : public QObject
 public:
 	Controller();
 	virtual ~Controller();
+	void Click();
 
 private:
 	bool is_running;
 
 	// QT init
-	MainWindow mainWindow;
+	MainWindow* mainWindow;
 
 	// Variables
 	Graph graph;
@@ -31,12 +33,11 @@ private:
 
 	// Functions
 	void Start();
-	void Click();
 	void MoveCow();
 	void MoveHare();
 	void Update();
 	void Repaint();
-
+	
 
 };
 

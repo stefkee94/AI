@@ -1,11 +1,9 @@
 #include "Vertex.h"
 
-
 Vertex::Vertex(int x_pos, int y_pos) : x_pos(x_pos), y_pos(y_pos)
 {
 	visited = false;
 }
-
 
 Vertex::~Vertex()
 {
@@ -16,9 +14,9 @@ void Vertex::SetVisited(bool value)
 	visited = value;
 }
 
-void Vertex::AddObject(Edge edge)
+void Vertex::AddObject(std::shared_ptr<Edge> edge)
 {
-	//edges.push_back(edge);
+	edges.push_back(edge);
 }
 
 void Vertex::SetCow(std::shared_ptr<Cow> p_cow)
@@ -36,10 +34,10 @@ bool Vertex::IsVisited()
 	return visited;
 }
 
-//std::vector<Edge> Vertex::GetEdges()
-//{
-//	return edges;
-//}
+std::vector<std::shared_ptr<Edge>> Vertex::GetEdges()
+{
+	return edges;
+}
 
 std::shared_ptr<Cow> Vertex::GetCow()
 {
