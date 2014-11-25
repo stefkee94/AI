@@ -51,16 +51,36 @@ void Graph::AddEdges(std::shared_ptr<Vertex> start, std::shared_ptr<Vertex> end)
 	end->AddObject(edge);
 }
 
-void Graph::Search(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> current_node, std::shared_ptr<Vertex> end_node, std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
+void Graph::Search(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node, std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 {
-	FillOpenList(current_node);
+	FillOpenList(start_node);
 
+	if (distances.size() > 0)
+		FillClosedList(distances, cow, hare);
 	// Calculate distance of the node to the end_node
-	CalculateDistance(current_node, end_node);
+	//CalculateDistance(start_node, end_node);
 }
 
 void Graph::FillOpenList(std::shared_ptr<Vertex> current_node)
 {
+	//First add current node to Closed list
+	if (closed_list.empty())
+		closed_list.push_back(current_node);
+	bool is_same = false;
+	for (int c = 0; c < closed_list.size(); c++)
+	{
+		if (closed_list.at(c)->getWeight() != current_node->getWeight())
+			continue;
+		else
+		{
+			is_same = true;
+			break;
+		}
+	}
+
+	if (!is_same)
+		closed_list.push_back(current_node);
+
 	std::vector<std::shared_ptr<Edge>> edges = current_node->GetEdges();
 
 	for (int i = 0; i < edges.size(); i++)
@@ -82,6 +102,11 @@ void Graph::FillOpenList(std::shared_ptr<Vertex> current_node)
 						//		 And add this as the new position.
 						//
 						//open_list.push_back(positions.at(x));
+						/*for (int c = 0; c < closed_list.size() - 1; c++)
+						{
+							if (closed_list[c]->getWeight() == )
+						}*/
+						CalculateDistance(closed_list.at(closed_list.size()-1), open_list.at(x), edges.at(x));
 					}
 					else
 					{
@@ -93,9 +118,64 @@ void Graph::FillOpenList(std::shared_ptr<Vertex> current_node)
 	}
 }
 
-void Graph::CalculateDistance(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node)
+void Graph::FillClosedList(std::vector<int> lowest_distance, std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 {
+	for (int openl = 0; openl < open_list.size(); openl++)
+	{
+		std::vector<std::shared_ptr<Edge>> tmp_edges = open_list[openl]->GetEdges();
+		for (int w = 0; w < tmp_edges.size(); w++)
+		{
+			if (tmp_edges[w]->GetWeight() == lowest_distance.at(0))
+			{
+				std::shared_ptr<Vertex> to_closed_list = open_list.at(openl);
+				closed_list.push_back(to_closed_list);
+				open_list.erase(open_list.begin() + openl);
+				to_closed_list->SetCow(cow);
+				cow->SetVertex(closed_list.at(closed_list.size()-1));
+				return;
+			}
+		}
+	}
+}
 
+void Graph::CalculateDistance(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node, std::shared_ptr<Edge> edge)
+{
+	int checkClosedList = edge->GetDestinations()[0]->getWeight();
+	// NOT WORKING YET, previous path is taken as well
+	for (int c = 0; c < closed_list.size(); c++)
+	{
+		if (checkClosedList == closed_list[c]->getWeight())
+			return;
+	}
+	
+	if (distances.empty())
+		distances.push_back(edge->GetWeight());
+	else
+	{
+		for (int d = 0; d < distances.size(); d++)
+		{
+			if (distances.at(d) > edge->GetWeight())
+			{
+				distances.erase(distances.begin() + d);
+				distances.push_back(edge->GetWeight());
+			}
+		}
+	}
+}
+
+void Graph::MoveHare(std::shared_ptr<Hare> hare, int prev_position)
+{
+	int posHare;
+	do posHare = rand() % positions.size();
+	while (posHare == prev_position);
+
+	positions.at(posHare)->SetHare(hare);
+	hare->SetVertex(positions.at(posHare));
+
+	//Start over, clear closed and open list
+	closed_list.clear();
+	open_list.clear();
+	distances.clear();
 }
 
 std::vector<std::shared_ptr<Vertex>> Graph::getPositions()

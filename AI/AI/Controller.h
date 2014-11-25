@@ -34,7 +34,7 @@ private:
 	// Functions
 	void Start();
 	void MoveCow();
-	void MoveHare();
+	void MoveHare(int prev_position);
 	void Update();
 	void Repaint();
 	

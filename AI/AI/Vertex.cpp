@@ -3,6 +3,7 @@
 Vertex::Vertex(int x_pos, int y_pos) : x_pos(x_pos), y_pos(y_pos)
 {
 	visited = false;
+	weight = rand() % 100;
 }
 
 Vertex::~Vertex()
@@ -67,4 +68,9 @@ int Vertex::getYPos()
 void Vertex::setYPos(int position)
 {
 	y_pos = position;
+}
+
+int Vertex::getWeight()
+{
+	return weight;
 }

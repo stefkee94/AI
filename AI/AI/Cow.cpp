@@ -1,8 +1,8 @@
 #include "Cow.h"
-
+#include <qdir.h>
 Cow::Cow()
 {
-	img_link = "C:\\Users\\Sjoerd Nijhof\\Desktop\\KMINT_Sprites\\lemmling_Cartoon_cow.png";
+	img_link = QDir::currentPath().append("/Resources/lemmling_Cartoon_cow.png");
 }
 
 Cow::~Cow()

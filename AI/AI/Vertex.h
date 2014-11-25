@@ -15,6 +15,7 @@ private:
 	//std::vector<Edge> edges;
 	bool visited;
 	int x_pos, y_pos;
+	int weight;
 	std::vector<std::shared_ptr<Edge>> edges;
 	std::weak_ptr<Cow> cow;
 	std::weak_ptr<Hare> hare;
@@ -37,5 +38,6 @@ public:
 	void setXPos(int position);
 	int getYPos();
 	void setYPos(int position);
+	int getWeight();
 };
 

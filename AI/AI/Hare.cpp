@@ -1,8 +1,8 @@
 #include "Hare.h"
-
+#include <qdir.h>
 Hare::Hare()
 {
-	img_link = "C:\\Users\\Sjoerd Nijhof\\Desktop\\KMINT_Sprites\\rabbit-3.png";
+	img_link = QDir::currentPath().append("/Resources/rabbit-3.png");
 }
 
 Hare::~Hare()

@@ -9,7 +9,6 @@ void MainWindow::showGraph(Graph graph, Controller* p_controller)
 	controller = p_controller;
 	vertices = graph.getPositions();
 	edges = graph.getEdges();
-	QWidget::update();
 }
 
 void MainWindow::showPlayers(std::shared_ptr<Cow> p_cow, std::shared_ptr<Hare> p_hare)
@@ -23,6 +22,7 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 	if (e->key() == Qt::Key_Space)
 	{
 		controller->Click();
+		repaint();
 	}
 }
 
@@ -33,6 +33,7 @@ void MainWindow::paintEvent(QPaintEvent *e)
 	{
 		painter.setBrush(Qt::darkBlue);
 		painter.drawEllipse(vertices[i]->getXPos() - 10, vertices[i]->getYPos() - 10, 20, 20);
+		//painter.drawText(vertices[i]->getXPos() - 10, vertices[i]->getYPos() - 10,vertices[i]->)
 	}
 
 	for (int j = 0; j < edges.size(); j++)
