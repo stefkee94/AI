@@ -22,7 +22,6 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 	if (e->key() == Qt::Key_Space)
 	{
 		controller->Click();
-		repaint();
 	}
 }
 

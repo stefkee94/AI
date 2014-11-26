@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QtWidgets>
 #include <memory>
+#include <chrono>
+#include <thread>
 
 #include "MainWindow.h"
 #include "Cow.h"
@@ -33,7 +35,7 @@ private:
 
 	// Functions
 	void Start();
-	void MoveCow();
+	void MoveCow(std::vector<std::shared_ptr<Vertex>> route);
 	void MoveHare(int prev_position);
 	void Update();
 	void Repaint();

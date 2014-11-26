@@ -10,7 +10,8 @@ Controller::Controller() : QObject()
 	mainWindow = new MainWindow();
 	mainWindow->setWindowTitle(QObject::tr("Week 1 AI"));
 	mainWindow->resize(1000,500);
-	
+	mainWindow->show();
+
 	Repaint();
 }
 
@@ -25,33 +26,30 @@ void Controller::Click()
 
 void Controller::Update()
 {
-	MoveCow();
+	std::vector<std::shared_ptr<Vertex>> route = graph.GetRoute(cow->GetVertex(), hare->GetVertex());
+	MoveCow(route);
 }
 
 void Controller::Repaint()
 {
 	mainWindow->showGraph(graph, this);
 	mainWindow->showPlayers(cow, hare);
-	mainWindow->show();
+	mainWindow->repaint();
 }
 
-void Controller::MoveCow()
+void Controller::MoveCow(std::vector<std::shared_ptr<Vertex>> route)
 {
-	graph.Search(cow->GetVertex(), hare->GetVertex(), cow, hare);
-	std::vector<std::shared_ptr<Vertex>> vertices = graph.getPositions();
-	for (int i = 0; i < vertices.size() - 1; i++)
+	for (int i = 1; i < route.size(); i++)
 	{
-		std::shared_ptr<Hare> tmp_hare = vertices[i]->GetHare();
-		std::shared_ptr<Cow> tmp_cow = vertices[i]->GetCow();
-		if (tmp_hare != nullptr && tmp_cow != nullptr)
-		{
-			if (tmp_hare->GetVertex()->getWeight() == tmp_cow->GetVertex()->getWeight())
-			{
-				MoveHare(i);
-				break;
-			}
-			
-		}
+		// Move the cow
+		cow->SetVertex(route.at(i));
+
+		// Repaint the view to show the movement
+		Repaint();
+
+		// Let the thread sleep for 2 seconds
+		std::chrono::milliseconds dura(2000);
+		std::this_thread::sleep_for(dura);
 	}
 }
 

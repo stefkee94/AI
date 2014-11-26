@@ -190,6 +190,7 @@
     <ClCompile Include="Hare.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
+    <ClCompile Include="PositionNode.cpp" />
     <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -225,6 +226,9 @@
   <ItemGroup>
     <Image Include="..\..\..\..\..\Desktop\KMINT_Sprites\KMINT_Sprites\lemmling_Cartoon_cow.png" />
     <Image Include="..\..\..\..\..\Desktop\KMINT_Sprites\KMINT_Sprites\rabbit-3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PositionNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
