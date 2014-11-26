@@ -20,7 +20,7 @@ private:
 
 	std::vector<int> distances;
 
-	void AddVertex();
+	void AddVertex(int i);
 	void AddEdges(std::shared_ptr<Vertex> start, std::shared_ptr<Vertex> end);
 
 	

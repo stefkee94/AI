@@ -12,7 +12,7 @@ void Graph::Init(std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 {
 	// Build the graph
 	for (int i = 0; i < 6; i++)
-		AddVertex();
+		AddVertex(i);
 
 	for (int j = 0; j < positions.size()-1; j++)
 	{
@@ -38,9 +38,17 @@ void Graph::Init(std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 	hare->SetVertex(positions.at(posHare));
 }
 
-void Graph::AddVertex()
+void Graph::AddVertex(int i)
 {
-	positions.push_back(std::make_shared<Vertex>(rand() % 900, rand() % 400));
+	switch (i)
+	{
+	case 0: positions.push_back(std::make_shared<Vertex>(50, 50)); break;
+	case 1: positions.push_back(std::make_shared<Vertex>(300, 100)); break;
+	case 2: positions.push_back(std::make_shared<Vertex>(150, 200)); break;
+	case 3: positions.push_back(std::make_shared<Vertex>(400, 300)); break;
+	case 4: positions.push_back(std::make_shared<Vertex>(600, 200)); break;
+	case 5: positions.push_back(std::make_shared<Vertex>(300, 20)); break;
+	}
 }
 
 void Graph::AddEdges(std::shared_ptr<Vertex> start, std::shared_ptr<Vertex> end)
