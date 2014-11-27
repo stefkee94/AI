@@ -28,6 +28,8 @@ void Controller::Update()
 {
 	std::vector<std::shared_ptr<Vertex>> route = graph.GetRoute(cow->GetVertex(), hare->GetVertex());
 	MoveCow(route);
+	MoveHare();
+	Repaint();
 }
 
 void Controller::Repaint()
@@ -39,7 +41,7 @@ void Controller::Repaint()
 
 void Controller::MoveCow(std::vector<std::shared_ptr<Vertex>> route)
 {
-	for (int i = 1; i < route.size(); i++)
+	for (int i = 0; i < route.size(); i++)
 	{
 		// Move the cow
 		cow->SetVertex(route.at(i));
@@ -48,14 +50,12 @@ void Controller::MoveCow(std::vector<std::shared_ptr<Vertex>> route)
 		Repaint();
 
 		// Let the thread sleep for 2 seconds
-		std::chrono::milliseconds dura(2000);
+		std::chrono::milliseconds dura(500);
 		std::this_thread::sleep_for(dura);
 	}
 }
 
-void Controller::MoveHare(int prev_position)
+void Controller::MoveHare()
 {
-	// Only called when the cow is on the same position as the hare
-	// Move the hare to a random position
-	graph.MoveHare(hare, prev_position);
+	graph.MoveHare(hare);
 }

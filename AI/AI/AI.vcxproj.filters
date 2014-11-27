@@ -45,6 +45,15 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{080764e2-2270-461c-a3bb-57450ebd2d3c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{c8a121c3-aa4b-4cc8-9f5b-86cfe105674a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\Services">
+      <UniqueIdentifier>{20fbaa14-63a6-4521-ae7c-086e80061930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{f5fcd920-a662-4fc6-a629-c91c5ba50fff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graph.cpp">
@@ -84,6 +93,9 @@
     <ClCompile Include="PositionNode.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="packages.config" />
@@ -120,6 +132,9 @@
   <ItemGroup>
     <ClInclude Include="PositionNode.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files\Services</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

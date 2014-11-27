@@ -28,9 +28,6 @@ void Graph::Init(std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 	int posCow = 0;
 	positions.at(posCow)->SetCow(cow);
 	cow->SetVertex(positions.at(posCow));
-
-	// Add the position of the cow to the closed list
-	closed_list.push_back(positions.at(posCow));
 	
 	// Add the hare to a vertex
 	int posHare = 4;	
@@ -61,6 +58,10 @@ void Graph::AddEdges(std::shared_ptr<Vertex> start, std::shared_ptr<Vertex> end)
 
 std::vector<std::shared_ptr<Vertex>> Graph::GetRoute(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node)
 {
+
+	// Add the position of the cow to the closed list
+	closed_list.push_back(start_node);
+
 	// Set your current node
 	bool found_end_node = true;
 	std::shared_ptr<Vertex> current_node = start_node;
@@ -175,7 +176,7 @@ void Graph::FillOpenList(std::vector<std::shared_ptr<Vertex>> ordered_vertex_lis
 			int position = ordered_distance_list.size() - 1;
 			for (int y = ordered_distance_list.size() - 1; y >= 0; y--)
 			{
-				if (open_list.at(y).GetDistance() < ordered_distance_list.at(x))
+				if (open_list.size() - 1 >= y && open_list.at(y).GetDistance() < ordered_distance_list.at(x))
 					position = y;
 				else
 				{
@@ -254,11 +255,11 @@ std::vector<std::shared_ptr<Vertex>> Graph::CreateRoute()
 	return route;
 }
 
-void Graph::MoveHare(std::shared_ptr<Hare> hare, int prev_position)
+void Graph::MoveHare(std::shared_ptr<Hare> hare)
 {
 	int posHare;
-	do posHare = rand() % positions.size();
-	while (posHare == prev_position);
+	do posHare = Utils::RandomNumber(positions.size() - 1);
+	while (positions.at(posHare) == hare->GetVertex());
 
 	positions.at(posHare)->SetHare(hare);
 	hare->SetVertex(positions.at(posHare));

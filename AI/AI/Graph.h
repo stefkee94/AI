@@ -8,6 +8,7 @@
 #include "Vertex.h"
 #include "Cow.h"
 #include "Hare.h"
+#include "Utils.h"
 #include "PositionNode.h"
 
 class Graph
@@ -41,6 +42,6 @@ public:
 	std::vector<std::shared_ptr<Vertex>> getPositions();
 	std::vector<std::shared_ptr<Edge>> getEdges();
 
-	void MoveHare(std::shared_ptr<Hare>, int prev_position);
+	void MoveHare(std::shared_ptr<Hare> hare);
 };
 
