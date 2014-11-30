@@ -27,7 +27,7 @@ private:
 	void AddEdges(std::shared_ptr<Vertex> start, std::shared_ptr<Vertex> end);
 
 	int EstimateDistance(std::shared_ptr<Vertex> current_node, std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node);
-	void FillOpenList(std::vector<std::shared_ptr<Vertex>> ordered_vertex_list, std::vector<int> ordered_distance_list);
+	void FillOpenList(std::vector<PositionNode> ordered_list);
 	std::vector<std::shared_ptr<Vertex>> CreateRoute();
 	
 public:

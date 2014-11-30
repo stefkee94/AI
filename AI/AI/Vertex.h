@@ -16,9 +16,8 @@ private:
 	bool visited;
 	int x_pos, y_pos;
 	int weight;
+	std::weak_ptr<Vertex> parent;
 	std::vector<std::shared_ptr<Edge>> edges;
-	std::weak_ptr<Cow> cow;
-	std::weak_ptr<Hare> hare;
 
 public:
 	Vertex(int x_pos, int y_pos);
@@ -27,13 +26,11 @@ public:
 	// Functions
 	void AddObject(std::shared_ptr<Edge> edge);
 	void SetVisited(bool value);
-	void SetCow(std::shared_ptr<Cow> p_cow);
-	void SetHare(std::shared_ptr<Hare> p_hare);
+	void SetParent(std::shared_ptr<Vertex> p_parent);
+	std::shared_ptr<Vertex> GetParent();
 
 	bool IsVisited();
 	std::vector<std::shared_ptr<Edge>> GetEdges();
-	std::shared_ptr<Cow> GetCow();
-	std::shared_ptr<Hare> GetHare();
 	int getXPos();
 	void setXPos(int position);
 	int getYPos();

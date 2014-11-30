@@ -20,16 +20,6 @@ void Vertex::AddObject(std::shared_ptr<Edge> edge)
 	edges.push_back(edge);
 }
 
-void Vertex::SetCow(std::shared_ptr<Cow> p_cow)
-{
-	cow = p_cow;
-}
-
-void Vertex::SetHare(std::shared_ptr<Hare> p_hare)
-{
-	hare = p_hare;
-}
-
 bool Vertex::IsVisited()
 {
 	return visited;
@@ -40,14 +30,14 @@ std::vector<std::shared_ptr<Edge>> Vertex::GetEdges()
 	return edges;
 }
 
-std::shared_ptr<Cow> Vertex::GetCow()
+std::shared_ptr<Vertex> Vertex::GetParent()
 {
-	return cow.lock();
+	return parent.lock();
 }
 
-std::shared_ptr<Hare> Vertex::GetHare()
+void Vertex::SetParent(std::shared_ptr<Vertex> p_parent)
 {
-	return hare.lock();
+	parent = p_parent;
 }
 
 int Vertex::getXPos()

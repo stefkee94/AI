@@ -25,13 +25,11 @@ void Graph::Init(std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 	AddEdges(positions[0], positions[positions.size() - 1]);
 
 	// Add the cow to a vertex
-	int posCow = 0;
-	positions.at(posCow)->SetCow(cow);
+	int posCow = 4;
 	cow->SetVertex(positions.at(posCow));
 	
 	// Add the hare to a vertex
-	int posHare = 4;	
-	positions.at(posHare)->SetHare(hare);
+	int posHare = 1;
 	hare->SetVertex(positions.at(posHare));
 }
 
@@ -58,7 +56,6 @@ void Graph::AddEdges(std::shared_ptr<Vertex> start, std::shared_ptr<Vertex> end)
 
 std::vector<std::shared_ptr<Vertex>> Graph::GetRoute(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node)
 {
-
 	// Add the position of the cow to the closed list
 	closed_list.push_back(start_node);
 
@@ -90,42 +87,33 @@ std::vector<std::shared_ptr<Vertex>> Graph::GetRoute(std::shared_ptr<Vertex> sta
 		}
 
 		// Create an ordered list
-		std::vector<std::shared_ptr<Vertex>> ordered_vertex_list;
-		std::vector<int> ordered_distance_list;
+		std::vector<PositionNode> ordered_list;
 		for (int x = 0; x < neighbours.size(); x++)
 		{
+			// Create a new position
+			PositionNode position_node = PositionNode(neighbours.at(x), distances[neighbours.at(x)]);
+
+			// Check if list is empty or not
 			if (x == 0)
-			{
-				ordered_vertex_list.push_back(neighbours.at(x));
-				ordered_distance_list.push_back(distances[neighbours.at(x)]);
-			}
+				ordered_list.push_back(position_node);
 			else
 			{
-				int position = ordered_distance_list.size();
-				for (int y = ordered_distance_list.size() - 1; y >= 0; y--)
+				int position = neighbours.size();
+				for (int y = ordered_list.size() - 1; y >= 0; y--)
 				{
-					if (distances[neighbours.at(x)] < ordered_distance_list.at(y))
+					if (distances[neighbours.at(x)] < ordered_list.at(y).GetDistance())
 					{
 						if (y == 0)
-						{
-							ordered_vertex_list.insert(ordered_vertex_list.begin(), neighbours.at(x));
-							ordered_distance_list.insert(ordered_distance_list.begin(), distances[neighbours.at(x)]);
-						}
+							ordered_list.insert(ordered_list.begin(), position_node);
 						else
 							position = y;
 					}
 					else
 					{
-						if (position >= 0 && position < ordered_distance_list.size())
-						{
-							ordered_vertex_list.insert(ordered_vertex_list.begin() + position, neighbours.at(x));
-							ordered_distance_list.insert(ordered_distance_list.begin() + position, distances[neighbours.at(x)]);
-						}
+						if (position >= 0 && position < ordered_list.size())
+							ordered_list.insert(ordered_list.begin() + position, position_node);
 						else
-						{
-							ordered_vertex_list.push_back(neighbours.at(x));
-							ordered_distance_list.push_back(distances[neighbours.at(x)]);
-						}
+							ordered_list.push_back(position_node);
 						break;
 					}
 				}
@@ -133,7 +121,7 @@ std::vector<std::shared_ptr<Vertex>> Graph::GetRoute(std::shared_ptr<Vertex> sta
 		}
 
 		// Fill the open list with the ordered neighbours
-		FillOpenList(ordered_vertex_list, ordered_distance_list);
+		FillOpenList(ordered_list);
 
 		// Add the shortest item to the closed list and remove it from the open_list
 		closed_list.push_back(open_list.at(0).GetVertex());
@@ -150,41 +138,48 @@ std::vector<std::shared_ptr<Vertex>> Graph::GetRoute(std::shared_ptr<Vertex> sta
 	return route;
 }
 
-void Graph::FillOpenList(std::vector<std::shared_ptr<Vertex>> ordered_vertex_list, std::vector<int> ordered_distance_list)
+void Graph::FillOpenList(std::vector<PositionNode> ordered_list)
 {
 	bool empty_list = open_list.size() == 0;
-	for (int x = 0; x < ordered_vertex_list.size(); x++)
+	for (int x = 0; x < ordered_list.size(); x++)
 	{
 		// Check if the open list is empty
 		if (empty_list)
-			open_list.push_back(PositionNode(ordered_vertex_list.at(x), ordered_distance_list.at(x)));
+		{
+			open_list = ordered_list;
+			break;
+		}
 		else
 		{
+			bool contains = false;
 			// Check if the open list already contains the current vertex
 			for (int y = 0; y < open_list.size(); y++)
 			{
-				if (open_list.at(y).GetVertex() == ordered_vertex_list.at(x))
+				if (open_list.at(y).GetVertex() == ordered_list.at(x).GetVertex())
 				{
-					if (open_list.at(y).GetDistance() > ordered_distance_list.at(x))
+					if (open_list.at(y).GetDistance() > ordered_list.at(x).GetDistance())
 						open_list.erase(open_list.begin() + y);
 					else
-						break;
+						contains = true;
 				}
 			}
 
-			// Add the vertex to the open list.
-			int position = ordered_distance_list.size() - 1;
-			for (int y = ordered_distance_list.size() - 1; y >= 0; y--)
+			if (!contains)
 			{
-				if (open_list.size() - 1 >= y && open_list.at(y).GetDistance() < ordered_distance_list.at(x))
-					position = y;
-				else
+				// Add the vertex to the open list.
+				bool inserted = false;
+				for (int y = 0; y < open_list.size(); y++)
 				{
-					if (position >= 0 && position < open_list.size())
-						open_list.insert(open_list.begin() + position, PositionNode(ordered_vertex_list.at(x), ordered_distance_list.at(x)));
-					else
-						open_list.push_back(PositionNode(ordered_vertex_list.at(x), ordered_distance_list.at(x)));
+					if (open_list.at(y).GetDistance() > ordered_list.at(x).GetDistance())
+					{
+						open_list.insert(open_list.begin() + y, ordered_list.at(x));
+						inserted = true;
+						break;
+					}
 				}
+
+				if (!inserted)
+					open_list.push_back(ordered_list.at(x));
 			}
 		}
 	}
@@ -193,9 +188,11 @@ void Graph::FillOpenList(std::vector<std::shared_ptr<Vertex>> ordered_vertex_lis
 int Graph::EstimateDistance(std::shared_ptr<Vertex> current_node, std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node)
 {
 	int distance = 0;
+
+	std::shared_ptr<Vertex> p_current_node = current_node;
 	for (int x = closed_list.size() - 1; x >= 0; x--)
 	{
-		std::vector<std::shared_ptr<Edge>> connections = current_node->GetEdges();
+		std::vector<std::shared_ptr<Edge>> connections = p_current_node->GetEdges();
 		for (int y = 0; y < connections.size(); y++)
 		{
 			std::vector<std::shared_ptr<Vertex>> positions = connections.at(y)->GetDestinations();
@@ -204,10 +201,12 @@ int Graph::EstimateDistance(std::shared_ptr<Vertex> current_node, std::shared_pt
 				if (positions.at(i) == closed_list.at(x))
 				{
 					distance += connections.at(y)->GetWeight();
-					break;
+					p_current_node = positions.at(i);
+					goto end;
 				}
 			}
 		}
+		end:;
 	}
 
 	// Estimate the distance from current_node to end_node
@@ -237,19 +236,34 @@ std::vector<std::shared_ptr<Vertex>> Graph::CreateRoute()
 	route.insert(route.begin(), closed_list.at(closed_list.size() - 1));
 	for (int x = closed_list.size() - 1; x > 0; x--)
 	{
-		std::vector<std::shared_ptr<Edge>> connections = closed_list.at(x)->GetEdges();
+		bool found_position = false;
+		std::shared_ptr<Vertex> position;
+		std::vector<std::shared_ptr<Edge>> connections = route.at(0)->GetEdges();
 		for (int y = 0; y < connections.size(); y++)
 		{
 			std::vector<std::shared_ptr<Vertex>> positions = connections.at(y)->GetDestinations();
-			for (int i = 0; i < positions.size(); i++)
+			if (std::find(positions.begin(), positions.end(), closed_list.at(0)) != positions.end())
 			{
-				if (positions.at(i) == closed_list.at(x - 1))
+				position = closed_list.at(0);
+				found_position = true;
+				x = 0;
+				break;
+			}
+			else
+			{
+				for(int i = 0; i < positions.size(); i++)
 				{
-					route.insert(route.begin(), closed_list.at(x - 1));
-					break;
+					if (positions.at(i) == closed_list.at(x - 1))
+					{
+						position = closed_list.at(x - 1);
+						found_position = true;
+					}
 				}
 			}
 		}
+
+		if (found_position)
+			route.insert(route.begin(), position);
 	}
 
 	return route;
@@ -261,7 +275,6 @@ void Graph::MoveHare(std::shared_ptr<Hare> hare)
 	do posHare = Utils::RandomNumber(positions.size() - 1);
 	while (positions.at(posHare) == hare->GetVertex());
 
-	positions.at(posHare)->SetHare(hare);
 	hare->SetVertex(positions.at(posHare));
 
 	//Start over, clear closed and open list
