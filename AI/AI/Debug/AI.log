@@ -1,21 +1,8 @@
-﻿Build started 30-Nov-14 8:52:40 PM.
+﻿Build started 01-Dec-14 8:25:14 PM.
      1>Project "C:\Users\Sjoerd Nijhof\Documents\School\Jaar4\AI\AI\AI\AI.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Sjoerd Nijhof\Documents\School\Jaar4\AI\AI\packages\SDL.1.2.15.15\build\native\../..//build/native/include/" /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include /I.\GeneratedFiles\Debug /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtCore /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtGui /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtWidgets /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtOpenGL /Zi /nologo /W3 /WX- /sdl /Od /Oy- /GL /D HAS_SDL /D QT_DLL /D QWT_DLL /D _CRT_SECURE_NO_WARNINGS /D QT_WIDGETS_LIB /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Graph.cpp
-         Graph.cpp
-     1>Graph.cpp(17): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(71): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(74): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(83): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(91): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(113): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(144): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(156): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(171): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(196): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(199): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(242): warning C4018: '<' : signed/unsigned mismatch
-     1>Graph.cpp(254): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\Sjoerd Nijhof\Documents\School\Jaar4\AI\AI\packages\SDL.1.2.15.15\build\native\../..//build/native/include/" /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include /I.\GeneratedFiles\Debug /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtCore /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtGui /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtWidgets /IC:\Qt\Qt5.3.2\5.3\msvc2013_opengl\include\QtOpenGL /Zi /nologo /W3 /WX- /sdl /Od /Oy- /GL /D HAS_SDL /D QT_DLL /D QWT_DLL /D _CRT_SECURE_NO_WARNINGS /D QT_WIDGETS_LIB /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PositionNode.cpp
+         PositionNode.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Sjoerd Nijhof\Documents\School\Jaar4\AI\AI\Debug\Week1.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Qt\Qt5.3.2\5.3\msvc2013_opengl\lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib C:\Qt\Qt5.3.2\5.3\msvc2013_opengl\lib\qtmaind.lib C:\Qt\Qt5.3.2\5.3\msvc2013_opengl\lib\Qt5Cored.lib C:\Qt\Qt5.3.2\5.3\msvc2013_opengl\lib\Qt5Guid.lib C:\Qt\Qt5.3.2\5.3\msvc2013_opengl\lib\Qt5OpenGLd.lib opengl32.lib glu32.lib C:\Qt\Qt5.3.2\5.3\msvc2013_opengl\lib\Qt5Widgetsd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Sjoerd Nijhof\Documents\School\Jaar4\AI\AI\Debug\Week1.pdb" /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Sjoerd Nijhof\Documents\School\Jaar4\AI\AI\Debug\Week1.lib" /MACHINE:X86 Debug\Controller.obj
          Debug\Cow.obj
@@ -37,4 +24,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:02.18
+Time Elapsed 00:00:02.50
