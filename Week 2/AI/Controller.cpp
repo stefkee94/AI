@@ -12,7 +12,7 @@ Controller::Controller() : QObject()
 	mainWindow->resize(1000,500);
 	mainWindow->show();
 
-	Start();
+	std::thread* game_loop = new std::thread(&Controller::Start, this);
 
 	Repaint();
 }
@@ -32,7 +32,11 @@ void Controller::Start()
 	while (is_running)
 	{
 		Update();
-		Repaint();
+		//Repaint();
+
+		// Sleep
+		std::chrono::milliseconds dura(10);
+		std::this_thread::sleep_for(dura);
 	}
 }
 
