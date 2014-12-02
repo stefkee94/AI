@@ -11,6 +11,7 @@
 #include "Cow.h"
 #include "Hare.h"
 #include "Controller.h"
+//#include "EnumState.h"
 
 class Controller;
 class MainWindow : public QWidget
@@ -21,7 +22,7 @@ public:
 	MainWindow(QWidget *parent = 0);
 	virtual ~MainWindow();
 	void paintEvent(QPaintEvent *e);
-	void showGraph(Graph graph, Controller* p_controller);
+	void showGraph(std::shared_ptr<Graph> graph, Controller* p_controller);
 	void showPlayers(std::shared_ptr<Cow> p_cow, std::shared_ptr<Hare> p_hare);
 
 private:

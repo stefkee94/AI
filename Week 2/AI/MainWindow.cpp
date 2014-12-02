@@ -4,11 +4,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
 }
 
-void MainWindow::showGraph(Graph graph, Controller* p_controller)
+void MainWindow::showGraph(std::shared_ptr<Graph> graph, Controller* p_controller)
 {
 	controller = p_controller;
-	vertices = graph.getPositions();
-	edges = graph.getEdges();
+	vertices = graph->getPositions();
+	edges = graph->getEdges();
 }
 
 void MainWindow::showPlayers(std::shared_ptr<Cow> p_cow, std::shared_ptr<Hare> p_hare)
@@ -51,6 +51,19 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 	painter.drawImage(t_cow->GetVertex()->getXPos() - img_cow.width() / 2, t_cow->GetVertex()->getYPos() - img_cow.height() / 2, img_cow);
 	painter.drawImage(t_hare->GetVertex()->getXPos() - img_hare.width() / 2, t_hare->GetVertex()->getYPos() - img_hare.height() / 2, img_hare);
+
+	// Get state to show on the screen
+	/*QString state;
+	switch (t_cow->GetState())
+	{
+		case EnumState::COW_WANDERING:
+			state = "The cow is wandering over the vertices";
+		case EnumState::COW_CHASING:
+			state = "The cow is chasing the hare";
+	}
+
+	painter.drawText(10, 10, state);
+	painter.drawText(10, 20, "The hare is wandering");*/
 }
 
 MainWindow::~MainWindow()

@@ -29,7 +29,7 @@ private:
 	MainWindow* mainWindow;
 
 	// Variables
-	Graph graph;
+	std::shared_ptr<Graph> graph;
 	std::shared_ptr<Cow> cow;
 	std::shared_ptr<Hare> hare;
 

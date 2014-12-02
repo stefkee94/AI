@@ -5,7 +5,8 @@ Controller::Controller() : QObject()
 	cow = std::make_shared<Cow>();
 	hare = std::make_shared<Hare>();
 
-	graph.Init(cow, hare);
+	graph = std::make_shared<Graph>();
+	graph->Init(cow, hare);
 	
 	mainWindow = new MainWindow();
 	mainWindow->setWindowTitle(QObject::tr("Week 1 AI"));
@@ -13,8 +14,8 @@ Controller::Controller() : QObject()
 	mainWindow->show();
 
 	std::thread* game_loop = new std::thread(&Controller::Start, this);
-
-	Repaint();
+	//QThread* game_loop = new QThread(&Controller::Start, this);
+	//Repaint();
 }
 
 Controller::~Controller()
@@ -32,8 +33,7 @@ void Controller::Start()
 	while (is_running)
 	{
 		Update();
-		//Repaint();
-
+		Repaint();
 		// Sleep
 		std::chrono::milliseconds dura(10);
 		std::this_thread::sleep_for(dura);
@@ -42,8 +42,8 @@ void Controller::Start()
 
 void Controller::Update()
 {
-	cow->Move();
-
+	cow->Move(graph);
+	cow->Update();
 	//std::vector<std::shared_ptr<Vertex>> route = graph.GetRoute(cow->GetVertex(), hare->GetVertex());
 	//MoveCow(route);
 	//MoveHare();
@@ -54,7 +54,9 @@ void Controller::Repaint()
 {
 	mainWindow->showGraph(graph, this);
 	mainWindow->showPlayers(cow, hare);
-	mainWindow->repaint();
+	//mainWindow->repaint();
+	mainWindow->update();
+	qApp->processEvents();
 }
 
 void Controller::MoveCow(std::vector<std::shared_ptr<Vertex>> route)
@@ -75,5 +77,5 @@ void Controller::MoveCow(std::vector<std::shared_ptr<Vertex>> route)
 
 void Controller::MoveHare()
 {
-	graph.MoveHare(hare);
+	graph->MoveHare(hare);
 }
