@@ -29,7 +29,7 @@ private:
 	int EstimateDistance(std::shared_ptr<Vertex> current_node, std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node);
 	void FillOpenList(std::vector<PositionNode> ordered_list);
 	std::vector<std::shared_ptr<Vertex>> CreateRoute();
-	
+	std::shared_ptr<Hare> hare;
 public:
 	Graph();
 	~Graph();
@@ -41,7 +41,10 @@ public:
 
 	std::vector<std::shared_ptr<Vertex>> getPositions();
 	std::vector<std::shared_ptr<Edge>> getEdges();
+	std::vector<std::shared_ptr<Vertex>> GetShortestChaseRoute();
+	void ClearRoute();
 
+	std::shared_ptr<Vertex> GetHarePosition();
 	void MoveHare(std::shared_ptr<Hare> hare);
 };
 

@@ -16,7 +16,7 @@ private:
 	std::shared_ptr<Vertex> vertex;
 	QString img_link;
 	// For the state
-	std::shared_ptr<BehaviorState> behavior;
+	BehaviorState* behavior;
 	EnumState currentState;
 	//std::shared_ptr<Graph> graph;
 public:

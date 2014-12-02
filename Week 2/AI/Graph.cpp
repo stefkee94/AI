@@ -10,6 +10,7 @@ Graph::~Graph()
 
 void Graph::Init(std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 {
+	this->hare = hare;
 	// Build the graph
 	for (int i = 0; i < 6; i++)
 		AddVertex(i);
@@ -288,7 +289,24 @@ std::vector<std::shared_ptr<Vertex>> Graph::getPositions()
 	return positions;
 }
 
+std::vector<std::shared_ptr<Vertex>> Graph::GetShortestChaseRoute()
+{
+	return CreateRoute();
+}
+
+void Graph::ClearRoute()
+{
+	closed_list.clear();
+	open_list.clear();
+	distances.clear();
+}
+
 std::vector<std::shared_ptr<Edge>> Graph::getEdges()
 {
 	return edges;
+}
+
+std::shared_ptr<Vertex> Graph::GetHarePosition()
+{
+	return hare->GetVertex();
 }

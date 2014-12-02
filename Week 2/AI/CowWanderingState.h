@@ -13,7 +13,7 @@ public:
 	void CheckState();
 
 private:
-	bool hasEatenPill;
+	bool hasEatenPill = false;
 	//std::shared_ptr<Vertex> current_vertex;
 };
 

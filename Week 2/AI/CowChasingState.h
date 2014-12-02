@@ -14,6 +14,7 @@ public:
 	void CheckState();
 
 private:
+	bool foundHare = false;
 	//std::shared_ptr<Graph> graph;
 };
 
