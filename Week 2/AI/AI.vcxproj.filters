@@ -111,8 +111,11 @@
     <ClCompile Include="CowWanderingState.cpp">
       <Filter>Source Files\Model\State</Filter>
     </ClCompile>
-    <ClCompile Include="CowFactory.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="HareWanderingState.cpp">
+      <Filter>Source Files\Model\State</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseUnit.cpp">
+      <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,11 +164,22 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CowFactory.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EnumState.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="HareWanderingState.h">
+      <Filter>Header Files\Model\State</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseUnit.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\pill.png">
+      <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Resources\weapon.png">
+      <Filter>Resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>

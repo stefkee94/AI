@@ -171,11 +171,11 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseUnit.cpp" />
     <ClCompile Include="CowChasingState.cpp" />
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Cow.cpp" />
     <ClCompile Include="BehaviorState.cpp" />
-    <ClCompile Include="CowFactory.cpp" />
     <ClCompile Include="Edge.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Controller.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -191,6 +191,7 @@
     </ClCompile>
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Hare.cpp" />
+    <ClCompile Include="HareWanderingState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MainWindow.cpp" />
     <ClCompile Include="PositionNode.cpp" />
@@ -345,8 +346,13 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CowFactory.h" />
+    <ClInclude Include="BaseUnit.h" />
     <ClInclude Include="EnumState.h" />
+    <ClInclude Include="HareWanderingState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\pill.png" />
+    <Image Include="Resources\weapon.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

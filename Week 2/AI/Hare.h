@@ -1,14 +1,10 @@
 #pragma once
 
-#include <memory>
-#include <QString>
-#include "Vertex.h"
+#include "BaseUnit.h"
+#include "HareWanderingState.h"
 
-class Hare
+class Hare : public BaseUnit, public std::enable_shared_from_this<BaseUnit>
 {
-private:
-	std::shared_ptr<Vertex> vertex;
-	QString img_link;
 
 public:
 	Hare();
@@ -17,5 +13,10 @@ public:
 	void SetVertex(std::shared_ptr<Vertex> p_vertex);
 	std::shared_ptr<Vertex> GetVertex();
 	QString GetImageLink();
+
+	void Move(std::shared_ptr<Graph> graph);
+	void Update();
+	void ChangeState(EnumState new_state);
+	EnumState GetState();
 };
 

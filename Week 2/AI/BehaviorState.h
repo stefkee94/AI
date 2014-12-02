@@ -2,12 +2,12 @@
 #include <memory>
 #include "Utils.h"
 
+class BaseUnit;
 class Graph;
-class Cow;
 class BehaviorState
 {
 public:
-	BehaviorState(std::shared_ptr<Cow> owner);
+	BehaviorState(std::shared_ptr<BaseUnit> owner);
 	virtual ~BehaviorState();
 
 	virtual void Move(std::shared_ptr<Graph> graph) = 0;
@@ -16,7 +16,7 @@ public:
 
 protected:
 	// The owner in this case is only the cow
-	std::shared_ptr<Cow> owner;
+	std::shared_ptr<BaseUnit> owner;
 	
 };
 

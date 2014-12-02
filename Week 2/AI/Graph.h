@@ -42,6 +42,7 @@ public:
 	std::vector<std::shared_ptr<Vertex>> getPositions();
 	std::vector<std::shared_ptr<Edge>> getEdges();
 	std::vector<std::shared_ptr<Vertex>> GetShortestChaseRoute();
+	std::vector<std::shared_ptr<Vertex>> CreateWanderingRoute();
 	void ClearRoute();
 
 	std::shared_ptr<Vertex> GetHarePosition();

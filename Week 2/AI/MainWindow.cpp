@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include <qdir.h>
 
 MainWindow::MainWindow(QWidget *parent)
 {
@@ -28,11 +29,16 @@ void MainWindow::keyPressEvent(QKeyEvent *e)
 void MainWindow::paintEvent(QPaintEvent *e)
 {
 	QPainter painter(this);
+	QImage img_pill(QDir::currentPath().append("/Resources/pill.png"));
+	QImage img_weapon(QDir::currentPath().append("/Resources/weapon.png"));
 	for (int i = 0; i < vertices.size(); i++)
 	{
 		painter.setBrush(Qt::darkBlue);
 		painter.drawEllipse(vertices[i]->getXPos() - 10, vertices[i]->getYPos() - 10, 20, 20);
-		//painter.drawText(vertices[i]->getXPos() - 10, vertices[i]->getYPos() - 10,vertices[i]->)
+		if (vertices[i]->hasNewPill())
+			painter.drawImage(vertices[i]->getXPos() - img_pill.width() / 2, vertices[i]->getYPos() - img_pill.height() / 2, img_pill);
+		if (vertices[i]->hasNewWeapon())
+			painter.drawImage(vertices[i]->getXPos() - img_weapon.width() / 2, vertices[i]->getYPos() - img_weapon.height() / 2, img_weapon);
 	}
 
 	for (int j = 0; j < edges.size(); j++)
@@ -64,8 +70,12 @@ void MainWindow::paintEvent(QPaintEvent *e)
 			break;
 	}
 
-	painter.drawText(10, 10, cow_state);
-	painter.drawText(10, 20, "The hare is wandering");
+	painter.setPen(QPen(QColor(Qt::black), 3 , Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));
+	QFont times_font("times", 24);
+	painter.setFont(times_font);
+
+	painter.drawText(430, 30, cow_state);
+	painter.drawText(430, 60, "The hare is wandering");
 }
 
 MainWindow::~MainWindow()

@@ -1,11 +1,10 @@
 #pragma once
 
 #include "BehaviorState.h"
-
 class CowWanderingState : public BehaviorState
 {
 public:
-	CowWanderingState(std::shared_ptr<Cow> owner);
+	CowWanderingState(std::shared_ptr<BaseUnit> owner);
 	~CowWanderingState();
 
 	void Move(std::shared_ptr<Graph> graph);

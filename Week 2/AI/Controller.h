@@ -35,7 +35,7 @@ private:
 
 	// Functions
 	void Start();
-	void MoveCow(std::vector<std::shared_ptr<Vertex>> route);
+	void MoveCow();
 	void MoveHare();
 	void Update();
 	void Repaint();

@@ -9,7 +9,7 @@ Controller::Controller() : QObject()
 	graph->Init(cow, hare);
 	
 	mainWindow = new MainWindow();
-	mainWindow->setWindowTitle(QObject::tr("Week 1 AI"));
+	mainWindow->setWindowTitle(QObject::tr("Week 2 AI, FSM"));
 	mainWindow->resize(1000,500);
 	mainWindow->show();
 
@@ -32,8 +32,11 @@ void Controller::Start()
 	is_running = true;
 	while (is_running)
 	{
+		//std::chrono::milliseconds durat(2000);
+		//std::this_thread::sleep_for(durat);
+
 		Update();
-		Repaint();
+		//Repaint();
 		// Sleep
 		std::chrono::milliseconds dura(1000);
 		std::this_thread::sleep_for(dura);
@@ -43,10 +46,10 @@ void Controller::Start()
 void Controller::Update()
 {
 	cow->Move(graph);
-	cow->Update();
+	//cow->Update();
 	//std::vector<std::shared_ptr<Vertex>> route = graph.GetRoute(cow->GetVertex(), hare->GetVertex());
-	MoveCow(graph->GetShortestChaseRoute());
-	//Repaint();
+	MoveCow();
+	Repaint();
 }
 
 void Controller::Repaint()
@@ -55,26 +58,33 @@ void Controller::Repaint()
 	mainWindow->showPlayers(cow, hare);
 	//mainWindow->repaint();
 	mainWindow->update();
-	//qApp->processEvents();
+	qApp->processEvents();
 }
 
-void Controller::MoveCow(std::vector<std::shared_ptr<Vertex>> route)
+void Controller::MoveCow()
 {
-	for (int i = 0; i < route.size(); i++)
+	std::vector<std::shared_ptr<Vertex>> route = graph->GetShortestChaseRoute();
+	if (route.size() > 0)
 	{
-		// Move the cow
-		cow->SetVertex(route.at(i));
+		for (int i = 0; i < route.size(); i++)
+		{
+			// Move the cow
+			cow->SetVertex(route.at(i));
 
-		// Repaint the view to show the movement
-		Repaint();
+			// Repaint the view to show the movement
+			Repaint();
 
-		// Let the thread sleep for 2 seconds
-		std::chrono::milliseconds dura(500);
-		std::this_thread::sleep_for(dura);
+			// Let the thread sleep for 2 seconds
+			std::chrono::milliseconds dura(500);
+			std::this_thread::sleep_for(dura);
+		}
+		if (cow->GetVertex() == hare->GetVertex())
+			MoveHare();
 	}
+	else
+	{
 
-	if (cow->GetVertex() == hare->GetVertex())
-		MoveHare();
+	}
 }
 
 void Controller::MoveHare()

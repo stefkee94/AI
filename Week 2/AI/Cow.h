@@ -1,24 +1,11 @@
 #pragma once
 
-#include <memory>
-#include <QString>
-#include "Vertex.h"
-
-#include "EnumState.h"
+#include "BaseUnit.h"
 #include "CowWanderingState.h"
 #include "CowChasingState.h"
-#include "BehaviorState.h"
 
-class Graph;
-class Cow
+class Cow : public BaseUnit, public std::enable_shared_from_this<BaseUnit>
 {
-private:
-	std::shared_ptr<Vertex> vertex;
-	QString img_link;
-	// For the state
-	BehaviorState* behavior;
-	EnumState currentState;
-	//std::shared_ptr<Graph> graph;
 public:
 	Cow();
 	~Cow();

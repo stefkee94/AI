@@ -12,15 +12,17 @@ class Hare;
 class Vertex
 {
 private:
-	//std::vector<Edge> edges;
 	bool visited;
+	bool hasPill = false;
+	bool hasWeapon = false;
+
 	int x_pos, y_pos;
 	int weight;
 	std::weak_ptr<Vertex> parent;
 	std::vector<std::shared_ptr<Edge>> edges;
 
 public:
-	Vertex(int x_pos, int y_pos);
+	Vertex(int x_pos, int y_pos, bool hasPill, bool hasWeapon);
 	~Vertex();
 
 	// Functions
@@ -30,6 +32,17 @@ public:
 	std::shared_ptr<Vertex> GetParent();
 
 	bool IsVisited();
+
+	// Pill methods
+	bool hasNewPill();
+	void setPill(bool new_status_pill);
+	bool getPill();
+
+	// Weapon methods
+	bool hasNewWeapon();
+	void setWeapon(bool new_status_weapon);
+	bool getWeapon();
+	
 	std::vector<std::shared_ptr<Edge>> GetEdges();
 	int getXPos();
 	void setXPos(int position);

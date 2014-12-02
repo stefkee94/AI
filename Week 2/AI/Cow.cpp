@@ -1,5 +1,6 @@
 #include "Cow.h"
 #include <qdir.h>
+#include "Graph.h"
 
 Cow::Cow()
 {
@@ -12,7 +13,7 @@ Cow::Cow()
 
 Cow::~Cow()
 {
-	delete behavior;
+
 }
 
 void Cow::SetVertex(std::shared_ptr<Vertex> p_vertex)
@@ -33,13 +34,13 @@ QString Cow::GetImageLink()
 void Cow::Move(std::shared_ptr<Graph> graph)
 {
 	// Send behavior to state
-	//behavior->CheckState();
+	behavior->CheckState();
 	behavior->Move(graph);
 }
 
 void Cow::Update()
 {
-	behavior->CheckState();
+	//behavior->CheckState();
 }
 
 void Cow::ChangeState(EnumState new_state)

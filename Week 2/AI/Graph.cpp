@@ -38,12 +38,12 @@ void Graph::AddVertex(int i)
 {
 	switch (i)
 	{
-	case 0: positions.push_back(std::make_shared<Vertex>(50, 50)); break;
-	case 1: positions.push_back(std::make_shared<Vertex>(300, 100)); break;
-	case 2: positions.push_back(std::make_shared<Vertex>(150, 200)); break;
-	case 3: positions.push_back(std::make_shared<Vertex>(400, 300)); break;
-	case 4: positions.push_back(std::make_shared<Vertex>(600, 200)); break;
-	case 5: positions.push_back(std::make_shared<Vertex>(300, 20)); break;
+		case 0: positions.push_back(std::make_shared<Vertex>(50, 50,   true,  false)); break;
+		case 1: positions.push_back(std::make_shared<Vertex>(300, 100, false, false)); break;
+		case 2: positions.push_back(std::make_shared<Vertex>(150, 200, false, false)); break;
+		case 3: positions.push_back(std::make_shared<Vertex>(400, 300, false, false)); break;
+		case 4: positions.push_back(std::make_shared<Vertex>(600, 200, false, false)); break;
+		case 5: positions.push_back(std::make_shared<Vertex>(300, 20,  false, true)); break;
 	}
 }
 
@@ -289,9 +289,23 @@ std::vector<std::shared_ptr<Vertex>> Graph::getPositions()
 	return positions;
 }
 
+std::vector<std::shared_ptr<Vertex>> CreateWanderingRoute(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node)
+{
+	std::vector<std::shared_ptr<Vertex>> route;
+
+	route.insert(route.begin(), start_node);
+	route.insert(route.begin() + 1, end_node);
+
+	return route;
+}
+
 std::vector<std::shared_ptr<Vertex>> Graph::GetShortestChaseRoute()
 {
-	return CreateRoute();
+	std::vector<std::shared_ptr<Vertex>> new_empty_route;
+	if (closed_list.size() > 0)
+		return CreateRoute();
+	else
+		return new_empty_route;
 }
 
 void Graph::ClearRoute()
