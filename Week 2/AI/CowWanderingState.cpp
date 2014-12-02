@@ -17,7 +17,9 @@ CowWanderingState::~CowWanderingState()
 void CowWanderingState::Move(std::shared_ptr<Graph> graph)
 {
 	// Always get first item to walk
-	owner->SetVertex(owner->GetVertex()->GetEdges()[0]->GetDestinations()[0]);
+	std::vector<std::shared_ptr<Edge>> edges = owner->GetVertex()->GetEdges();
+	std::vector<std::shared_ptr<Vertex>> positions = edges.at(Utils::RandomNumber(edges.size() - 1))->GetDestinations();
+	owner->SetVertex(positions.at(0) != owner->GetVertex() ? positions.at(0) : positions.at(1));
 }
 
 void CowWanderingState::Update()

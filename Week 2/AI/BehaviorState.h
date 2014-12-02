@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "Utils.h"
 
 class Graph;
 class Cow;

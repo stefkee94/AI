@@ -35,7 +35,7 @@ void Controller::Start()
 		Update();
 		Repaint();
 		// Sleep
-		std::chrono::milliseconds dura(10);
+		std::chrono::milliseconds dura(500);
 		std::this_thread::sleep_for(dura);
 	}
 }
@@ -47,7 +47,7 @@ void Controller::Update()
 	//std::vector<std::shared_ptr<Vertex>> route = graph.GetRoute(cow->GetVertex(), hare->GetVertex());
 	//MoveCow(route);
 	//MoveHare();
-	//Repaint();
+	Repaint();
 }
 
 void Controller::Repaint()
