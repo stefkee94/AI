@@ -1,5 +1,5 @@
 #pragma once
-
+#include <vector>
 #include "BehaviorState.h"
 class Vertex;
 class CowChasingState : public BehaviorState 

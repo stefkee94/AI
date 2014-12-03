@@ -1,7 +1,5 @@
 #pragma once
 #include <memory>
-#include "Utils.h"
-
 class BaseUnit;
 class Graph;
 class BehaviorState

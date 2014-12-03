@@ -162,24 +162,20 @@
     <CustomBuild Include="CowWanderingState.h">
       <Filter>Header Files\Model\State</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="EnumState.h">
+    <CustomBuild Include="BaseUnit.h">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="HareWanderingState.h">
+    </CustomBuild>
+    <CustomBuild Include="EnumState.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareWanderingState.h">
       <Filter>Header Files\Model\State</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseUnit.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="Resources\pill.png">
+    </CustomBuild>
+    <CustomBuild Include="Resources\pill.png">
       <Filter>Resources</Filter>
-    </Image>
-    <Image Include="Resources\weapon.png">
+    </CustomBuild>
+    <CustomBuild Include="Resources\weapon.png">
       <Filter>Resources</Filter>
-    </Image>
+    </CustomBuild>
   </ItemGroup>
 </Project>

@@ -1,15 +1,13 @@
 #pragma once
-
 #include "BaseUnit.h"
-#include "HareWanderingState.h"
-
-class Hare : public BaseUnit, public std::enable_shared_from_this<BaseUnit>
+class Hare : public BaseUnit, public std::enable_shared_from_this<Hare>
 {
 
 public:
 	Hare();
 	~Hare();
-
+	//QString img_link;
+	//std::shared_ptr<Vertex> vertex;
 	void SetVertex(std::shared_ptr<Vertex> p_vertex);
 	std::shared_ptr<Vertex> GetVertex();
 	QString GetImageLink();
