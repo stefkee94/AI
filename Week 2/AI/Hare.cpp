@@ -7,7 +7,7 @@ Hare::Hare()
 	img_link = QDir::currentPath().append("/Resources/rabbit-3.png");
 
 	// Set Hare state
-	//ChangeState(EnumState::HARE_WANDERING);
+	BaseUnit::ChangeState(EnumState::HARE_WANDERING);
 }
 
 Hare::~Hare()
@@ -32,8 +32,9 @@ QString Hare::GetImageLink()
 void Hare::Move(std::shared_ptr<Graph> graph)
 {
 	// Send behavior to state
-	//behavior->CheckState();
-	//behavior->Move(graph);
+	behavior->Move(graph);
+	behavior->CheckState();
+	
 }
 
 void Hare::Update()
@@ -43,6 +44,7 @@ void Hare::Update()
 
 void Hare::ChangeState(EnumState new_state)
 {
+	BaseUnit::ChangeState(new_state);
 	//switch (new_state)
 	//{
 	//	case EnumState::HARE_WANDERING:

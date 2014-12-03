@@ -46,6 +46,7 @@ void Controller::Start()
 void Controller::Update()
 {
 	cow->Move(graph);
+	//hare->Move(graph);
 	//cow->Update();
 	//std::vector<std::shared_ptr<Vertex>> route = graph.GetRoute(cow->GetVertex(), hare->GetVertex());
 	MoveCow();
@@ -79,15 +80,26 @@ void Controller::MoveCow()
 			std::this_thread::sleep_for(dura);
 		}
 		if (cow->GetVertex() == hare->GetVertex())
-			MoveHare();
-	}
-	else
-	{
-
+		{
+			if (cow->GetState() == EnumState::COW_CHASING && hare->GetState() == EnumState::HARE_WANDERING)
+			{
+				MoveHare();
+				hare->Move(graph);
+			}
+			if (hare->GetState() == EnumState::HARE_CHASING)
+			{
+				std::shared_ptr<Vertex> new_cow_pos = cow->GetVertex()->GetEdges()[0]->GetDestinations()[0];
+				hare->Move(graph);
+				cow->SetVertex(new_cow_pos);
+			}
+				
+		}
+			
 	}
 }
 
 void Controller::MoveHare()
 {
 	graph->MoveHare(hare);
+	
 }

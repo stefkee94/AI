@@ -58,7 +58,7 @@ void MainWindow::paintEvent(QPaintEvent *e)
 	painter.drawImage(t_cow->GetVertex()->getXPos() - img_cow.width() / 2, t_cow->GetVertex()->getYPos() - img_cow.height() / 2, img_cow);
 	painter.drawImage(t_hare->GetVertex()->getXPos() - img_hare.width() / 2, t_hare->GetVertex()->getYPos() - img_hare.height() / 2, img_hare);
 
-	// Get state to show on the screen
+	// Check state from cow and show on screen
 	QString cow_state;
 	switch (t_cow->GetState())
 	{
@@ -70,12 +70,23 @@ void MainWindow::paintEvent(QPaintEvent *e)
 			break;
 	}
 
+	// Check state from hare and show on screen
+	QString hare_state;
+	switch (t_hare->GetState())
+	{
+		case EnumState::HARE_WANDERING:
+			hare_state = "The hare is wandering in the field";
+			break;
+		case EnumState::HARE_CHASING:
+			hare_state = "The hare is chasing the cow";
+	}
+
 	painter.setPen(QPen(QColor(Qt::black), 3 , Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));
 	QFont times_font("times", 24);
 	painter.setFont(times_font);
 
 	painter.drawText(430, 30, cow_state);
-	painter.drawText(430, 60, "The hare is wandering");
+	painter.drawText(430, 60, hare_state);
 }
 
 MainWindow::~MainWindow()

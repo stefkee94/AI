@@ -7,7 +7,7 @@ Cow::Cow()
 	img_link = QDir::currentPath().append("/Resources/lemmling_Cartoon_cow.png");
 	// Init on wandering state for the cow
 	//behavior = std::make_shared<CowWanderingState>(std::shared_ptr<Cow>(this));
-	ChangeState(EnumState::COW_CHASING);
+	BaseUnit::ChangeState(EnumState::COW_WANDERING);
 	//this->graph = graph;
 }
 
@@ -45,16 +45,17 @@ void Cow::Update()
 
 void Cow::ChangeState(EnumState new_state)
 {
-	switch (new_state)
+	BaseUnit::ChangeState(new_state);
+	/*switch (new_state)
 	{
 		case EnumState::COW_WANDERING:
 			behavior = new CowWanderingState(std::shared_ptr<Cow>(this));
-			currentState = EnumState::COW_WANDERING;
 			break;
 		case EnumState::COW_CHASING:
 			behavior = new CowChasingState(std::shared_ptr<Cow>(this));
-			currentState = EnumState::COW_CHASING;
+			break;
 	}
+	currentState = new_state;*/
 }
 
 EnumState Cow::GetState()

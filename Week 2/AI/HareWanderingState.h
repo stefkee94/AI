@@ -10,5 +10,8 @@ public:
 	void Move(std::shared_ptr<Graph> graph);
 	void Update();
 	void CheckState();
+
+private:
+	bool hasWeapon = false;
 };
 

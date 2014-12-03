@@ -11,6 +11,7 @@ Graph::~Graph()
 void Graph::Init(std::shared_ptr<Cow> cow, std::shared_ptr<Hare> hare)
 {
 	this->hare = hare;
+	this->cow = cow;
 	// Build the graph
 	for (int i = 0; i < 6; i++)
 		AddVertex(i);
@@ -272,6 +273,7 @@ std::vector<std::shared_ptr<Vertex>> Graph::CreateRoute()
 
 void Graph::MoveHare(std::shared_ptr<Hare> hare)
 {
+	//int posHare = 5; TO TEST WITH WEAPON
 	int posHare;
 	do posHare = Utils::RandomNumber(positions.size() - 1);
 	while (positions.at(posHare) == hare->GetVertex());
@@ -323,4 +325,9 @@ std::vector<std::shared_ptr<Edge>> Graph::getEdges()
 std::shared_ptr<Vertex> Graph::GetHarePosition()
 {
 	return hare->GetVertex();
+}
+
+std::shared_ptr<Vertex> Graph::GetCowPosition()
+{
+	return cow->GetVertex();
 }

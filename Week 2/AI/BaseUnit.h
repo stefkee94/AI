@@ -5,6 +5,8 @@
 #include "BehaviorState.h"
 class Vertex;
 class Graph;
+class Cow;
+class Hare;
 class BaseUnit
 {
 public:

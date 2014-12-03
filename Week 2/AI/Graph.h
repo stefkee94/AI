@@ -30,6 +30,7 @@ private:
 	void FillOpenList(std::vector<PositionNode> ordered_list);
 	std::vector<std::shared_ptr<Vertex>> CreateRoute();
 	std::shared_ptr<Hare> hare;
+	std::shared_ptr<Cow> cow;
 public:
 	Graph();
 	~Graph();
@@ -46,6 +47,8 @@ public:
 	void ClearRoute();
 
 	std::shared_ptr<Vertex> GetHarePosition();
+	std::shared_ptr<Vertex> GetCowPosition();
+
 	void MoveHare(std::shared_ptr<Hare> hare);
 };
 

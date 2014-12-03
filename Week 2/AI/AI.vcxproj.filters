@@ -117,6 +117,9 @@
     <ClCompile Include="BaseUnit.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="HareChasingState.cpp">
+      <Filter>Source Files\Model\State</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="packages.config" />
@@ -177,5 +180,10 @@
     <CustomBuild Include="Resources\weapon.png">
       <Filter>Resources</Filter>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HareChasingState.h">
+      <Filter>Header Files\Model\State</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
