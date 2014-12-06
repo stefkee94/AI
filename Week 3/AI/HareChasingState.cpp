@@ -17,6 +17,11 @@ void HareChasingState::Move(std::shared_ptr<Graph> graph)
 		
 }
 
+void HareChasingState::Update(std::shared_ptr<Graph> graph)
+{
+
+}
+
 void HareChasingState::CheckState()
 {
 	if (shotCow)

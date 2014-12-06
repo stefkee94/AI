@@ -9,6 +9,7 @@ public:
 
 	void Move(std::shared_ptr<Graph> graph);
 	void CheckState();
+	void Update(std::shared_ptr<Graph> graph);
 
 private:
 	bool hasEatenPill = false;

@@ -45,10 +45,8 @@ void Controller::Start()
 
 void Controller::Update()
 {
-	cow->Move(graph);
-	//hare->Move(graph);
-	//cow->Update();
-	//std::vector<std::shared_ptr<Vertex>> route = graph.GetRoute(cow->GetVertex(), hare->GetVertex());
+	if(hare->GetState() == EnumState::HARE_WANDERING) cow->Move(graph);
+	hare->Move(graph);
 	MoveCow();
 	Repaint();
 }
@@ -67,18 +65,47 @@ void Controller::MoveCow()
 	std::vector<std::shared_ptr<Vertex>> route = graph->GetShortestChaseRoute();
 	if (route.size() > 0)
 	{
+		if (hare->GetState() == EnumState::HARE_SEARCHING_WEAPON)
+		{
+			for (int i = 0; i < route.size(); i++)
+			{
+				hare->SetVertex(route.at(i));
+				Repaint();
+				std::chrono::milliseconds dura(1000);
+				std::this_thread::sleep_for(dura);
+			}
+			hare->Update(graph);
+			hare->ChangeState(EnumState::HARE_CHASING);
+			return;
+		}
+
 		for (int i = 0; i < route.size(); i++)
 		{
+			// Check the state of the vertex to choose what to do
+			hare->Update(graph);
+			if (hare->GetState() != EnumState::HARE_WANDERING)
+			{
+				graph->ClearRoute();
+				break;
+			}
+
 			// Move the cow
 			cow->SetVertex(route.at(i));
-
+			
 			// Repaint the view to show the movement
 			Repaint();
 
 			// Let the thread sleep for 2 seconds
-			std::chrono::milliseconds dura(500);
+			std::chrono::milliseconds dura(1000);
 			std::this_thread::sleep_for(dura);
 		}
+
+		if (hare->GetState() == EnumState::HARE_FLEEING)
+		{
+			hare->Move(graph);
+			Repaint();
+		}
+
 		if (cow->GetVertex() == hare->GetVertex())
 		{
 			if (cow->GetState() == EnumState::COW_CHASING && hare->GetState() == EnumState::HARE_WANDERING)
@@ -91,10 +118,8 @@ void Controller::MoveCow()
 				std::shared_ptr<Vertex> new_cow_pos = cow->GetVertex()->GetEdges()[0]->GetDestinations()[0];
 				hare->Move(graph);
 				cow->SetVertex(new_cow_pos);
-			}
-				
+			}	
 		}
-			
 	}
 }
 

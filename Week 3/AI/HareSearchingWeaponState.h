@@ -1,17 +1,14 @@
 #pragma once
 #include "BehaviorState.h"
 
-class HareChasingState : public BehaviorState
+class HareSearchingWeaponState : public BehaviorState
 {
 public:
-	HareChasingState(std::shared_ptr<BaseUnit> owner);
-	virtual ~HareChasingState();
+	HareSearchingWeaponState(std::shared_ptr<BaseUnit> owner);
+	virtual ~HareSearchingWeaponState();
 
 	void Move(std::shared_ptr<Graph> graph);
 	void CheckState();
 	void Update(std::shared_ptr<Graph> graph);
-
-private:
-	bool shotCow = false;
 };
 

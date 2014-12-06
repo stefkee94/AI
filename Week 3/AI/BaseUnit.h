@@ -12,6 +12,7 @@ class BaseUnit
 public:
 	virtual void Move(std::shared_ptr<Graph> graph) = 0;
 	void ChangeState(EnumState state);
+	virtual void Update(std::shared_ptr<Graph> graph) = 0;
 	virtual EnumState GetState() = 0;
 	virtual QString GetImageLink() = 0;
 	virtual void SetVertex(std::shared_ptr<Vertex> p_vertex) = 0;

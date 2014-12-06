@@ -17,14 +17,16 @@ void CowChasingState::Move(std::shared_ptr<Graph> graph)
 	std::shared_ptr<Vertex> hare_pos = graph->GetHarePosition();
 	if (cow_pos != hare_pos)
 		graph->GetRoute(cow_pos, hare_pos);
-	foundHare = true;
+}
+
+void CowChasingState::Update(std::shared_ptr<Graph> graph)
+{
+
 }
 
 void CowChasingState::CheckState()
 {
 	// If cow found hare, change status to wandering
-	if (foundHare)
-	{
-		owner->ChangeState(EnumState::COW_WANDERING);
-	}
+	/*if (foundHare)
+		owner->ChangeState(EnumState::COW_WANDERING);*/
 }

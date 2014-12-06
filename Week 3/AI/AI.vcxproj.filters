@@ -60,6 +60,18 @@
     <Filter Include="Header Files\Model\State">
       <UniqueIdentifier>{3dcf6574-972e-4819-9979-ec733f6c9325}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\State\Cow">
+      <UniqueIdentifier>{9232d216-b30a-49b4-8dfe-bce1fc881c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\State\Hare">
+      <UniqueIdentifier>{efe2bd14-4ada-498b-96fd-e9ae8a6efd04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\State\Cow">
+      <UniqueIdentifier>{5d5a4a86-549c-466f-a6d1-dcf6ed3487f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\State\Hare">
+      <UniqueIdentifier>{55eecc4c-eeb5-457c-9961-1d25f65d6647}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Graph.cpp">
@@ -105,20 +117,26 @@
     <ClCompile Include="BehaviorState.cpp">
       <Filter>Source Files\Model\State</Filter>
     </ClCompile>
-    <ClCompile Include="CowChasingState.cpp">
-      <Filter>Source Files\Model\State</Filter>
-    </ClCompile>
-    <ClCompile Include="CowWanderingState.cpp">
-      <Filter>Source Files\Model\State</Filter>
-    </ClCompile>
-    <ClCompile Include="HareWanderingState.cpp">
-      <Filter>Source Files\Model\State</Filter>
-    </ClCompile>
     <ClCompile Include="BaseUnit.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="CowChasingState.cpp">
+      <Filter>Source Files\Model\State\Cow</Filter>
+    </ClCompile>
+    <ClCompile Include="CowWanderingState.cpp">
+      <Filter>Source Files\Model\State\Cow</Filter>
+    </ClCompile>
     <ClCompile Include="HareChasingState.cpp">
-      <Filter>Source Files\Model\State</Filter>
+      <Filter>Source Files\Model\State\Hare</Filter>
+    </ClCompile>
+    <ClCompile Include="HareFleeingState.cpp">
+      <Filter>Source Files\Model\State\Hare</Filter>
+    </ClCompile>
+    <ClCompile Include="HareSearchingWeaponState.cpp">
+      <Filter>Source Files\Model\State\Hare</Filter>
+    </ClCompile>
+    <ClCompile Include="HareWanderingState.cpp">
+      <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,20 +177,11 @@
     <CustomBuild Include="BehaviorState.h">
       <Filter>Header Files\Model\State</Filter>
     </CustomBuild>
-    <CustomBuild Include="CowChasingState.h">
-      <Filter>Header Files\Model\State</Filter>
-    </CustomBuild>
-    <CustomBuild Include="CowWanderingState.h">
-      <Filter>Header Files\Model\State</Filter>
-    </CustomBuild>
     <CustomBuild Include="BaseUnit.h">
       <Filter>Header Files\Model</Filter>
     </CustomBuild>
     <CustomBuild Include="EnumState.h">
       <Filter>Header Files\Model</Filter>
-    </CustomBuild>
-    <CustomBuild Include="HareWanderingState.h">
-      <Filter>Header Files\Model\State</Filter>
     </CustomBuild>
     <CustomBuild Include="Resources\pill.png">
       <Filter>Resources</Filter>
@@ -180,10 +189,25 @@
     <CustomBuild Include="Resources\weapon.png">
       <Filter>Resources</Filter>
     </CustomBuild>
+    <CustomBuild Include="CowChasingState.h">
+      <Filter>Header Files\Model\State\Cow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CowWanderingState.h">
+      <Filter>Header Files\Model\State\Cow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareWanderingState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HareChasingState.h">
-      <Filter>Header Files\Model\State</Filter>
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </ClInclude>
+    <ClInclude Include="HareFleeingState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </ClInclude>
+    <ClInclude Include="HareSearchingWeaponState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

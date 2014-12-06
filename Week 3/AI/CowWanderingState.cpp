@@ -39,6 +39,11 @@ void CowWanderingState::Move(std::shared_ptr<Graph> graph)
 	graph->ClearRoute();
 }
 
+void CowWanderingState::Update(std::shared_ptr<Graph> graph)
+{
+
+}
+
 void CowWanderingState::CheckState()
 {
 	//TODO : IF PILL FOUND CHANGE STATE

@@ -13,7 +13,7 @@ public:
 	QString GetImageLink();
 
 	void Move(std::shared_ptr<Graph> graph);
-	void Update();
+	void Update(std::shared_ptr<Graph> graph);
 	//void ChangeState(EnumState new_state);
 	EnumState GetState();
 };

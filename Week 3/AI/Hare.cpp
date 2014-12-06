@@ -33,7 +33,12 @@ void Hare::Move(std::shared_ptr<Graph> graph)
 {
 	// Send behavior to state
 	behavior->Move(graph);
-	behavior->CheckState();
+	//behavior->CheckState();
+}
+
+void Hare::Update(std::shared_ptr<Graph> graph)
+{
+	behavior->Update(graph);
 }
 
 EnumState Hare::GetState()

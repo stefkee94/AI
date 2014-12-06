@@ -79,6 +79,13 @@ void MainWindow::paintEvent(QPaintEvent *e)
 			break;
 		case EnumState::HARE_CHASING:
 			hare_state = "The hare is chasing the cow";
+			break;
+		case EnumState::HARE_FLEEING:
+			hare_state = "The hare is fleeing from the cow";
+			break;
+		case EnumState::HARE_SEARCHING_WEAPON:
+			hare_state = "The hare is searching the weapon now";
+			break;
 	}
 
 	painter.setPen(QPen(QColor(Qt::black), 3 , Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));

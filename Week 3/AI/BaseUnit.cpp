@@ -3,6 +3,8 @@
 #include "CowWanderingState.h"
 #include "HareWanderingState.h"
 #include "HareChasingState.h"
+#include "HareFleeingState.h"
+#include "HareSearchingWeaponState.h"
 
 void BaseUnit::ChangeState(EnumState new_state)
 {
@@ -19,6 +21,13 @@ void BaseUnit::ChangeState(EnumState new_state)
 			break;
 		case EnumState::HARE_CHASING:
 			behavior = new HareChasingState(std::shared_ptr<BaseUnit>(this));
+			break;
+		case EnumState::HARE_FLEEING:
+			behavior = new HareFleeingState(std::shared_ptr<BaseUnit>(this));
+			break;
+		case EnumState::HARE_SEARCHING_WEAPON:
+			behavior = new HareSearchingWeaponState(std::shared_ptr<BaseUnit>(this));
+			break;
 	}
 	currentState = new_state;
 }
