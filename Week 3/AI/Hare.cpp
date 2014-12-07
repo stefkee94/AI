@@ -29,11 +29,10 @@ QString Hare::GetImageLink()
 	return img_link;
 }
 
-void Hare::Move(std::shared_ptr<Graph> graph)
+std::vector<std::shared_ptr<Vertex>> Hare::Move(std::shared_ptr<Graph> graph)
 {
 	// Send behavior to state
-	behavior->Move(graph);
-	//behavior->CheckState();
+	return behavior->Move(graph);
 }
 
 void Hare::Update(std::shared_ptr<Graph> graph)

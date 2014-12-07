@@ -9,12 +9,21 @@ HareChasingState::HareChasingState(std::shared_ptr<BaseUnit> owner) : BehaviorSt
 HareChasingState::~HareChasingState()
 {
 }
-void HareChasingState::Move(std::shared_ptr<Graph> graph)
+
+std::vector<std::shared_ptr<Vertex>> HareChasingState::Move(std::shared_ptr<Graph> graph)
 {
 	// in chasing mode, move the cow to other place and change state to wandering
 	if (owner->GetVertex() == graph->GetCowPosition())
+	{
 		shotCow = true;
-		
+		return std::vector<std::shared_ptr<Vertex>>();
+	}
+	else
+	{
+		std::shared_ptr<Vertex> cow_pos = owner->GetVertex();
+		std::shared_ptr<Vertex> hare_pos = graph->GetHarePosition();
+		return graph->GetRoute(hare_pos, cow_pos);
+	}
 }
 
 void HareChasingState::Update(std::shared_ptr<Graph> graph)

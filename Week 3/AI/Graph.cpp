@@ -58,8 +58,17 @@ void Graph::AddEdges(std::shared_ptr<Vertex> start, std::shared_ptr<Vertex> end)
 
 std::vector<std::shared_ptr<Vertex>> Graph::GetRoute(std::shared_ptr<Vertex> start_node, std::shared_ptr<Vertex> end_node)
 {
+	// Clear the routes
+	ClearRoute();
+
 	// Add the position of the cow to the closed list
 	closed_list.push_back(start_node);
+
+	if (start_node == end_node)
+	{
+		std::vector<std::shared_ptr<Vertex>> route = CreateRoute();
+		return route;
+	}
 
 	// Set your current node
 	bool found_end_node = true;
@@ -126,8 +135,11 @@ std::vector<std::shared_ptr<Vertex>> Graph::GetRoute(std::shared_ptr<Vertex> sta
 		FillOpenList(ordered_list);
 
 		// Add the shortest item to the closed list and remove it from the open_list
-		closed_list.push_back(open_list.at(0).GetVertex());
-		open_list.erase(open_list.begin());
+		if (open_list.size() > 0)
+		{
+			closed_list.push_back(open_list.at(0).GetVertex());
+			open_list.erase(open_list.begin());
+		}
 
 		if (closed_list.at(closed_list.size() - 1) == end_node)
 			found_end_node = false;
@@ -273,17 +285,12 @@ std::vector<std::shared_ptr<Vertex>> Graph::CreateRoute()
 
 void Graph::MoveHare(std::shared_ptr<Hare> hare)
 {
-	//int posHare = 5; TO TEST WITH WEAPON
+	//int posHare = 5; //TO TEST WITH WEAPON
 	int posHare;
 	do posHare = Utils::RandomNumber(positions.size() - 1);
 	while (positions.at(posHare) == hare->GetVertex());
 
 	hare->SetVertex(positions.at(posHare));
-
-	//Start over, clear closed and open list
-	closed_list.clear();
-	open_list.clear();
-	distances.clear();
 }
 
 std::vector<std::shared_ptr<Vertex>> Graph::getPositions()

@@ -12,7 +12,7 @@ public:
 	std::shared_ptr<Vertex> GetVertex();
 	QString GetImageLink();
 
-	void Move(std::shared_ptr<Graph> graph);
+	std::vector<std::shared_ptr<Vertex>>  Move(std::shared_ptr<Graph> graph);
 	void Update(std::shared_ptr<Graph> graph);
 	//void ChangeState(EnumState new_state);
 	EnumState GetState();

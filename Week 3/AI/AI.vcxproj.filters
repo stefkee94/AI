@@ -126,16 +126,16 @@
     <ClCompile Include="CowWanderingState.cpp">
       <Filter>Source Files\Model\State\Cow</Filter>
     </ClCompile>
-    <ClCompile Include="HareChasingState.cpp">
+    <ClCompile Include="HareWanderingState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
-    <ClCompile Include="HareFleeingState.cpp">
+    <ClCompile Include="HareChasingState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
     <ClCompile Include="HareSearchingWeaponState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
-    <ClCompile Include="HareWanderingState.cpp">
+    <ClCompile Include="HareFleeingState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
   </ItemGroup>

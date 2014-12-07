@@ -5,7 +5,7 @@ HareSearchingWeaponState::HareSearchingWeaponState(std::shared_ptr<BaseUnit> own
 {
 }
 
-void HareSearchingWeaponState::Move(std::shared_ptr<Graph> graph)
+std::vector<std::shared_ptr<Vertex>> HareSearchingWeaponState::Move(std::shared_ptr<Graph> graph)
 {
 	std::vector<std::shared_ptr<Vertex>> all_pos = graph->getPositions();
 	std::shared_ptr<Vertex> current_pos = owner->GetVertex();
@@ -13,12 +13,21 @@ void HareSearchingWeaponState::Move(std::shared_ptr<Graph> graph)
 	{
 		if (pos->hasNewWeapon())
 		{
-			graph->GetRoute(owner->GetVertex(), pos);
-			//pos->setWeapon(false);
-			//current_pos->setWeapon(true);
-			return;
+			if (owner->GetVertex() == pos)
+			{
+				pos->setWeapon(false);
+				CheckState();
+				break;
+				//current_pos->setWeapon(true);
+			}
+			else
+			{
+				return graph->GetRoute(owner->GetVertex(), pos);
+			}
 		}
 	}
+
+	return std::vector<std::shared_ptr<Vertex>>();
 }
 
 void HareSearchingWeaponState::Update(std::shared_ptr<Graph> graph)
@@ -31,7 +40,7 @@ void HareSearchingWeaponState::Update(std::shared_ptr<Graph> graph)
 
 void HareSearchingWeaponState::CheckState()
 {
-	//owner->ChangeState(EnumState::HARE_CHASING);
+	owner->ChangeState(EnumState::HARE_CHASING);
 }
 
 HareSearchingWeaponState::~HareSearchingWeaponState()
