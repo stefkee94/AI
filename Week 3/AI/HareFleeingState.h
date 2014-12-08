@@ -15,5 +15,8 @@ public:
 	void CheckState();
 	void Update(std::shared_ptr<Graph> graph);
 	std::string GetAction();
+
+private:
+	int counter;
 };
 

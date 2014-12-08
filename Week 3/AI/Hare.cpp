@@ -49,3 +49,13 @@ EnumState Hare::GetState()
 {
 	return currentState;
 }
+
+void Hare::SetPil(bool contains_pill)
+{
+	pill = contains_pill;
+}
+
+bool Hare::GetPil()
+{
+	return pill;
+}

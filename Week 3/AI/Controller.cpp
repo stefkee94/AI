@@ -45,35 +45,54 @@ void Controller::Update()
 {
 	std::vector<std::shared_ptr<Vertex>> route_cow, route_hare;
 
-	if (hare->GetState() == EnumState::HARE_CHASING && Utils::InRange(hare->GetVertex(), cow->GetVertex()))
+	if (sleep_counter > 0)
 	{
-		std::cout << "The cow is shot!" << std::endl;
+		if (sleep_counter > 0)
+			sleep_counter--;
 
-		// Move the hare
 		route_hare = hare->Move(graph);
 		MoveHare(route_hare);
-
-		// Clear the route and move the cow to a random position
 		graph->ClearRoute();
-		graph->MoveCow(cow);
-	}
-	else if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
-	{
-		std::cout << "The hare is caught!" << std::endl;
-		graph->MoveHare(hare);
 	}
 	else
 	{
-		// Get the routes of the hare and the cow
-		route_hare = hare->Move(graph);
-		route_cow = cow->Move(graph);
+		if (hare->GetState() == EnumState::HARE_CHASING && Utils::InRange(hare->GetVertex(), cow->GetVertex()))
+		{
+			std::cout << "The cow is shot!" << std::endl;
 
-		// Move the hare and the cow
-		MoveHare(route_hare);
-		MoveCow(route_cow);
+			// Move the hare
+			route_hare = hare->Move(graph);
+			MoveHare(route_hare);
 
-		// Clear the routes
-		graph->ClearRoute();
+			// Clear the route and move the cow to a random position
+			graph->ClearRoute();
+			graph->MoveCow(cow);
+		}
+		else if (hare->GetState() == EnumState::HARE_WANDERING && hare->GetPil() && cow->GetVertex() == hare->GetVertex())
+		{
+			std::cout << "The cow falls asleep!" << std::endl;
+			sleep_counter = 6;
+			route_hare = hare->Move(graph);
+			MoveHare(route_hare);
+		}
+		else if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
+		{
+			std::cout << "The hare is caught!" << std::endl;
+			graph->MoveHare(hare);
+		}
+		else
+		{
+			// Get the routes of the hare and the cow
+			route_hare = hare->Move(graph);
+			route_cow = cow->Move(graph);
+
+			// Move the hare and the cow
+			MoveHare(route_hare);
+			MoveCow(route_cow);
+
+			// Clear the routes
+			graph->ClearRoute();
+		}
 	}
 }
 

@@ -53,3 +53,13 @@ EnumState Cow::GetState()
 {
 	return currentState;
 }
+
+void Cow::SetPil(bool contains_pill)
+{
+	pill = contains_pill;
+}
+
+bool Cow::GetPil()
+{
+	return pill;
+}

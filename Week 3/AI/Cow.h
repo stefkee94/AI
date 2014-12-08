@@ -16,5 +16,7 @@ public:
 	void SetVertex(std::shared_ptr<Vertex> p_vertex);
 	std::shared_ptr<Vertex> GetVertex();
 	std::string GetAction();
+	void SetPil(bool contains_pill);
+	bool GetPil();
 };
 
