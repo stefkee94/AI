@@ -13,8 +13,8 @@ public:
 
 	std::vector<std::shared_ptr<Vertex>> Move(std::shared_ptr<Graph> graph);
 	void CheckState();
-	bool IsCowInRange(std::shared_ptr<Graph> graph);
 	void Update(std::shared_ptr<Graph> graph);
+	std::string GetAction();
 
 private:
 	bool hasWeapon = false;

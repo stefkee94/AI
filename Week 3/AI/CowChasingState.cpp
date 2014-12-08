@@ -31,6 +31,11 @@ void CowChasingState::Update(std::shared_ptr<Graph> graph)
 
 }
 
+std::string CowChasingState::GetAction()
+{
+	return "chasing the hare";
+}
+
 void CowChasingState::CheckState()
 {
 	// If cow found hare, change status to wandering

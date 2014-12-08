@@ -40,6 +40,11 @@ void Hare::Update(std::shared_ptr<Graph> graph)
 	behavior->Update(graph);
 }
 
+std::string Hare::GetAction()
+{
+	return behavior->GetAction();
+}
+
 EnumState Hare::GetState()
 {
 	return currentState;

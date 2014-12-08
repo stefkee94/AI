@@ -41,6 +41,7 @@ bool Utils::InRange(std::shared_ptr<Vertex> param1, std::shared_ptr<Vertex> para
 		{
 			if (vertex == param2)
 			{
+				std::cout << "IN RANGE" << std::endl;
 				return true;
 			}
 		}

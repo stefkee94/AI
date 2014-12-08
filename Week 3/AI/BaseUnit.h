@@ -21,6 +21,7 @@ public:
 	virtual QString GetImageLink() = 0;
 	virtual void SetVertex(std::shared_ptr<Vertex> p_vertex) = 0;
 	virtual std::shared_ptr<Vertex> GetVertex() = 0;
+	virtual std::string GetAction() = 0;
 
 protected:
 	BehaviorState* behavior;

@@ -38,6 +38,11 @@ void HareSearchingPillState::Update(std::shared_ptr<Graph> graph)
 	all_pos[0]->setWeapon(true);*/
 }
 
+std::string HareSearchingPillState::GetAction()
+{
+	return "searching for the sleeping pill";
+}
+
 void HareSearchingPillState::CheckState()
 {
 	//owner->ChangeState(EnumState::HARE_CHASING);

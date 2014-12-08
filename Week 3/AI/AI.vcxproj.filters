@@ -139,7 +139,7 @@
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
     <ClCompile Include="HareSearchingPillState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,7 +213,7 @@
       <Filter>Header Files\Model\State\Hare</Filter>
     </ClInclude>
     <ClInclude Include="HareSearchingPillState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Model\State\Hare</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

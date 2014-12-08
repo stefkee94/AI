@@ -15,5 +15,6 @@ public:
 	QString GetImageLink();
 	void SetVertex(std::shared_ptr<Vertex> p_vertex);
 	std::shared_ptr<Vertex> GetVertex();
+	std::string GetAction();
 };
 

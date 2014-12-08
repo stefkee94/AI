@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 #include <memory>
 #include <vector>
 
@@ -15,6 +16,7 @@ public:
 	virtual std::vector<std::shared_ptr<Vertex>> Move(std::shared_ptr<Graph> graph) = 0;
 	virtual void CheckState() = 0;
 	virtual void Update(std::shared_ptr<Graph> graph) = 0;
+	virtual std::string GetAction() = 0;
 
 protected:
 	std::shared_ptr<BaseUnit> owner;

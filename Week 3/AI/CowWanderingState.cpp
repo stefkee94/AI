@@ -50,6 +50,11 @@ void CowWanderingState::Update(std::shared_ptr<Graph> graph)
 
 }
 
+std::string CowWanderingState::GetAction()
+{
+	return "wandering in the field";
+}
+
 void CowWanderingState::CheckState()
 {
 	//TODO : IF PILL FOUND CHANGE STATE

@@ -18,7 +18,6 @@ std::vector<std::shared_ptr<Vertex>> HareSearchingWeaponState::Move(std::shared_
 				pos->setWeapon(false);
 				CheckState();
 				break;
-				//current_pos->setWeapon(true);
 			}
 			else
 			{
@@ -36,6 +35,11 @@ void HareSearchingWeaponState::Update(std::shared_ptr<Graph> graph)
 	std::shared_ptr<Vertex> current_pos = owner->GetVertex();
 	current_pos->setWeapon(false);
 	all_pos[0]->setWeapon(true);
+}
+
+std::string HareSearchingWeaponState::GetAction()
+{
+	return "searching for the weapon";
 }
 
 void HareSearchingWeaponState::CheckState()

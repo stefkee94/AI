@@ -44,6 +44,11 @@ void Cow::Update(std::shared_ptr<Graph> graph)
 	behavior->Update(graph);
 }
 
+std::string Cow::GetAction()
+{
+	return behavior->GetAction();
+}
+
 EnumState Cow::GetState()
 {
 	return currentState;

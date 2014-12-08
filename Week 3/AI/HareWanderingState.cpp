@@ -26,8 +26,11 @@ std::vector<std::shared_ptr<Vertex>> HareWanderingState::Move(std::shared_ptr<Gr
 	std::shared_ptr<Vertex> next_pos;
 
 	// Check if the cow is in range
-	if (IsCowInRange(graph))
+	if (Utils::InRange(owner->GetVertex(), graph->GetCowPosition()))
+	{
 		CheckState();
+
+	}
 	else
 	{
 		std::vector<std::shared_ptr<Edge>> edges = owner->GetVertex()->GetEdges();
@@ -44,40 +47,25 @@ std::vector<std::shared_ptr<Vertex>> HareWanderingState::Move(std::shared_ptr<Gr
 	return route;
 }
 
-bool HareWanderingState::IsCowInRange(std::shared_ptr<Graph> graph)
-{
-	std::shared_ptr<Vertex> current_vert = owner->GetVertex();
-	std::vector<std::shared_ptr<Edge>> edges = current_vert->GetEdges();
-	for (std::shared_ptr<Edge> edge : edges)
-	{
-		std::vector<std::shared_ptr<Vertex>> dests = edge->GetDestinations();
-		for (std::shared_ptr<Vertex> vertex : dests)
-		{
-			if (vertex == graph->GetCowPosition())
-			{
-				// DO SOMETHING BECAUSE COW IS IN RANGE AND CHASING
-				std::cout << "IN RANGE" << std::endl;
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
 void HareWanderingState::Update(std::shared_ptr<Graph> graph)
 {
 	
 }
 
+std::string HareWanderingState::GetAction()
+{
+	return "wandering in the field";
+}
+
 void HareWanderingState::CheckState()
 {
 	int number = rand() % 100;
-	//if (number < 51)
-		//owner->ChangeState(EnumState::HARE_FLEEING);
+	if (number < 51)
+	//	owner->ChangeState(EnumState::HARE_FLEEING);
 	//else if (number > 50 && number < 76)
 		owner->ChangeState(EnumState::HARE_SEARCHING_WEAPON);
-	//else
-		//owner->ChangeState(EnumState::HARE_SEARCHING_SLEEPINGPILL);
+	else
+		owner->ChangeState(EnumState::HARE_SEARCHING_SLEEPINGPILL);
 
 	//owner->ChangeState(EnumState::HARE_FLEEING);
 	/*if (hasWeapon)

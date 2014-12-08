@@ -32,6 +32,11 @@ void HareFleeingState::Update(std::shared_ptr<Graph> graph)
 
 }
 
+std::string HareFleeingState::GetAction()
+{
+	return "fleeing from the cow";
+}
+
 void HareFleeingState::CheckState()
 {
 	owner->ChangeState(EnumState::HARE_WANDERING);
