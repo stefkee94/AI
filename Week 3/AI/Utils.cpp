@@ -30,3 +30,20 @@ int Utils::RandomNumber(int min, int max)
 {
 	return std::uniform_int_distribution<int>(min, max)(rng);
 }
+
+bool Utils::InRange(std::shared_ptr<Vertex> param1, std::shared_ptr<Vertex> param2)
+{
+	std::vector<std::shared_ptr<Edge>> edges = param1->GetEdges();
+	for (std::shared_ptr<Edge> edge : edges)
+	{
+		std::vector<std::shared_ptr<Vertex>> dests = edge->GetDestinations();
+		for (std::shared_ptr<Vertex> vertex : dests)
+		{
+			if (vertex == param2)
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}

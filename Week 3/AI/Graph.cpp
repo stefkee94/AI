@@ -293,6 +293,16 @@ void Graph::MoveHare(std::shared_ptr<Hare> hare)
 	hare->SetVertex(positions.at(posHare));
 }
 
+void Graph::MoveCow(std::shared_ptr<Cow> cow)
+{
+	//int posHare = 5; //TO TEST WITH WEAPON
+	int posCow;
+	do posCow = Utils::RandomNumber(positions.size() - 1);
+	while (positions.at(posCow) == cow->GetVertex());
+
+	cow->SetVertex(positions.at(posCow));
+}
+
 std::vector<std::shared_ptr<Vertex>> Graph::getPositions()
 {
 	return positions;

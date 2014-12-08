@@ -45,10 +45,21 @@ void Controller::Update()
 {
 	std::vector<std::shared_ptr<Vertex>> route_cow, route_hare;
 
-	if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
+	if (hare->GetState() == EnumState::HARE_CHASING && Utils::InRange(hare->GetVertex(), cow->GetVertex()))
 	{
-		//route_cow = cow->Move(graph);
-		//MoveCow(route_cow);
+		std::cout << "The cow is shot!" << std::endl;
+
+		// Move the hare
+		route_hare = hare->Move(graph);
+		MoveHare(route_hare);
+
+		// Clear the route and move the cow to a random position
+		graph->ClearRoute();
+		graph->MoveCow(cow);
+	}
+	else if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
+	{
+		std::cout << "The hare is caught!" << std::endl;
 		graph->MoveHare(hare);
 	}
 	else

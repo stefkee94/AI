@@ -50,5 +50,6 @@ public:
 	std::shared_ptr<Vertex> GetCowPosition();
 
 	void MoveHare(std::shared_ptr<Hare> hare);
+	void MoveCow(std::shared_ptr<Cow> cow);
 };
 

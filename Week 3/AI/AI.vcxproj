@@ -193,6 +193,7 @@
     <ClCompile Include="Hare.cpp" />
     <ClCompile Include="HareChasingState.cpp" />
     <ClCompile Include="HareFleeingState.cpp" />
+    <ClCompile Include="HareSearchingPillState.cpp" />
     <ClCompile Include="HareSearchingWeaponState.cpp" />
     <ClCompile Include="HareWanderingState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -435,6 +436,7 @@
   <ItemGroup>
     <ClInclude Include="HareChasingState.h" />
     <ClInclude Include="HareFleeingState.h" />
+    <ClInclude Include="HareSearchingPillState.h" />
     <ClInclude Include="HareSearchingWeaponState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

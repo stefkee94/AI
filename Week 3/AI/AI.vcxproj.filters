@@ -138,6 +138,9 @@
     <ClCompile Include="HareFleeingState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
+    <ClCompile Include="HareSearchingPillState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="packages.config" />
@@ -208,6 +211,9 @@
     </ClInclude>
     <ClInclude Include="HareSearchingWeaponState.h">
       <Filter>Header Files\Model\State\Hare</Filter>
+    </ClInclude>
+    <ClInclude Include="HareSearchingPillState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
