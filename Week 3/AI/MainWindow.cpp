@@ -59,40 +59,12 @@ void MainWindow::paintEvent(QPaintEvent *e)
 	painter.drawImage(t_hare->GetVertex()->getXPos() - img_hare.width() / 2, t_hare->GetVertex()->getYPos() - img_hare.height() / 2, img_hare);
 
 	// Check state from cow and show on screen
-	//QString cow_state;
 	QString cow_state = QString("The cow is ");
 	cow_state.append(QString::fromUtf8(t_cow->GetAction().c_str()));
-	/*switch (t_cow->GetState())
-	{
-		case EnumState::COW_WANDERING:
-			cow_state = "The cow is wandering in the field";
-			break;
-		case EnumState::COW_CHASING:
-			cow_state = "The cow is chasing the hare";
-			break;
-	}*/
 
 	// Check state from hare and show on screen
 	QString hare_state = QString("The hare is ");
 	hare_state.append(QString::fromUtf8(t_hare->GetAction().c_str()));
-	/*switch (t_hare->GetState())
-	{
-		case EnumState::HARE_WANDERING:
-			hare_state = "The hare is wandering in the field";
-			break;
-		case EnumState::HARE_CHASING:
-			hare_state = "The hare is chasing the cow";
-			break;
-		case EnumState::HARE_FLEEING:
-			hare_state = "The hare is fleeing from the cow";
-			break;
-		case EnumState::HARE_SEARCHING_WEAPON:
-			hare_state = "The hare is searching for the weapon";
-			break;
-		case EnumState::HARE_SEARCHING_SLEEPINGPILL:
-			hare_state = "The hare is searching for the sleeping pill";
-			break;
-	}*/
 
 	painter.setPen(QPen(QColor(Qt::black), 3 , Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));
 	QFont times_font("times", 24);

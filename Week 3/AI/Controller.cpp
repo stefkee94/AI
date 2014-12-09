@@ -56,6 +56,9 @@ void Controller::Update()
 	}
 	else
 	{
+		if (sleep_counter == 0)
+			cow->ChangeState(EnumState::COW_CHASING);
+
 		if (hare->GetState() == EnumState::HARE_CHASING && Utils::InRange(hare->GetVertex(), cow->GetVertex()))
 		{
 			std::cout << "The cow is shot!" << std::endl;
@@ -68,12 +71,43 @@ void Controller::Update()
 			graph->ClearRoute();
 			graph->MoveCow(cow);
 		}
+		else if (hare->GetState() == EnumState::HARE_WANDERING && Utils::InRange(hare->GetVertex(), cow->GetVertex()) && sleep_counter == -1)
+		{
+			// Update the hare while cow is in range to choose what to do
+			hare->Update(graph);
+			route_hare = hare->Move(graph);
+			MoveHare(route_hare);
+		}
+		else if (hare->GetState() == EnumState::HARE_FLEEING)
+		{
+			// Move away from the cow
+			auto new_route = hare->Move(graph);
+			if (new_route.size() > 0)
+				MoveHare(new_route);
+		}
+		else if (hare->GetState() == EnumState::HARE_SEARCHING_WEAPON)
+		{
+			auto new_route = hare->Move(graph);
+			if (new_route.size() > 0)
+				MoveHare(new_route);
+		}
+		else if (hare->GetState() == EnumState::HARE_SEARCHING_SLEEPINGPILL)
+		{
+			sleep_counter = 0; // means that pill is found
+			auto new_route = hare->Move(graph);
+			if (new_route.size() > 0)
+				MoveHare(new_route);
+			//hare->Update(graph);
+		}
 		else if (hare->GetState() == EnumState::HARE_WANDERING && hare->GetPil() && cow->GetVertex() == hare->GetVertex())
 		{
 			std::cout << "The cow falls asleep!" << std::endl;
-			sleep_counter = 6;
+			sleep_counter = 2;
+			cow->ChangeState(EnumState::COW_SLEEPING);
+
 			route_hare = hare->Move(graph);
-			MoveHare(route_hare);
+			if (route_hare.size() > 0)
+				MoveHare(route_hare);
 		}
 		else if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
 		{
@@ -83,11 +117,11 @@ void Controller::Update()
 		else
 		{
 			// Get the routes of the hare and the cow
-			route_hare = hare->Move(graph);
+			//route_hare = hare->Move(graph);
 			route_cow = cow->Move(graph);
 
 			// Move the hare and the cow
-			MoveHare(route_hare);
+			//MoveHare(route_hare);
 			MoveCow(route_cow);
 
 			// Clear the routes

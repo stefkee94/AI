@@ -28,10 +28,23 @@ std::vector<std::shared_ptr<Vertex>> HareWanderingState::Move(std::shared_ptr<Gr
 	// Check if the cow is in range
 	if (owner->GetPil() && owner->GetVertex() == graph->GetCowPosition())
 	{
-		// Set the new position of the weapon
+		// Set the new position of the pill
 		std::vector<std::shared_ptr<Vertex>> positions = graph->getPositions();
 		positions.at(Utils::RandomNumber(positions.size() - 1))->setPill(true);
 
+		
+
+		std::vector<std::shared_ptr<Edge>> edges = owner->GetVertex()->GetEdges();
+		std::vector<std::shared_ptr<Vertex>> new_positions = edges.at(Utils::RandomNumber(edges.size() - 1))->GetDestinations();
+
+		// Get next vertex
+		if (new_positions.at(0) != owner->GetVertex())
+			next_pos = new_positions.at(0);
+		else
+			next_pos = new_positions.at(1);
+
+		route.push_back(next_pos);
+		
 		// Change the current state of the hare
 		CheckState();
 	}
@@ -58,7 +71,7 @@ std::vector<std::shared_ptr<Vertex>> HareWanderingState::Move(std::shared_ptr<Gr
 
 void HareWanderingState::Update(std::shared_ptr<Graph> graph)
 {
-	
+	CheckState();
 }
 
 std::string HareWanderingState::GetAction()
@@ -80,8 +93,5 @@ void HareWanderingState::CheckState()
 			owner->ChangeState(EnumState::HARE_SEARCHING_WEAPON);
 		else
 			owner->ChangeState(EnumState::HARE_SEARCHING_SLEEPINGPILL);
-
-		//owner->ChangeState(EnumState::HARE_FLEEING);
-		//else if (number > 50 && number < 76)
 	}
 }

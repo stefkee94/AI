@@ -24,7 +24,7 @@ public:
 
 private:
 	bool is_running;
-	int sleep_counter = 0;
+	int sleep_counter = -1; // Init on -1 (non availble) and 0 = available
 
 	// QT init
 	MainWindow* mainWindow;

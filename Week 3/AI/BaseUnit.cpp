@@ -1,6 +1,7 @@
 #include "BaseUnit.h"
 #include "CowChasingState.h"
 #include "CowWanderingState.h"
+#include "CowSleepingState.h"
 #include "HareWanderingState.h"
 #include "HareChasingState.h"
 #include "HareFleeingState.h"
@@ -16,6 +17,9 @@ void BaseUnit::ChangeState(EnumState new_state)
 		break;
 	case EnumState::COW_CHASING:
 		behavior = new CowChasingState(std::shared_ptr<BaseUnit>(this));
+		break;
+	case EnumState::COW_SLEEPING:
+		behavior = new CowSleepingState(std::shared_ptr<BaseUnit>(this));
 		break;
 	case EnumState::HARE_WANDERING:
 		behavior = new HareWanderingState(std::shared_ptr<BaseUnit>(this));

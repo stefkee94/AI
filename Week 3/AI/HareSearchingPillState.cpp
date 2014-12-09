@@ -36,6 +36,7 @@ void HareSearchingPillState::Update(std::shared_ptr<Graph> graph)
 	std::shared_ptr<Vertex> current_pos = owner->GetVertex();
 	current_pos->setWeapon(false);
 	all_pos[0]->setWeapon(true);*/
+	CheckState();
 }
 
 std::string HareSearchingPillState::GetAction()

@@ -141,6 +141,9 @@
     <ClCompile Include="HareSearchingPillState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
+    <ClCompile Include="CowSleepingState.cpp">
+      <Filter>Source Files\Model\State\Cow</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="packages.config" />
@@ -201,19 +204,22 @@
     <CustomBuild Include="HareWanderingState.h">
       <Filter>Header Files\Model\State\Hare</Filter>
     </CustomBuild>
+    <CustomBuild Include="HareChasingState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareFleeingState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareSearchingPillState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareSearchingWeaponState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="HareChasingState.h">
-      <Filter>Header Files\Model\State\Hare</Filter>
-    </ClInclude>
-    <ClInclude Include="HareFleeingState.h">
-      <Filter>Header Files\Model\State\Hare</Filter>
-    </ClInclude>
-    <ClInclude Include="HareSearchingWeaponState.h">
-      <Filter>Header Files\Model\State\Hare</Filter>
-    </ClInclude>
-    <ClInclude Include="HareSearchingPillState.h">
-      <Filter>Header Files\Model\State\Hare</Filter>
+    <ClInclude Include="CowSleepingState.h">
+      <Filter>Header Files\Model\State\Cow</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

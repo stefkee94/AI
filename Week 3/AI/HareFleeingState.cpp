@@ -1,16 +1,15 @@
 #include "HareFleeingState.h"
 #include "Graph.h"
 
-HareFleeingState::HareFleeingState(std::shared_ptr<BaseUnit> owner) : BehaviorState(owner)
+HareFleeingState::HareFleeingState(std::shared_ptr<BaseUnit> owner) : BehaviorState(owner), counter(2)
 {
-	int counter = 5;
 }
 
 std::vector<std::shared_ptr<Vertex>> HareFleeingState::Move(std::shared_ptr<Graph> graph)
 {
 	std::vector<std::shared_ptr<Vertex>> route;
 
-	// Check if the hare has fleed for 5 turns
+	// Check if the hare has fleed for 2 turns
 	if (counter <= 0)
 		CheckState();
 	else
@@ -46,10 +45,19 @@ std::vector<std::shared_ptr<Vertex>> HareFleeingState::Move(std::shared_ptr<Grap
 		// Look for a position where the cow cant move to
 		for (int x = 0; x < possible_positions_hare.size(); x++)
 		{
+			if (owner->GetVertex() == graph->GetCowPosition())
+			{
+				route.push_back(possible_positions_hare.at(0));
+				break;
+			}
+
 			if (std::find(possible_positions_cow.begin(), possible_positions_cow.end(), possible_positions_hare.at(x)) == possible_positions_cow.end())
 			{
-				route.push_back(possible_positions_hare.at(x));
-				break;
+				if (possible_positions_hare.at(x) != graph->GetCowPosition())
+				{
+					route.push_back(possible_positions_hare.at(x));
+					break;
+				}
 			}
 		}
 
