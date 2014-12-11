@@ -11,9 +11,12 @@ std::vector<std::shared_ptr<Vertex>> CowSleepingState::Move(std::shared_ptr<Grap
 	return std::vector<std::shared_ptr<Vertex>>();
 }
 
-void CowSleepingState::Update(std::shared_ptr<Graph> graph)
+void CowSleepingState::Update(Controller* controller, std::shared_ptr<Graph> graph)
 {
-
+	if (counter < 3)
+		counter++;
+	else
+		owner->ChangeState(EnumState::COW_CHASING);
 }
 
 std::string CowSleepingState::GetAction()

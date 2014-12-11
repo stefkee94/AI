@@ -45,7 +45,7 @@ std::vector<std::shared_ptr<Vertex>> CowWanderingState::Move(std::shared_ptr<Gra
 	return route;
 }
 
-void CowWanderingState::Update(std::shared_ptr<Graph> graph)
+void CowWanderingState::Update(Controller* controller, std::shared_ptr<Graph> graph)
 {
 
 }

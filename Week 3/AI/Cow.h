@@ -10,7 +10,7 @@ public:
 	Cow();
 	~Cow();
 	std::vector<std::shared_ptr<Vertex>>  Move(std::shared_ptr<Graph> graph);
-	void Update(std::shared_ptr<Graph> graph);
+	void Update(Controller* controller, std::shared_ptr<Graph> graph);
 	EnumState GetState();
 	QString GetImageLink();
 	void SetVertex(std::shared_ptr<Vertex> p_vertex);

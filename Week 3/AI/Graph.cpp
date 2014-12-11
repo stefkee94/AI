@@ -285,20 +285,46 @@ std::vector<std::shared_ptr<Vertex>> Graph::CreateRoute()
 
 void Graph::MoveHare(std::shared_ptr<Hare> hare)
 {
+	std::shared_ptr<Vertex> current_position = hare->GetVertex();
+	std::vector<std::shared_ptr<Edge>> connected_edges = current_position->GetEdges();
+
+	std::vector<std::shared_ptr<Vertex>> connected_positions;
+	for (int i = 0; i < connected_edges.size(); i++)
+	{
+		std::vector<std::shared_ptr<Vertex>> t_positions = connected_edges.at(i)->GetDestinations();
+		if (t_positions.at(0) != current_position)
+			connected_positions.push_back(t_positions.at(0));
+		else
+			connected_positions.push_back(t_positions.at(1));
+	}
+
 	//int posHare = 5; //TO TEST WITH WEAPON
 	int posHare;
 	do posHare = Utils::RandomNumber(positions.size() - 1);
-	while (positions.at(posHare) == hare->GetVertex());
+	while (positions.at(posHare) == current_position || (std::find(connected_positions.begin(), connected_positions.end(), positions.at(posHare)) != connected_positions.end()));
 
 	hare->SetVertex(positions.at(posHare));
 }
 
 void Graph::MoveCow(std::shared_ptr<Cow> cow)
 {
+	std::shared_ptr<Vertex> current_position = cow->GetVertex();
+	std::vector<std::shared_ptr<Edge>> connected_edges = current_position->GetEdges();
+
+	std::vector<std::shared_ptr<Vertex>> connected_positions;
+	for (int i = 0; i < connected_edges.size(); i++)
+	{
+		std::vector<std::shared_ptr<Vertex>> t_positions = connected_edges.at(i)->GetDestinations();
+		if (t_positions.at(0) != current_position)
+			connected_positions.push_back(t_positions.at(0));
+		else
+			connected_positions.push_back(t_positions.at(1));
+	}
+
 	//int posHare = 5; //TO TEST WITH WEAPON
 	int posCow;
 	do posCow = Utils::RandomNumber(positions.size() - 1);
-	while (positions.at(posCow) == cow->GetVertex());
+	while (positions.at(posCow) == current_position || (std::find(connected_positions.begin(), connected_positions.end(), positions.at(posCow)) != connected_positions.end()));
 
 	cow->SetVertex(positions.at(posCow));
 }

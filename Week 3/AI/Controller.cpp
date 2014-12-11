@@ -22,9 +22,14 @@ Controller::~Controller()
 {
 }
 
-void Controller::Click()
+std::shared_ptr<Cow> Controller::GetCow()
 {
-	Update();
+	return cow;
+}
+
+std::shared_ptr<Hare> Controller::GetHare()
+{
+	return hare;
 }
 
 void Controller::Start()
@@ -36,7 +41,7 @@ void Controller::Start()
 		Repaint();
 		
 		// Sleep
-		std::chrono::milliseconds dura(1000);
+		std::chrono::milliseconds dura(2000);
 		std::this_thread::sleep_for(dura);
 	}
 }
@@ -45,89 +50,62 @@ void Controller::Update()
 {
 	std::vector<std::shared_ptr<Vertex>> route_cow, route_hare;
 
-	if (sleep_counter > 0)
-	{
-		if (sleep_counter > 0)
-			sleep_counter--;
+	// Update the units
+	hare->Update(this, graph);
+	cow->Update(this, graph);
 
-		route_hare = hare->Move(graph);
-		MoveHare(route_hare);
-		graph->ClearRoute();
-	}
-	else
-	{
-		if (sleep_counter == 0)
-			cow->ChangeState(EnumState::COW_CHASING);
+	// Get the routes of the units
+	route_hare = hare->Move(graph);
+	route_cow = cow->Move(graph);
 
-		if (hare->GetState() == EnumState::HARE_CHASING && Utils::InRange(hare->GetVertex(), cow->GetVertex()))
-		{
-			std::cout << "The cow is shot!" << std::endl;
+	// Move the units
+	MoveHare(route_hare);
+	MoveCow(route_cow);
 
-			// Move the hare
-			route_hare = hare->Move(graph);
-			MoveHare(route_hare);
+	// Clear the routes
+	graph->ClearRoute();
 
-			// Clear the route and move the cow to a random position
-			graph->ClearRoute();
-			graph->MoveCow(cow);
-		}
-		else if (hare->GetState() == EnumState::HARE_WANDERING && Utils::InRange(hare->GetVertex(), cow->GetVertex()) && sleep_counter == -1)
-		{
-			// Update the hare while cow is in range to choose what to do
-			hare->Update(graph);
-			route_hare = hare->Move(graph);
-			MoveHare(route_hare);
-		}
-		else if (hare->GetState() == EnumState::HARE_FLEEING)
-		{
-			// Move away from the cow
-			auto new_route = hare->Move(graph);
-			if (new_route.size() > 0)
-				MoveHare(new_route);
-		}
-		else if (hare->GetState() == EnumState::HARE_SEARCHING_WEAPON)
-		{
-			auto new_route = hare->Move(graph);
-			if (new_route.size() > 0)
-				MoveHare(new_route);
-		}
-		else if (hare->GetState() == EnumState::HARE_SEARCHING_SLEEPINGPILL)
-		{
-			sleep_counter = 0; // means that pill is found
-			auto new_route = hare->Move(graph);
-			if (new_route.size() > 0)
-				MoveHare(new_route);
-			//hare->Update(graph);
-		}
-		else if (hare->GetState() == EnumState::HARE_WANDERING && hare->GetPil() && cow->GetVertex() == hare->GetVertex())
-		{
-			std::cout << "The cow falls asleep!" << std::endl;
-			sleep_counter = 2;
-			cow->ChangeState(EnumState::COW_SLEEPING);
 
-			route_hare = hare->Move(graph);
-			if (route_hare.size() > 0)
-				MoveHare(route_hare);
-		}
-		else if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
-		{
-			std::cout << "The hare is caught!" << std::endl;
-			graph->MoveHare(hare);
-		}
-		else
-		{
-			// Get the routes of the hare and the cow
-			//route_hare = hare->Move(graph);
-			route_cow = cow->Move(graph);
+	//if (hare->GetState() == EnumState::HARE_CHASING && Utils::InRange(hare->GetVertex(), cow->GetVertex()))
+	//{
+	//	std::cout << "The cow is shot!" << std::endl;
 
-			// Move the hare and the cow
-			//MoveHare(route_hare);
-			MoveCow(route_cow);
+	//	// Move the hare
+	//	route_hare = hare->Move(graph);
+	//	MoveHare(route_hare);
 
-			// Clear the routes
-			graph->ClearRoute();
-		}
-	}
+	//	// Clear the route and move the cow to a random position
+	//	graph->ClearRoute();
+	//	graph->MoveCow(cow);
+	//}
+	//else if (hare->GetState() == EnumState::HARE_WANDERING && hare->GetPil() && cow->GetVertex() == hare->GetVertex())
+	//{
+	//	std::cout << "The cow falls asleep!" << std::endl;
+	//	sleep_counter = 2;
+	//	cow->ChangeState(EnumState::COW_SLEEPING);
+
+	//	route_hare = hare->Move(graph);
+	//	if (route_hare.size() > 0)
+	//		MoveHare(route_hare);
+	//}
+	//else if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
+	//{
+	//	std::cout << "The hare is caught!" << std::endl;
+	//	graph->MoveHare(hare);
+	//}
+	//else
+	//{
+		//// Get the routes of the hare and the cow
+		//route_hare = hare->Move(graph);
+		//route_cow = cow->Move(graph);
+
+		//// Move the hare and the cow
+		//MoveHare(route_hare);
+		//MoveCow(route_cow);
+
+		//// Clear the routes
+		//graph->ClearRoute();
+	//}
 }
 
 void Controller::Repaint()
@@ -169,4 +147,14 @@ void Controller::MoveHare(std::vector<std::shared_ptr<Vertex>> route_hare)
 			}
 		}
 	}
+}
+
+void Controller::RespawnCow()
+{
+	graph->MoveCow(cow);
+}
+
+void Controller::RespawnHare()
+{
+	graph->MoveHare(hare);
 }

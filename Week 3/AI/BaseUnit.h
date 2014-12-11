@@ -7,6 +7,7 @@
 #include "EnumState.h"
 #include "BehaviorState.h"
 
+class Controller;
 class Vertex;
 class Graph;
 class Cow;
@@ -16,7 +17,7 @@ class BaseUnit
 public:
 	virtual std::vector<std::shared_ptr<Vertex>> Move(std::shared_ptr<Graph> graph) = 0;
 	void ChangeState(EnumState state);
-	virtual void Update(std::shared_ptr<Graph> graph) = 0;
+	virtual void Update(Controller* controller, std::shared_ptr<Graph> graph) = 0;
 	virtual EnumState GetState() = 0;
 	virtual QString GetImageLink() = 0;
 	virtual void SetVertex(std::shared_ptr<Vertex> p_vertex) = 0;

@@ -216,10 +216,8 @@
     <CustomBuild Include="HareSearchingWeaponState.h">
       <Filter>Header Files\Model\State\Hare</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CowSleepingState.h">
+    <CustomBuild Include="CowSleepingState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
-    </ClInclude>
+    </CustomBuild>
   </ItemGroup>
 </Project>

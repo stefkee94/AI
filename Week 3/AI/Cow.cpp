@@ -37,9 +37,9 @@ std::vector<std::shared_ptr<Vertex>> Cow::Move(std::shared_ptr<Graph> graph)
 	return behavior->Move(graph);
 }
 
-void Cow::Update(std::shared_ptr<Graph> graph)
+void Cow::Update(Controller* controller, std::shared_ptr<Graph> graph)
 {
-	behavior->Update(graph);
+	behavior->Update(controller, graph);
 }
 
 std::string Cow::GetAction()

@@ -20,7 +20,12 @@ class Controller : public QObject
 public:
 	Controller();
 	virtual ~Controller();
-	void Click();
+
+	std::shared_ptr<Cow> GetCow();
+	std::shared_ptr<Hare> GetHare();
+
+	void RespawnCow();
+	void RespawnHare();
 
 private:
 	bool is_running;

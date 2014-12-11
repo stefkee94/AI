@@ -8,6 +8,7 @@ Hare::Hare()
 
 	// Set Hare state
 	BaseUnit::ChangeState(EnumState::HARE_WANDERING);
+	pill = false;
 }
 
 Hare::~Hare()
@@ -35,9 +36,9 @@ std::vector<std::shared_ptr<Vertex>> Hare::Move(std::shared_ptr<Graph> graph)
 	return behavior->Move(graph);
 }
 
-void Hare::Update(std::shared_ptr<Graph> graph)
+void Hare::Update(Controller* controller, std::shared_ptr<Graph> graph)
 {
-	behavior->Update(graph);
+	behavior->Update(controller, graph);
 }
 
 std::string Hare::GetAction()

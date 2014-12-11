@@ -8,69 +8,62 @@ HareFleeingState::HareFleeingState(std::shared_ptr<BaseUnit> owner) : BehaviorSt
 std::vector<std::shared_ptr<Vertex>> HareFleeingState::Move(std::shared_ptr<Graph> graph)
 {
 	std::vector<std::shared_ptr<Vertex>> route;
+	std::vector<std::shared_ptr<Edge>> edges;
+	std::vector<std::shared_ptr<Vertex>> possible_positions_hare;
+	std::vector<std::shared_ptr<Vertex>> possible_positions_cow;
 
-	// Check if the hare has fleed for 2 turns
-	if (counter <= 0)
-		CheckState();
-	else
+	// Get all the possible positions of the hare
+	edges = owner->GetVertex()->GetEdges();
+	for (std::shared_ptr<Edge> edge : edges)
 	{
-		std::vector<std::shared_ptr<Edge>> edges;
-		std::vector<std::shared_ptr<Vertex>> possible_positions_hare;
-		std::vector<std::shared_ptr<Vertex>> possible_positions_cow;
-
-		// Get all the possible positions of the hare
-		edges = owner->GetVertex()->GetEdges();
-		for (std::shared_ptr<Edge> edge : edges)
+		std::vector<std::shared_ptr<Vertex>> dests = edge->GetDestinations();
+		for (std::shared_ptr<Vertex> vertex : dests)
 		{
-			std::vector<std::shared_ptr<Vertex>> dests = edge->GetDestinations();
-			for (std::shared_ptr<Vertex> vertex : dests)
-			{
-				if (vertex != owner->GetVertex())
-					possible_positions_hare.push_back(vertex);
-			}
+			if (vertex != owner->GetVertex())
+				possible_positions_hare.push_back(vertex);
+		}
+	}
+
+	// Get all the possible positions of the cow
+	edges = graph->GetCowPosition()->GetEdges();
+	for (std::shared_ptr<Edge> edge : edges)
+	{
+		std::vector<std::shared_ptr<Vertex>> dests = edge->GetDestinations();
+		for (std::shared_ptr<Vertex> vertex : dests)
+		{
+			if (vertex != graph->GetCowPosition())
+				possible_positions_cow.push_back(vertex);
+		}
+	}
+
+	// Look for a position where the cow cant move to
+	for (int x = 0; x < possible_positions_hare.size(); x++)
+	{
+		if (owner->GetVertex() == graph->GetCowPosition())
+		{
+			route.push_back(possible_positions_hare.at(0));
+			break;
 		}
 
-		// Get all the possible positions of the cow
-		edges = graph->GetCowPosition()->GetEdges();
-		for (std::shared_ptr<Edge> edge : edges)
+		if (std::find(possible_positions_cow.begin(), possible_positions_cow.end(), possible_positions_hare.at(x)) == possible_positions_cow.end())
 		{
-			std::vector<std::shared_ptr<Vertex>> dests = edge->GetDestinations();
-			for (std::shared_ptr<Vertex> vertex : dests)
+			if (possible_positions_hare.at(x) != graph->GetCowPosition())
 			{
-				if (vertex != graph->GetCowPosition())
-					possible_positions_cow.push_back(vertex);
-			}
-		}
-
-		// Look for a position where the cow cant move to
-		for (int x = 0; x < possible_positions_hare.size(); x++)
-		{
-			if (owner->GetVertex() == graph->GetCowPosition())
-			{
-				route.push_back(possible_positions_hare.at(0));
+				route.push_back(possible_positions_hare.at(x));
 				break;
 			}
-
-			if (std::find(possible_positions_cow.begin(), possible_positions_cow.end(), possible_positions_hare.at(x)) == possible_positions_cow.end())
-			{
-				if (possible_positions_hare.at(x) != graph->GetCowPosition())
-				{
-					route.push_back(possible_positions_hare.at(x));
-					break;
-				}
-			}
 		}
-
-		// Drop counter by 1
-		counter--;
 	}
 	
 	return route;
 }
 
-void HareFleeingState::Update(std::shared_ptr<Graph> graph)
+void HareFleeingState::Update(Controller* controller, std::shared_ptr<Graph> graph)
 {
-
+	if (counter <= 0)
+		CheckState();
+	else
+		counter--;
 }
 
 std::string HareFleeingState::GetAction()

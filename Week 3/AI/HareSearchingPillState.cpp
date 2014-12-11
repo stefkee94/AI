@@ -30,13 +30,13 @@ std::vector<std::shared_ptr<Vertex>> HareSearchingPillState::Move(std::shared_pt
 	return std::vector<std::shared_ptr<Vertex>>();
 }
 
-void HareSearchingPillState::Update(std::shared_ptr<Graph> graph)
+void HareSearchingPillState::Update(Controller* controller, std::shared_ptr<Graph> graph)
 {
 	/*std::vector<std::shared_ptr<Vertex>> all_pos = graph->getPositions();
 	std::shared_ptr<Vertex> current_pos = owner->GetVertex();
 	current_pos->setWeapon(false);
 	all_pos[0]->setWeapon(true);*/
-	CheckState();
+	//CheckState();
 }
 
 std::string HareSearchingPillState::GetAction()

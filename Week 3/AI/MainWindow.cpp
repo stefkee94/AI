@@ -18,14 +18,6 @@ void MainWindow::showPlayers(std::shared_ptr<Cow> p_cow, std::shared_ptr<Hare> p
 	hare = p_hare;
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *e)
-{
-	/*if (e->key() == Qt::Key_Space)
-	{
-		controller->Click();
-	}*/
-}
-
 void MainWindow::paintEvent(QPaintEvent *e)
 {
 	QPainter painter(this);

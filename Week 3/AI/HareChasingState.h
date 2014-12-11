@@ -13,7 +13,7 @@ public:
 
 	std::vector<std::shared_ptr<Vertex>> Move(std::shared_ptr<Graph> graph);
 	void CheckState();
-	void Update(std::shared_ptr<Graph> graph);
+	void Update(Controller* controller, std::shared_ptr<Graph> graph);
 	std::string GetAction();
 
 private:

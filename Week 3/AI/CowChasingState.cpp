@@ -1,4 +1,5 @@
 #include "CowChasingState.h"
+#include "Controller.h"
 #include "Graph.h"
 
 CowChasingState::CowChasingState(std::shared_ptr<BaseUnit> owner) : BehaviorState(owner)
@@ -12,23 +13,31 @@ CowChasingState::~CowChasingState()
 
 std::vector<std::shared_ptr<Vertex>> CowChasingState::Move(std::shared_ptr<Graph> graph)
 {
-	//Logic for move the cow in the chasing state
-	std::shared_ptr<Vertex> cow_pos = owner->GetVertex();
-	std::shared_ptr<Vertex> hare_pos = graph->GetHarePosition();
+	if (!foundHare)
+	{
+		//Logic for move the cow in the chasing state
+		std::shared_ptr<Vertex> cow_pos = owner->GetVertex();
+		std::shared_ptr<Vertex> hare_pos = graph->GetHarePosition();
 
-	if (cow_pos != hare_pos)
 		return graph->GetRoute(cow_pos, hare_pos);
+	}
 	else
 	{
-		//foundHare = true;
-		//CheckState();
+		foundHare = false;
 		return std::vector<std::shared_ptr<Vertex>>();
 	}
 }
 
-void CowChasingState::Update(std::shared_ptr<Graph> graph)
+void CowChasingState::Update(Controller* controller, std::shared_ptr<Graph> graph)
 {
+	std::shared_ptr<Hare> hare = controller->GetHare();
+	if (owner->GetVertex() == hare->GetVertex() && !hare->GetPil())
+	{
+		std::cout << "The hare is caught" << std::endl;
+		controller->RespawnHare();
 
+		foundHare = true;
+	}
 }
 
 std::string CowChasingState::GetAction()
