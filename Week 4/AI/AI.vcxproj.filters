@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Model">
+      <UniqueIdentifier>{5f90a0e9-d9ff-48b8-aa1e-2b95c82574db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model">
+      <UniqueIdentifier>{4fe31696-81b8-44c5-9257-75f0b5f44c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\QT">
+      <UniqueIdentifier>{c9a792ba-29ae-403a-84cd-b11c3995e15c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\QT">
+      <UniqueIdentifier>{8127b4ad-e875-46d3-8de3-ec9498b3bd7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Controller">
+      <UniqueIdentifier>{33c8adc3-f5b8-4b71-841e-1a63f02e521f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Controller">
+      <UniqueIdentifier>{03a0135b-2590-44b3-816e-bfd346f98084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{71ED8ED8-ACB9-4CE9-BBE1-E00B30144E11}</UniqueIdentifier>
+      <Extensions>moc;h;cpp</Extensions>
+      <ParseFiles>true</ParseFiles>
+    </Filter>
+    <Filter Include="Generated Files\Debug">
+      <UniqueIdentifier>{24508d7f-b9ee-4854-b19e-cf1c893bd317}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Generated Files\Release">
+      <UniqueIdentifier>{d6318472-22f8-44b2-a737-9bfa564d0e35}</UniqueIdentifier>
+      <Extensions>cpp;moc</Extensions>
+      <SourceControlFiles>False</SourceControlFiles>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{080764e2-2270-461c-a3bb-57450ebd2d3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Services">
+      <UniqueIdentifier>{c8a121c3-aa4b-4cc8-9f5b-86cfe105674a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Generated Files\Services">
+      <UniqueIdentifier>{20fbaa14-63a6-4521-ae7c-086e80061930}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Services">
+      <UniqueIdentifier>{f5fcd920-a662-4fc6-a629-c91c5ba50fff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\State">
+      <UniqueIdentifier>{ed33e73a-eb3d-47d7-b273-2096f8afd147}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\State">
+      <UniqueIdentifier>{3dcf6574-972e-4819-9979-ec733f6c9325}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\State\Cow">
+      <UniqueIdentifier>{9232d216-b30a-49b4-8dfe-bce1fc881c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Model\State\Hare">
+      <UniqueIdentifier>{efe2bd14-4ada-498b-96fd-e9ae8a6efd04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\State\Cow">
+      <UniqueIdentifier>{5d5a4a86-549c-466f-a6d1-dcf6ed3487f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\State\Hare">
+      <UniqueIdentifier>{55eecc4c-eeb5-457c-9961-1d25f65d6647}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Cow.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Hare.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MainWindow.cpp">
+      <Filter>Source Files\QT</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_Controller.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_Controller.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_MainWindow.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_MainWindow.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils.cpp">
+      <Filter>Source Files\Services</Filter>
+    </ClCompile>
+    <ClCompile Include="BehaviorState.cpp">
+      <Filter>Source Files\Model\State</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseUnit.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="CowChasingState.cpp">
+      <Filter>Source Files\Model\State\Cow</Filter>
+    </ClCompile>
+    <ClCompile Include="HareWanderingState.cpp">
+      <Filter>Source Files\Model\State\Hare</Filter>
+    </ClCompile>
+    <ClCompile Include="HareFleeingState.cpp">
+      <Filter>Source Files\Model\State\Hare</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="packages.config" />
+    <CustomBuild Include="Cow.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Hare.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Controller.h">
+      <Filter>Header Files\Controller</Filter>
+    </CustomBuild>
+    <CustomBuild Include="MainWindow.h">
+      <Filter>Header Files\QT</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Utils.h">
+      <Filter>Header Files\Services</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\..\..\Desktop\KMINT_Sprites\KMINT_Sprites\lemmling_Cartoon_cow.png">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\..\..\Desktop\KMINT_Sprites\KMINT_Sprites\rabbit-3.png">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="BehaviorState.h">
+      <Filter>Header Files\Model\State</Filter>
+    </CustomBuild>
+    <CustomBuild Include="BaseUnit.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EnumState.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\pill.png">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Resources\weapon.png">
+      <Filter>Resources</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CowChasingState.h">
+      <Filter>Header Files\Model\State\Cow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareWanderingState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareFleeingState.h">
+      <Filter>Header Files\Model\State\Hare</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
