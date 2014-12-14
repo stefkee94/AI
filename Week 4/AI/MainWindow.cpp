@@ -45,8 +45,8 @@ void MainWindow::paintEvent(QPaintEvent *e)
 	QImage img_cow(t_cow->GetImageLink());
 	QImage img_hare(t_hare->GetImageLink());
 
-	painter.drawImage(0/*cow x pos*/ - img_cow.width() / 2, 0/*cow y pos*/ - img_cow.height() / 2, img_cow);
-	painter.drawImage(0/*hare x pos*/ - img_hare.width() / 2, 0/*hare y pos*/ - img_hare.height() / 2, img_hare);
+	painter.drawImage(t_cow->GetPosition().x() - img_cow.width() / 2, t_cow->GetPosition().y() - img_cow.height() / 2, img_cow);
+	painter.drawImage(t_hare->GetPosition().x() - img_hare.width() / 2, t_hare->GetPosition().y() - img_hare.height() / 2, img_hare);
 
 	// Check state from cow and show on screen
 	QString cow_state = QString("The cow is ");

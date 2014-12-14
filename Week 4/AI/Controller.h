@@ -5,6 +5,7 @@
 #include <QtWidgets>
 #include <memory>
 #include <chrono>
+#include <ctime>
 #include <thread>
 
 #include "MainWindow.h"
@@ -29,6 +30,7 @@ public:
 private:
 	bool is_running;
 	int sleep_counter = -1; // Init on -1 (non availble) and 0 = available
+	double start_time;
 
 	// QT init
 	MainWindow* mainWindow;
@@ -41,9 +43,7 @@ private:
 	// Functions
 	void Start();
 	void MoveUnits();
-	void MoveCow(std::vector<std::shared_ptr<Vertex>> route_cow);
-	void MoveHare(std::vector<std::shared_ptr<Vertex>> route_hare);
-	void Update();
+	void Update(double);
 	void Repaint();
 	
 

@@ -1,10 +1,9 @@
 #include "Cow.h"
-#include <qdir.h>
 
 Cow::Cow()
 {
 	img_link = QDir::currentPath().append("/Resources/lemmling_Cartoon_cow.png");
-	behavior = new CowChasingState(std::shared_ptr<BaseUnit>(this));
+	state = new CowChasingState(std::shared_ptr<BaseUnit>(this));
 }
 
 Cow::~Cow()
@@ -12,49 +11,41 @@ Cow::~Cow()
 
 }
 
-void Cow::SetVertex(std::shared_ptr<Vertex> p_vertex)
-{
-	vertex = p_vertex;
-}
-
-std::shared_ptr<Vertex> Cow::GetVertex()
-{
-	return vertex;
-}
-
-QString Cow::GetImageLink()
-{
-	return img_link;
-}
-
-std::vector<std::shared_ptr<Vertex>> Cow::Move()
+void Cow::Move(double time_elapsed)
 {
 	// Send behavior to state
-	behavior->CheckState();
-	return behavior->Move();
+	//behavior->CheckState();
+	//return behavior->Move();
 }
 
-void Cow::Update(Controller* controller)
+void Cow::Update(double time_elapsed)
 {
-	behavior->Update(controller);
-}
+	// Calculate the combined force from each steering behavior
+	QVector2D SteeringForce = Steering->Calculate();
 
-std::string Cow::GetAction()
-{
-	return behavior->GetAction();
-}
+	// Acceleration = Force / Mass
+	QVector2D Acceleration = SteeringForce / Mass;
 
-EnumState Cow::GetState()
-{
-	return currentState;
-}
+	// Update velocity
+	Velocity += Acceleration * time_elapsed;
+	
+	// Make sure the unit does not exceed maximum velocity
+	if (Velocity.length() > MaxSpeed)
+	{
+		Velocity.normalize();
+		Velocity *= MaxSpeed;
+	}
 
-void Cow::SetPil(bool contains_pill)
-{
-	pill = contains_pill;
-}
+	// Update the position
+	Position += Velocity * time_elapsed;
 
-bool Cow::GetPil()
-{
-	return pill;
+	// Update the heading if the vehicle has a velocity greater than a very small value
+	if (Velocity.lengthSquared() > 0.00000001)
+	{
+		Heading.normalize();
+		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
+	}
+
+	// Treat the screen as a toroid
+	//WrapAround(Position, World->xClient(), Word->yClient());
 }

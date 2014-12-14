@@ -4,55 +4,20 @@
 Hare::Hare()
 {
 	img_link = QDir::currentPath().append("/Resources/rabbit-3.png");
-	behavior = new HareWanderingState(std::shared_ptr<BaseUnit>(this));
+	state = new HareWanderingState(std::shared_ptr<BaseUnit>(this));
 }
 
 Hare::~Hare()
 {
 }
 
-void Hare::SetVertex(std::shared_ptr<Vertex> p_vertex)
-{
-	vertex = p_vertex;
-}
-
-std::shared_ptr<Vertex> Hare::GetVertex()
-{
-	return vertex;
-}
-
-QString Hare::GetImageLink()
-{
-	return img_link;
-}
-
-std::vector<std::shared_ptr<Vertex>> Hare::Move()
+void Hare::Move(double time_elapsed)
 {
 	// Send behavior to state
-	return behavior->Move();
+	//return state->Move();
 }
 
-void Hare::Update(Controller* controller)
+void Hare::Update(double time_elapsed)
 {
-	behavior->Update(controller);
-}
-
-std::string Hare::GetAction()
-{
-	return behavior->GetAction();
-}
-
-EnumState Hare::GetState()
-{
-	return currentState;
-}
-
-void Hare::SetPil(bool contains_pill)
-{
-	pill = contains_pill;
-}
-
-bool Hare::GetPil()
-{
-	return pill;
+	//state->Update(controller);
 }

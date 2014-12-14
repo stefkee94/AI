@@ -1,21 +1,18 @@
 #pragma once
 
-#include "BaseUnit.h"
+#include "MovingEntity.h"
 #include "CowChasingState.h"
 
-class Cow : public BaseUnit, public std::enable_shared_from_this<Cow>
+class Cow : public MovingEntity, public std::enable_shared_from_this<Cow>
 {
+private:
+	SteeringBehaviors* Steering;
+
 public:
 	Cow();
 	~Cow();
-	std::vector<std::shared_ptr<Vertex>> Move();
-	void Update(Controller* controller);
-	EnumState GetState();
-	QString GetImageLink();
-	void SetVertex(std::shared_ptr<Vertex> p_vertex);
-	std::shared_ptr<Vertex> GetVertex();
-	std::string GetAction();
-	void SetPil(bool contains_pill);
-	bool GetPil();
+
+	void Move(double time_elapsed);
+	void Update(double time_elapsed);
 };
 

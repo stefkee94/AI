@@ -2,11 +2,14 @@
 
 #include <vector>
 #include <memory>
+#include <qdir.h>
 #include <qstring.h>
+#include <qvector2d.h>
 
 #include "EnumState.h"
 #include "BehaviorState.h"
 
+class GameWorld;
 class Controller;
 class Vertex;
 class Graph;
@@ -14,22 +17,23 @@ class Cow;
 class Hare;
 class BaseUnit
 {
+private:
+	GameWorld* World;
+
 public:
-	virtual std::vector<std::shared_ptr<Vertex>> Move() = 0;
-	virtual void Update(Controller* controller) = 0;
-	virtual EnumState GetState() = 0;
-	virtual QString GetImageLink() = 0;
-	virtual void SetVertex(std::shared_ptr<Vertex> p_vertex) = 0;
-	virtual std::shared_ptr<Vertex> GetVertex() = 0;
-	virtual std::string GetAction() = 0;
-	virtual void SetPil(bool contains_pill) = 0;
-	virtual bool GetPil() = 0;
+	virtual void Move(double time_elapsed) = 0;
+	virtual void Update(double time_elapsed) = 0;
+
+	virtual void SetPosition(QVector2D position);
+
+	virtual QString GetImageLink();
+	virtual EnumState GetEnumState();
+	virtual std::string GetAction();
+	virtual QVector2D GetPosition();
 
 protected:
-	BehaviorState* behavior;
-	EnumState currentState;
-	std::shared_ptr<Vertex> vertex;
+	QVector2D Position;
+	BehaviorState* state;
+	EnumState currentEnumState;
 	QString img_link;
-	bool pill;
 };
-
