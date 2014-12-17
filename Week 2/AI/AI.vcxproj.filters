@@ -180,10 +180,8 @@
     <CustomBuild Include="Resources\weapon.png">
       <Filter>Resources</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="HareChasingState.h">
+    <CustomBuild Include="HareChasingState.h">
       <Filter>Header Files\Model\State</Filter>
-    </ClInclude>
+    </CustomBuild>
   </ItemGroup>
 </Project>

@@ -128,7 +128,6 @@
     <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Cow.cpp" />
     <ClCompile Include="BehaviorState.cpp" />
-    <ClCompile Include="GameWorld.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_Controller.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -367,7 +366,6 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameWorld.h" />
     <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="SteeringBehaviors.h" />
   </ItemGroup>

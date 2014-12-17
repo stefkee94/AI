@@ -9,17 +9,8 @@
 #include "EnumState.h"
 #include "BehaviorState.h"
 
-class GameWorld;
-class Controller;
-class Vertex;
-class Graph;
-class Cow;
-class Hare;
 class BaseUnit
 {
-private:
-	GameWorld* World;
-
 public:
 	virtual void Move(double time_elapsed) = 0;
 	virtual void Update(double time_elapsed) = 0;

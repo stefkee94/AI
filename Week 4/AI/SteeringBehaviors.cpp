@@ -1,5 +1,5 @@
 #include "SteeringBehaviors.h"
-
+#include "MovingEntity.h"
 
 SteeringBehaviors::SteeringBehaviors()
 {
@@ -13,7 +13,7 @@ SteeringBehaviors::~SteeringBehaviors()
 QVector2D SteeringBehaviors::Seek(QVector2D TargetPos, std::shared_ptr<MovingEntity> unit)
 {
 	TargetPos -= unit->GetPosition();
-	QVector2D DesiredVelocity = TargetPos * unit->GetMaxSpeed(); // TargetPos moet nog genormalized worden...
+	QVector2D DesiredVelocity = TargetPos.normalized() * unit->GetMaxSpeed(); // TargetPos moet nog genormalized worden...
 
 	return (DesiredVelocity - unit->GetVelocity());
 }
@@ -28,7 +28,7 @@ QVector2D SteeringBehaviors::Flee(QVector2D TargetPos, std::shared_ptr<MovingEnt
 	}
 
 	TargetPos = unit->GetPosition() - TargetPos;
-	QVector2D DesiredVelocity = TargetPos * unit->GetMaxSpeed();
+	QVector2D DesiredVelocity = TargetPos.normalized() * unit->GetMaxSpeed();
 
 	return (DesiredVelocity - unit->GetVelocity());
 }
@@ -90,7 +90,46 @@ QVector2D SteeringBehaviors::Evade(const std::shared_ptr<MovingEntity> pursuer, 
 
 QVector2D SteeringBehaviors::Wander(std::shared_ptr<MovingEntity> unit)
 {
+	// First, add a small random vector to the target's position (RandomClamped returns a value between -1 and 1
+	QVector2D target = QVector2D(Utils::RandomClamped() * WanderJitter, Utils::RandomClamped() * WanderJitter);
 
+	// Reproject this new vector back onto a unit circle
+	target.normalize();
+
+	// Increase the length of the vector to the same as the radius of the wander circle
+	target *= WanderRadius;
+
+	// Move the target into a position WanderDist in front of the agen't
+	QVector2D target_local = target + QVector2D(WanderDistance, 0);
+
+	// Project the target into world space
+	QVector2D target_world = PointToWorldSpace(target_local, unit->GetHeading(), unit->GetSide(), unit->GetPosition());
+
+	return target_world;
+}
+
+QVector2D SteeringBehaviors::PointToWorldSpace(QVector2D target, QVector2D heading, QVector2D side, QVector2D position)
+{
+	//// Make a copy of the target
+	//QVector2D point = target;
+
+	//QMatrix matrix;
+
+	////create a transformation matrix
+	//C2DMatrix matTransform;
+
+	////rotate
+	//matTransform.Rotate(AgentHeading, AgentSide);
+
+	////and translate
+	//matTransform.Translate(AgentPosition.x, AgentPosition.y);
+
+	////now transform the vertices
+	//matTransform.TransformVector2Ds(TransPoint);
+
+	//return TransPoint;
+
+	return QVector2D();
 }
 
 QVector2D SteeringBehaviors::Calculate()

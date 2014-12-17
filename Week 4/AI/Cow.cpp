@@ -1,4 +1,5 @@
 #include "Cow.h"
+#include "SteeringBehaviors.h"
 
 Cow::Cow()
 {

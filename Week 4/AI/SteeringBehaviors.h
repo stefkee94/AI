@@ -1,9 +1,13 @@
 #pragma once
 
 #include <QVector2D>
+#include <QMatrix>
 #include <memory>
-#include "MovingEntity.h"
 
+
+#include "Utils.h"
+
+class MovingEntity;
 class SteeringBehaviors
 {
 private:
@@ -22,6 +26,7 @@ public:
 	QVector2D Evade(const std::shared_ptr<MovingEntity> pursuer, std::shared_ptr<MovingEntity> unit);
 
 	QVector2D Wander(std::shared_ptr<MovingEntity> unit);
+	QVector2D PointToWorldSpace(QVector2D target, QVector2D heading, QVector2D side, QVector2D position);
 	QVector2D Calculate();
 	QVector2D ForwardComponent();
 	QVector2D SideComponent();
