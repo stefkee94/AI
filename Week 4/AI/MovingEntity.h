@@ -34,7 +34,7 @@ protected:
 	QVector2D Side;
 
 	double Mass = 10;
-	double MaxSpeed = 50;
+	double MaxSpeed = 0.001;
 	double MaxForce = 20;
 	double MaxTurnRate = 40;
 

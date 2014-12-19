@@ -21,6 +21,9 @@ void Cow::Move(double time_elapsed)
 
 void Cow::Update(double time_elapsed)
 {
+	// Keep record of its current position
+	QVector2D old_position = GetPosition();
+
 	// Calculate the combined force from each steering behavior
 	QVector2D SteeringForce = Steering->Calculate();
 

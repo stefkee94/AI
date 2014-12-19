@@ -13,7 +13,7 @@ SteeringBehaviors::~SteeringBehaviors()
 QVector2D SteeringBehaviors::Seek(QVector2D TargetPos, std::shared_ptr<MovingEntity> unit)
 {
 	TargetPos -= unit->GetPosition();
-	QVector2D DesiredVelocity = TargetPos.normalized() * unit->GetMaxSpeed(); // TargetPos moet nog genormalized worden...
+	QVector2D DesiredVelocity = TargetPos.normalized() * unit->GetMaxSpeed();
 
 	return (DesiredVelocity - unit->GetVelocity());
 }
@@ -105,36 +105,45 @@ QVector2D SteeringBehaviors::Wander(std::shared_ptr<MovingEntity> unit)
 	// Project the target into world space
 	QVector2D target_world = PointToWorldSpace(target_local, unit->GetHeading(), unit->GetSide(), unit->GetPosition());
 
-	return target_world;
+	return target_world - unit->GetPosition();
 }
 
 QVector2D SteeringBehaviors::PointToWorldSpace(QVector2D target, QVector2D heading, QVector2D side, QVector2D position)
 {
-	//// Make a copy of the target
-	//QVector2D point = target;
+	// Make a copy of the target
+	QVector2D point = target;
 
-	//QMatrix matrix;
+	QMatrix matrix;
 
+	//rotate
+	//matrix.rotate(heading, side); --> error, functie accepteert maar 1 param...
+
+	//and translate
+	//matrix.translate(position.x, position.y);
+
+	//now transform the vertices
+	// TODO --> transform point with matrix
+
+	return point;
+
+
+	//// Hieronder staat wat code uit het boek, commentaar is weggehaald, maar stappen zijn hetzelfde als hierboven.	
 	////create a transformation matrix
 	//C2DMatrix matTransform;
 
-	////rotate
+	//
 	//matTransform.Rotate(AgentHeading, AgentSide);
 
-	////and translate
+	//
 	//matTransform.Translate(AgentPosition.x, AgentPosition.y);
 
-	////now transform the vertices
+	//
 	//matTransform.TransformVector2Ds(TransPoint);
-
-	//return TransPoint;
-
-	return QVector2D();
 }
 
 QVector2D SteeringBehaviors::Calculate()
 {
-	return QVector2D();
+	return QVector2D(0.01, -0.002);
 }
 
 QVector2D SteeringBehaviors::ForwardComponent()

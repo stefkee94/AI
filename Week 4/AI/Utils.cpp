@@ -33,7 +33,7 @@ int Utils::RandomNumber(int min, int max)
 
 double Utils::RandomClamped()
 {
-	return 0.1;// return std::uniform_int_distribution<double>(-1, 1)(rng);
+	return std::uniform_real_distribution<double>(-1, 1)(rng);
 }
 
 bool Utils::InRange(std::shared_ptr<Vertex> param1, std::shared_ptr<Vertex> param2)
