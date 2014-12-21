@@ -1,6 +1,6 @@
 #include "BehaviorState.h"
 
-BehaviorState::BehaviorState(std::shared_ptr<BaseUnit> owner)
+BehaviorState::BehaviorState(std::shared_ptr<MovingEntity> owner)
 {
 	this->owner = owner;
 }

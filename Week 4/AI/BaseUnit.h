@@ -13,7 +13,7 @@ class BaseUnit
 {
 public:
 	virtual void Move(double time_elapsed) = 0;
-	virtual void Update(double time_elapsed) = 0;
+	virtual void Update(Controller* controller, double time_elapsed) = 0;
 
 	virtual void SetPosition(QVector2D position);
 

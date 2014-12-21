@@ -15,7 +15,7 @@ Controller::Controller() : QObject()
 	
 	mainWindow = new MainWindow();
 	mainWindow->setWindowTitle(QObject::tr("Week 2 AI, FSM"));
-	mainWindow->resize(1000,500);
+	mainWindow->resize(1280,720);
 	mainWindow->show();
 
 	std::thread* game_loop = new std::thread(&Controller::Start, this);
@@ -62,8 +62,8 @@ void Controller::Update(double elapsed_time)
 	std::vector<std::shared_ptr<Vertex>> route_cow, route_hare;
 	
 	//// Update the units
-	hare->Update(elapsed_time);
-	cow->Update(elapsed_time);
+	hare->Update(this, elapsed_time);
+	cow->Update(this, elapsed_time);
 
 	//// Get the routes of the units
 	//route_hare = hare->Move(0/*dt*/);

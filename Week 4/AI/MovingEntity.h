@@ -1,9 +1,12 @@
 #pragma once
 
 #include <QVector2D>
+#include <QMatrix>
+#include <memory>
+
 #include "BaseUnit.h"
 
-class SteeringBehaviors;
+class Utils;
 class MovingEntity : public BaseUnit
 {
 public:
@@ -28,16 +31,27 @@ public:
 	virtual void SetHeading(QVector2D Heading);
 	virtual void SetSide(QVector2D Side);
 
+	virtual QVector2D Seek(QVector2D TargetPos);
+	virtual QVector2D Flee(QVector2D TargetPos);
+	virtual QVector2D Arrive(QVector2D TargetPos);
+	virtual QVector2D Pursuit(const std::shared_ptr<MovingEntity> target);
+	virtual QVector2D Evade(const std::shared_ptr<MovingEntity> pursuer);
+	virtual QVector2D Wander();
+	virtual QVector2D PointToWorldSpace(QVector2D target, QVector2D heading, QVector2D side, QVector2D position);
+
 protected:
+	// Variables
 	QVector2D Velocity;
 	QVector2D Heading;
 	QVector2D Side;
 
-	double Mass = 10;
-	double MaxSpeed = 0.001;
-	double MaxForce = 20;
-	double MaxTurnRate = 40;
+	double Mass;
+	double MaxSpeed;
+	double MaxForce;
+	double MaxTurnRate;
 
-	SteeringBehaviors* Steering;
+	double WanderRadius = 1.2;
+	double WanderDistance = 2.0;
+	double WanderJitter = 80.0;
 };
 
