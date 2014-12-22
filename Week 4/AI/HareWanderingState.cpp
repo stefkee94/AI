@@ -1,4 +1,5 @@
 #include "HareWanderingState.h"
+#include "HareFleeingState.h"
 #include "Controller.h"
 
 HareWanderingState::HareWanderingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
@@ -9,11 +10,6 @@ HareWanderingState::HareWanderingState(std::shared_ptr<MovingEntity> owner) : Be
 
 HareWanderingState::~HareWanderingState()
 {
-}
-
-std::vector<std::shared_ptr<Vertex>> HareWanderingState::Move()
-{
-	return std::vector<std::shared_ptr<Vertex>>();
 }
 
 void HareWanderingState::Update(Controller* controller, double time_elapsed)
@@ -32,11 +28,22 @@ void HareWanderingState::Update(Controller* controller, double time_elapsed)
 	Velocity += Acceleration * time_elapsed;
 
 	// Make sure the unit does not exceed maximum velocity
+	float length = Velocity.length();
 	if (Velocity.length() > owner->GetMaxSpeed())
 	{
-		Velocity.normalize();
+		Velocity.normalized();
 		Velocity *= owner->GetMaxSpeed();
 	}
+
+	if (Velocity.x() > 0.1)
+		Velocity.setX(0.1);
+	if (Velocity.y() > 0.1)
+		Velocity.setY(0.1);
+
+	if (Velocity.x() < -0.1)
+		Velocity.setX(-0.1);
+	if (Velocity.y() < -0.1)
+		Velocity.setY(-0.1);
 
 	// Update the position
 	QVector2D Position = owner->GetPosition();
@@ -46,18 +53,33 @@ void HareWanderingState::Update(Controller* controller, double time_elapsed)
 	if (Velocity.lengthSquared() > 0.00000001)
 	{
 		QVector2D Heading = owner->GetHeading();
-		Heading.normalize();
+		Heading.normalized();
 		owner->SetHeading(Heading);
 
 		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
 	}
 
+	// Treat the screen as a toroid
+	double max_x = controller->GetWidth();
+	double max_y = controller->GetHeight();
+
+	if (Position.x() > max_x)
+		Position.setX(0);
+	if (Position.x() < 0)
+		Position.setX(max_x);
+	if (Position.y() > max_y)
+		Position.setY(0);
+	if (Position.y() < 0)
+		Position.setY(max_y);
+
 	// Set velocity and position
 	owner->SetVelocity(Velocity);
 	owner->SetPosition(Position);
 
-	// Treat the screen as a toroid
-	//WrapAround(Position, World->xClient(), Word->yClient());
+	// If the cow is too close change the state to fleeing
+	QVector2D cow_position = controller->GetCow()->GetPosition();
+	if ((cow_position - Position).length() < 100)
+		owner->SetState(new HareFleeingState(owner));
 }
 
 std::string HareWanderingState::GetAction()

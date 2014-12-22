@@ -40,12 +40,12 @@ void MainWindow::paintEvent(QPaintEvent *e)
 	QString hare_state = QString("The hare is ");
 	hare_state.append(QString::fromUtf8(t_hare->GetAction().c_str()));
 
-	//painter.setPen(QPen(QColor(Qt::black), 3 , Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));
-	//QFont times_font("times", 24);
-	//painter.setFont(times_font);
+	painter.setPen(QPen(QColor(Qt::black), 3 , Qt::SolidLine, Qt::SquareCap, Qt::BevelJoin));
+	QFont times_font("times", 24);
+	painter.setFont(times_font);
 
-	//painter.drawText(430, 30, cow_state);
-	//painter.drawText(430, 60, hare_state);
+	painter.drawText(430, 30, cow_state);
+	painter.drawText(430, 60, hare_state);
 }
 
 MainWindow::~MainWindow()

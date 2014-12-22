@@ -10,11 +10,6 @@ CowChasingState::~CowChasingState()
 {
 }
 
-std::vector<std::shared_ptr<Vertex>> CowChasingState::Move()
-{
-	return std::vector<std::shared_ptr<Vertex>>();
-}
-
 void CowChasingState::Update(Controller* controller, double time_elapsed)
 {
 	// Keep record of its current position
@@ -31,9 +26,10 @@ void CowChasingState::Update(Controller* controller, double time_elapsed)
 	Velocity += Acceleration * time_elapsed;
 
 	// Make sure the unit does not exceed maximum velocity
+	float length = Velocity.length();
 	if (Velocity.length() > owner->GetMaxSpeed())
 	{
-		Velocity.normalize();
+		Velocity.normalized();
 		Velocity *= owner->GetMaxSpeed();
 	}
 
@@ -45,18 +41,38 @@ void CowChasingState::Update(Controller* controller, double time_elapsed)
 	if (Velocity.lengthSquared() > 0.00000001)
 	{
 		QVector2D Heading = owner->GetHeading();
-		Heading.normalize();
+		Heading.normalized();
 		owner->SetHeading(Heading);
 
 		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
 	}
 
+	if (Velocity.x() > 0.1)
+		Velocity.setX(0.1);
+	if (Velocity.y() > 0.1)
+		Velocity.setY(0.1);
+
+	if (Velocity.x() < -0.1)
+		Velocity.setX(-0.1);
+	if (Velocity.y() < -0.1)
+		Velocity.setY(-0.1);
+
+	// Treat the screen as a toroid
+	double max_x = controller->GetWidth();
+	double max_y = controller->GetHeight();
+
+	if (Position.x() > max_x)
+		Position.setX(0);
+	if (Position.x() < 0)
+		Position.setX(max_x);
+	if (Position.y() > max_y)
+		Position.setY(0);
+	if (Position.y() < 0)
+		Position.setY(max_y);
+
 	// Set velocity and position
 	owner->SetVelocity(Velocity);
 	owner->SetPosition(Position);
-
-	// Treat the screen as a toroid
-	//WrapAround(Position, World->xClient(), Word->yClient());
 }
 
 std::string CowChasingState::GetAction()

@@ -6,8 +6,8 @@ Cow::Cow()
 	img_link = QDir::currentPath().append("/Resources/lemmling_Cartoon_cow.png");
 	state = new CowChasingState(std::shared_ptr<MovingEntity>(this));
 
-	Mass = 90;
-	MaxSpeed = 0.4;
+	Mass = 490;
+	MaxSpeed = 0.3;
 	MaxForce = 20;
 	MaxTurnRate = 40;
 }

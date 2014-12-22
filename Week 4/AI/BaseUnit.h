@@ -16,6 +16,7 @@ public:
 	virtual void Update(Controller* controller, double time_elapsed) = 0;
 
 	virtual void SetPosition(QVector2D position);
+	virtual void SetState(BehaviorState* state);
 
 	virtual QString GetImageLink();
 	virtual EnumState GetEnumState();

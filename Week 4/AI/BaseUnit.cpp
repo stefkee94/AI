@@ -24,3 +24,8 @@ void BaseUnit::SetPosition(QVector2D position)
 {
 	this->Position = position;
 }
+
+void BaseUnit::SetState(BehaviorState* state)
+{
+	this->state = state;
+}

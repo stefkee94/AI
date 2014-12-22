@@ -6,8 +6,8 @@ Hare::Hare()
 	img_link = QDir::currentPath().append("/Resources/rabbit-3.png");
 	state = new HareWanderingState(std::shared_ptr<MovingEntity>(this));
 
-	Mass = 100;
-	MaxSpeed = 0.4;
+	Mass = 500;
+	MaxSpeed = 0.3;
 	MaxForce = 20;
 	MaxTurnRate = 40;
 }

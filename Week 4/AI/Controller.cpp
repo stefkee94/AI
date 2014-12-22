@@ -15,7 +15,7 @@ Controller::Controller() : QObject()
 	
 	mainWindow = new MainWindow();
 	mainWindow->setWindowTitle(QObject::tr("Week 2 AI, FSM"));
-	mainWindow->resize(1280,720);
+	mainWindow->resize(width_view, height_view);
 	mainWindow->show();
 
 	std::thread* game_loop = new std::thread(&Controller::Start, this);
@@ -34,6 +34,16 @@ std::shared_ptr<Cow> Controller::GetCow()
 std::shared_ptr<Hare> Controller::GetHare()
 {
 	return hare;
+}
+
+double Controller::GetWidth()
+{
+	return width_view;
+}
+
+double Controller::GetHeight()
+{
+	return height_view;
 }
 
 void Controller::Start()

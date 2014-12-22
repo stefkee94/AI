@@ -12,7 +12,6 @@ public:
 	CowChasingState(std::shared_ptr<MovingEntity> owner);
 	~CowChasingState();
 
-	std::vector<std::shared_ptr<Vertex>> Move();
 	void MoveCow(std::vector<std::shared_ptr<Vertex>> new_position);
 	void CheckState();
 	void Update(Controller* controller, double time_elapsed);
