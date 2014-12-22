@@ -35,15 +35,15 @@ void HareWanderingState::Update(Controller* controller, double time_elapsed)
 		Velocity *= owner->GetMaxSpeed();
 	}
 
-	if (Velocity.x() > 0.1)
-		Velocity.setX(0.1);
-	if (Velocity.y() > 0.1)
-		Velocity.setY(0.1);
+	if (Velocity.x() > 0.05)
+		Velocity.setX(0.05);
+	if (Velocity.y() > 0.05)
+		Velocity.setY(0.05);
 
-	if (Velocity.x() < -0.1)
-		Velocity.setX(-0.1);
-	if (Velocity.y() < -0.1)
-		Velocity.setY(-0.1);
+	if (Velocity.x() < -0.05)
+		Velocity.setX(-0.05);
+	if (Velocity.y() < -0.05)
+		Velocity.setY(-0.05);
 
 	// Update the position
 	QVector2D Position = owner->GetPosition();

@@ -47,15 +47,15 @@ void CowChasingState::Update(Controller* controller, double time_elapsed)
 		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
 	}
 
-	if (Velocity.x() > 0.1)
-		Velocity.setX(0.1);
-	if (Velocity.y() > 0.1)
-		Velocity.setY(0.1);
+	if (Velocity.x() > 0.05)
+		Velocity.setX(0.05);
+	if (Velocity.y() > 0.05)
+		Velocity.setY(0.05);
 
-	if (Velocity.x() < -0.1)
-		Velocity.setX(-0.1);
-	if (Velocity.y() < -0.1)
-		Velocity.setY(-0.1);
+	if (Velocity.x() < -0.05)
+		Velocity.setX(-0.05);
+	if (Velocity.y() < -0.05)
+		Velocity.setY(-0.05);
 
 	// Treat the screen as a toroid
 	double max_x = controller->GetWidth();

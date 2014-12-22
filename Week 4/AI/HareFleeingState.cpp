@@ -1,9 +1,9 @@
 #include "HareFleeingState.h"
 #include "Controller.h"
 
-HareFleeingState::HareFleeingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner), timer(1000)
+HareFleeingState::HareFleeingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner), timer(2000)
 {
-	owner->SetMaxSpeed(1.5);
+	owner->SetMaxSpeed(1);
 }
 
 void HareFleeingState::Update(Controller* controller, double time_elapsed)
