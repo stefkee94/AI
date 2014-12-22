@@ -38,12 +38,12 @@ std::shared_ptr<Hare> Controller::GetHare()
 
 double Controller::GetWidth()
 {
-	return width_view;
+	return mainWindow->width();
 }
 
 double Controller::GetHeight()
 {
-	return height_view;
+	return mainWindow->height();
 }
 
 void Controller::Start()
