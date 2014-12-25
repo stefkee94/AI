@@ -1,10 +1,10 @@
 #include "HareWanderingState.h"
-#include "Graph.h"
+#include "HareFleeingState.h"
 #include "Controller.h"
-#include <iostream>
 
-HareWanderingState::HareWanderingState(std::shared_ptr<BaseUnit> owner) : BehaviorState(owner)
+HareWanderingState::HareWanderingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
+	owner->SetMaxSpeed(1);
 }
 
 
@@ -12,57 +12,74 @@ HareWanderingState::~HareWanderingState()
 {
 }
 
-
-/*if (owner->GetVertex()->hasNewWeapon())
+void HareWanderingState::Update(Controller* controller, double time_elapsed)
 {
-hasWeapon = true;
-owner->GetVertex()->setWeapon(false);
-std::vector<std::shared_ptr<Edge>> new_edges = owner->GetVertex()->GetEdges();
-std::vector<std::shared_ptr<Vertex>> new_positions = new_edges.at(Utils::RandomNumber(new_edges.size() - 1))->GetDestinations();
-new_positions[0]->setWeapon(true);
-}*/
-std::vector<std::shared_ptr<Vertex>> HareWanderingState::Move(std::shared_ptr<Graph> graph)
-{
-	std::vector<std::shared_ptr<Vertex>> route;
-	std::shared_ptr<Vertex> next_pos;
+	// Keep record of its current position
+	QVector2D old_position = owner->GetPosition();
 
-	if (Utils::RandomNumber(100) < 80)
+	// Calculate the combined force from each steering behavior
+	QVector2D SteeringForce = owner->Wander();
+
+	// Acceleration = Force / Mass
+	QVector2D Acceleration = SteeringForce / owner->GetMass();
+
+	// Update velocity
+	QVector2D Velocity = owner->GetVelocity();
+	Velocity += Acceleration * time_elapsed;
+
+	// Make sure the unit does not exceed maximum velocity
+	float length = Velocity.length();
+	if (Velocity.length() > owner->GetMaxSpeed())
 	{
-		std::vector<std::shared_ptr<Edge>> edges = owner->GetVertex()->GetEdges();
-		std::vector<std::shared_ptr<Vertex>> positions = edges.at(Utils::RandomNumber(edges.size() - 1))->GetDestinations();
-
-		// Get next vertex
-		if (positions.at(0) != owner->GetVertex())
-			next_pos = positions.at(0);
-		else
-			next_pos = positions.at(1);
-
-		route.push_back(next_pos);
+		Velocity.normalized();
+		Velocity *= owner->GetMaxSpeed();
 	}
 
-	return route;
-}
+	if (Velocity.x() > 0.05)
+		Velocity.setX(0.05);
+	if (Velocity.y() > 0.05)
+		Velocity.setY(0.05);
 
-void HareWanderingState::Update(Controller* controller, std::shared_ptr<Graph> graph)
-{
-	if (owner->GetPil() && owner->GetVertex() == graph->GetCowPosition())
+	if (Velocity.x() < -0.05)
+		Velocity.setX(-0.05);
+	if (Velocity.y() < -0.05)
+		Velocity.setY(-0.05);
+
+	// Update the position
+	QVector2D Position = owner->GetPosition();
+	Position += Velocity * time_elapsed;
+
+	// Update the heading if the vehicle has a velocity greater than a very small value
+	if (Velocity.lengthSquared() > 0.00000001)
 	{
-		// Set the new position of the pill
-		std::vector<std::shared_ptr<Vertex>> positions = graph->getPositions();
-		positions.at(Utils::RandomNumber(positions.size() - 1))->setPill(true);
+		QVector2D Heading = owner->GetHeading();
+		Heading.normalized();
+		owner->SetHeading(Heading);
 
-		// Change the state of the cow
-		std::cout << "The cow falls asleep for 3 turns" << std::endl;
-		std::shared_ptr<Cow> cow = controller->GetCow();
-		cow->ChangeState(EnumState::COW_SLEEPING);
+		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
+	}
 
-		// Change the current state of the hare
-		CheckState();
-	}
-	else if (!owner->GetPil() && Utils::InRange(owner->GetVertex(), graph->GetCowPosition()))
-	{
-		CheckState();
-	}
+	// Treat the screen as a toroid
+	double max_x = controller->GetWidth();
+	double max_y = controller->GetHeight();
+
+	if (Position.x() > max_x)
+		Position.setX(0);
+	if (Position.x() < 0)
+		Position.setX(max_x);
+	if (Position.y() > max_y)
+		Position.setY(0);
+	if (Position.y() < 0)
+		Position.setY(max_y);
+
+	// Set velocity and position
+	owner->SetVelocity(Velocity);
+	owner->SetPosition(Position);
+
+	// If the cow is too close change the state to fleeing
+	QVector2D cow_position = controller->GetCow()->GetPosition();
+	if ((cow_position - Position).length() < 100)
+		owner->SetState(new HareFleeingState(owner));
 }
 
 std::string HareWanderingState::GetAction()
@@ -72,17 +89,5 @@ std::string HareWanderingState::GetAction()
 
 void HareWanderingState::CheckState()
 {
-	if (owner->GetPil())
-	{
-		owner->SetPil(false);
-		owner->ChangeState(EnumState::HARE_FLEEING);
-	}
-	else
-	{
-		int number = rand() % 100;
-		if (number < 51)
-			owner->ChangeState(EnumState::HARE_SEARCHING_WEAPON);
-		else
-			owner->ChangeState(EnumState::HARE_SEARCHING_SLEEPINGPILL);
-	}
+	
 }

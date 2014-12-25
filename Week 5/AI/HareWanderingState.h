@@ -1,19 +1,18 @@
 #pragma once
 
+#include <iostream>
 #include <vector>
 #include "Vertex.h"
 #include "BehaviorState.h"
 
-class Vertex;
 class HareWanderingState : public BehaviorState
 {
 public:
-	HareWanderingState(std::shared_ptr<BaseUnit> owner);
+	HareWanderingState(std::shared_ptr<MovingEntity> owner);
 	virtual ~HareWanderingState();
 
-	std::vector<std::shared_ptr<Vertex>> Move(std::shared_ptr<Graph> graph);
 	void CheckState();
-	void Update(Controller* controller, std::shared_ptr<Graph> graph);
+	void Update(Controller* controller, double time_elapsed);
 	std::string GetAction();
 
 private:

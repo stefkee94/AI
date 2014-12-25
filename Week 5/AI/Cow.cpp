@@ -1,13 +1,15 @@
 #include "Cow.h"
-#include <qdir.h>
-#include "Graph.h"
+#include "SteeringBehaviors.h"
 
 Cow::Cow()
 {
 	img_link = QDir::currentPath().append("/Resources/lemmling_Cartoon_cow.png");
+	state = new CowChasingState(std::shared_ptr<MovingEntity>(this));
 
-	// Init on wandering state for the cow
-	BaseUnit::ChangeState(EnumState::COW_CHASING);
+	Mass = 490;
+	MaxSpeed = 0.3;
+	MaxForce = 20;
+	MaxTurnRate = 40;
 }
 
 Cow::~Cow()
@@ -15,49 +17,14 @@ Cow::~Cow()
 
 }
 
-void Cow::SetVertex(std::shared_ptr<Vertex> p_vertex)
-{
-	vertex = p_vertex;
-}
-
-std::shared_ptr<Vertex> Cow::GetVertex()
-{
-	return vertex;
-}
-
-QString Cow::GetImageLink()
-{
-	return img_link;
-}
-
-std::vector<std::shared_ptr<Vertex>> Cow::Move(std::shared_ptr<Graph> graph)
+void Cow::Move(double time_elapsed)
 {
 	// Send behavior to state
-	behavior->CheckState();
-	return behavior->Move(graph);
+	//behavior->CheckState();
+	//return behavior->Move();
 }
 
-void Cow::Update(Controller* controller, std::shared_ptr<Graph> graph)
+void Cow::Update(Controller* controller, double time_elapsed)
 {
-	behavior->Update(controller, graph);
-}
-
-std::string Cow::GetAction()
-{
-	return behavior->GetAction();
-}
-
-EnumState Cow::GetState()
-{
-	return currentState;
-}
-
-void Cow::SetPil(bool contains_pill)
-{
-	pill = contains_pill;
-}
-
-bool Cow::GetPil()
-{
-	return pill;
+	state->Update(controller, time_elapsed);
 }

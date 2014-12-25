@@ -1,62 +1,28 @@
 #include "Hare.h"
 #include <qdir.h>
-#include "Graph.h"
 
 Hare::Hare()
 {
 	img_link = QDir::currentPath().append("/Resources/rabbit-3.png");
+	state = new HareWanderingState(std::shared_ptr<MovingEntity>(this));
 
-	// Set Hare state
-	BaseUnit::ChangeState(EnumState::HARE_WANDERING);
-	pill = false;
+	Mass = 500;
+	MaxSpeed = 0.3;
+	MaxForce = 20;
+	MaxTurnRate = 40;
 }
 
 Hare::~Hare()
 {
 }
 
-void Hare::SetVertex(std::shared_ptr<Vertex> p_vertex)
-{
-	vertex = p_vertex;
-}
-
-std::shared_ptr<Vertex> Hare::GetVertex()
-{
-	return vertex;
-}
-
-QString Hare::GetImageLink()
-{
-	return img_link;
-}
-
-std::vector<std::shared_ptr<Vertex>> Hare::Move(std::shared_ptr<Graph> graph)
+void Hare::Move(double time_elapsed)
 {
 	// Send behavior to state
-	return behavior->Move(graph);
+	//return state->Move();
 }
 
-void Hare::Update(Controller* controller, std::shared_ptr<Graph> graph)
+void Hare::Update(Controller* controller, double time_elapsed)
 {
-	behavior->Update(controller, graph);
-}
-
-std::string Hare::GetAction()
-{
-	return behavior->GetAction();
-}
-
-EnumState Hare::GetState()
-{
-	return currentState;
-}
-
-void Hare::SetPil(bool contains_pill)
-{
-	pill = contains_pill;
-}
-
-bool Hare::GetPil()
-{
-	return pill;
+	state->Update(controller, time_elapsed);
 }

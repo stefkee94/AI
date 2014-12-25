@@ -31,9 +31,14 @@ int Utils::RandomNumber(int min, int max)
 	return std::uniform_int_distribution<int>(min, max)(rng);
 }
 
+double Utils::RandomClamped()
+{
+	return std::uniform_real_distribution<double>(-2, 2)(rng);
+}
+
 bool Utils::InRange(std::shared_ptr<Vertex> param1, std::shared_ptr<Vertex> param2)
 {
-	std::vector<std::shared_ptr<Edge>> edges = param1->GetEdges();
+	/*std::vector<std::shared_ptr<Edge>> edges = param1->GetEdges();
 	for (std::shared_ptr<Edge> edge : edges)
 	{
 		std::vector<std::shared_ptr<Vertex>> dests = edge->GetDestinations();
@@ -45,6 +50,6 @@ bool Utils::InRange(std::shared_ptr<Vertex> param1, std::shared_ptr<Vertex> para
 				return true;
 			}
 		}
-	}
+	}*/
 	return false;
 }

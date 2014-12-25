@@ -1,20 +1,24 @@
 #include "Controller.h"
 
+int cow_x = 50;
+int cow_y = 500;
+int hare_x = 50;
+int hare_y = 200;
+
 Controller::Controller() : QObject()
 {
 	cow = std::make_shared<Cow>();
 	hare = std::make_shared<Hare>();
 
-	graph = std::make_shared<Graph>();
-	graph->Init(cow, hare);
+	cow->SetPosition(QVector2D(cow_x, cow_y));
+	hare->SetPosition(QVector2D(hare_x, hare_y));
 	
 	mainWindow = new MainWindow();
 	mainWindow->setWindowTitle(QObject::tr("Week 2 AI, FSM"));
-	mainWindow->resize(1000,500);
+	mainWindow->resize(width_view, height_view);
 	mainWindow->show();
 
 	std::thread* game_loop = new std::thread(&Controller::Start, this);
-	//QThread* game_loop = new QThread(&Controller::Start, this);
 	Repaint();
 }
 
@@ -32,129 +36,66 @@ std::shared_ptr<Hare> Controller::GetHare()
 	return hare;
 }
 
+double Controller::GetWidth()
+{
+	return mainWindow->width();
+}
+
+double Controller::GetHeight()
+{
+	return mainWindow->height();
+}
+
 void Controller::Start()
 {
+	start_time = std::clock();
 	is_running = true;
+
 	while (is_running)
 	{
-		Update();
+		// Calculate dt
+		double current_time = std::clock();
+		double elapsed_time = (current_time - start_time) / 1000;
+
+		// Update
+		Update(elapsed_time);
 		Repaint();
 		
 		// Sleep
-		std::chrono::milliseconds dura(2000);
+		std::chrono::milliseconds dura(10);
 		std::this_thread::sleep_for(dura);
 	}
 }
 
-void Controller::Update()
+void Controller::Update(double elapsed_time)
 {
 	std::vector<std::shared_ptr<Vertex>> route_cow, route_hare;
+	
+	//// Update the units
+	hare->Update(this, elapsed_time);
+	cow->Update(this, elapsed_time);
 
-	// Update the units
-	hare->Update(this, graph);
-	cow->Update(this, graph);
+	//// Get the routes of the units
+	//route_hare = hare->Move(0/*dt*/);
+	//route_cow = cow->Move(0/*dt*/);
 
-	// Get the routes of the units
-	route_hare = hare->Move(graph);
-	route_cow = cow->Move(graph);
-
-	// Move the units
-	MoveHare(route_hare);
-	MoveCow(route_cow);
-
-	// Clear the routes
-	graph->ClearRoute();
-
-
-	//if (hare->GetState() == EnumState::HARE_CHASING && Utils::InRange(hare->GetVertex(), cow->GetVertex()))
-	//{
-	//	std::cout << "The cow is shot!" << std::endl;
-
-	//	// Move the hare
-	//	route_hare = hare->Move(graph);
-	//	MoveHare(route_hare);
-
-	//	// Clear the route and move the cow to a random position
-	//	graph->ClearRoute();
-	//	graph->MoveCow(cow);
-	//}
-	//else if (hare->GetState() == EnumState::HARE_WANDERING && hare->GetPil() && cow->GetVertex() == hare->GetVertex())
-	//{
-	//	std::cout << "The cow falls asleep!" << std::endl;
-	//	sleep_counter = 2;
-	//	cow->ChangeState(EnumState::COW_SLEEPING);
-
-	//	route_hare = hare->Move(graph);
-	//	if (route_hare.size() > 0)
-	//		MoveHare(route_hare);
-	//}
-	//else if (cow->GetState() == EnumState::COW_CHASING && cow->GetVertex() == hare->GetVertex())
-	//{
-	//	std::cout << "The hare is caught!" << std::endl;
-	//	graph->MoveHare(hare);
-	//}
-	//else
-	//{
-		//// Get the routes of the hare and the cow
-		//route_hare = hare->Move(graph);
-		//route_cow = cow->Move(graph);
-
-		//// Move the hare and the cow
-		//MoveHare(route_hare);
-		//MoveCow(route_cow);
-
-		//// Clear the routes
-		//graph->ClearRoute();
-	//}
+	//// Move the units
+	//MoveHare(route_hare);
+	//MoveCow(route_cow);
 }
 
 void Controller::Repaint()
 {
-	mainWindow->showGraph(graph, this);
+	mainWindow->showGraph(this);
 	mainWindow->showPlayers(cow, hare);
 	mainWindow->update();
 	qApp->processEvents();
 }
 
-void Controller::MoveCow(std::vector<std::shared_ptr<Vertex>> route_cow)
-{
-	//std::vector<std::shared_ptr<Vertex>> route = graph->GetShortestChaseRoute();
-	if (route_cow.size() > 0)
-	{
-		for (int i = 0; i < route_cow.size(); i++)
-		{
-			if (route_cow.at(i) != cow->GetVertex() && route_cow.at(i) != nullptr)
-			{
-				cow->SetVertex(route_cow.at(i));
-				break;
-			}
-		}
-	}
-}
-
-//graph->MoveHare(hare);
-void Controller::MoveHare(std::vector<std::shared_ptr<Vertex>> route_hare)
-{
-	//std::vector<std::shared_ptr<Vertex>> route = graph->GetShortestChaseRoute();
-	if (route_hare.size() > 0)
-	{
-		for (int i = 0; i < route_hare.size(); i++)
-		{
-			if (route_hare.at(i) != hare->GetVertex() && route_hare.at(i) != nullptr)
-			{
-				hare->SetVertex(route_hare.at(i));
-				break;
-			}
-		}
-	}
-}
-
 void Controller::RespawnCow()
 {
-	graph->MoveCow(cow);
 }
 
 void Controller::RespawnHare()
 {
-	graph->MoveHare(hare);
 }

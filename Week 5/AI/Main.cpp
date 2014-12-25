@@ -1,5 +1,4 @@
 #include <QApplication>
-#include "Graph.h"
 
 #include "Controller.h"
 

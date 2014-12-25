@@ -74,15 +74,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Graph.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Edge.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="Cow.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
@@ -111,38 +102,26 @@
     <ClCompile Include="Utils.cpp">
       <Filter>Source Files\Services</Filter>
     </ClCompile>
-    <ClCompile Include="PositionNode.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="BehaviorState.cpp">
       <Filter>Source Files\Model\State</Filter>
     </ClCompile>
-    <ClCompile Include="BaseUnit.cpp">
-      <Filter>Source Files\Model</Filter>
-    </ClCompile>
     <ClCompile Include="CowChasingState.cpp">
-      <Filter>Source Files\Model\State\Cow</Filter>
-    </ClCompile>
-    <ClCompile Include="CowWanderingState.cpp">
       <Filter>Source Files\Model\State\Cow</Filter>
     </ClCompile>
     <ClCompile Include="HareWanderingState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
-    <ClCompile Include="HareChasingState.cpp">
-      <Filter>Source Files\Model\State\Hare</Filter>
-    </ClCompile>
-    <ClCompile Include="HareSearchingWeaponState.cpp">
-      <Filter>Source Files\Model\State\Hare</Filter>
-    </ClCompile>
     <ClCompile Include="HareFleeingState.cpp">
       <Filter>Source Files\Model\State\Hare</Filter>
     </ClCompile>
-    <ClCompile Include="HareSearchingPillState.cpp">
-      <Filter>Source Files\Model\State\Hare</Filter>
+    <ClCompile Include="SteeringBehaviors.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CowSleepingState.cpp">
-      <Filter>Source Files\Model\State\Cow</Filter>
+    <ClCompile Include="MovingEntity.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseUnit.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -150,16 +129,7 @@
     <CustomBuild Include="Cow.h">
       <Filter>Header Files\Model</Filter>
     </CustomBuild>
-    <CustomBuild Include="Edge.h">
-      <Filter>Header Files\Model</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Graph.h">
-      <Filter>Header Files\Model</Filter>
-    </CustomBuild>
     <CustomBuild Include="Hare.h">
-      <Filter>Header Files\Model</Filter>
-    </CustomBuild>
-    <CustomBuild Include="Vertex.h">
       <Filter>Header Files\Model</Filter>
     </CustomBuild>
     <CustomBuild Include="Controller.h">
@@ -167,9 +137,6 @@
     </CustomBuild>
     <CustomBuild Include="MainWindow.h">
       <Filter>Header Files\QT</Filter>
-    </CustomBuild>
-    <CustomBuild Include="PositionNode.h">
-      <Filter>Header Files\Model</Filter>
     </CustomBuild>
     <CustomBuild Include="Utils.h">
       <Filter>Header Files\Services</Filter>
@@ -198,26 +165,19 @@
     <CustomBuild Include="CowChasingState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
     </CustomBuild>
-    <CustomBuild Include="CowWanderingState.h">
-      <Filter>Header Files\Model\State\Cow</Filter>
-    </CustomBuild>
     <CustomBuild Include="HareWanderingState.h">
-      <Filter>Header Files\Model\State\Hare</Filter>
-    </CustomBuild>
-    <CustomBuild Include="HareChasingState.h">
       <Filter>Header Files\Model\State\Hare</Filter>
     </CustomBuild>
     <CustomBuild Include="HareFleeingState.h">
       <Filter>Header Files\Model\State\Hare</Filter>
     </CustomBuild>
-    <CustomBuild Include="HareSearchingPillState.h">
-      <Filter>Header Files\Model\State\Hare</Filter>
-    </CustomBuild>
-    <CustomBuild Include="HareSearchingWeaponState.h">
-      <Filter>Header Files\Model\State\Hare</Filter>
-    </CustomBuild>
-    <CustomBuild Include="CowSleepingState.h">
-      <Filter>Header Files\Model\State\Cow</Filter>
-    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MovingEntity.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehaviors.h">
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
