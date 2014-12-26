@@ -7,7 +7,7 @@ Hare::Hare()
 	state = new HareWanderingState(std::shared_ptr<MovingEntity>(this));
 
 	Mass = 500;
-	MaxSpeed = 0.3;
+	MaxSpeed = 0.6;
 	MaxForce = 20;
 	MaxTurnRate = 40;
 }

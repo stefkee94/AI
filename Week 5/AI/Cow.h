@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MovingEntity.h"
-#include "CowChasingState.h"
+#include "CowWanderingState.h"
 
 class Cow : public MovingEntity, public std::enable_shared_from_this<Cow>
 {
@@ -9,7 +9,7 @@ public:
 	Cow();
 	~Cow();
 
-	void Move(double time_elapsed);
+	void Respawn();
 	void Update(Controller* controller, double time_elapsed);
 };
 

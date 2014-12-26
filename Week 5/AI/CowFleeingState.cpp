@@ -1,22 +1,23 @@
-#include "CowChasingState.h"
+#include "CowFleeingState.h"
 #include "Controller.h"
 
-CowChasingState::CowChasingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
+CowFleeingState::CowFleeingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
+	owner->SetMaxSpeed(0.5);
 }
 
 
-CowChasingState::~CowChasingState()
+CowFleeingState::~CowFleeingState()
 {
 }
 
-void CowChasingState::Update(Controller* controller, double time_elapsed)
+void CowFleeingState::Update(Controller* controller, double time_elapsed)
 {
 	// Keep record of its current position
 	QVector2D old_position = owner->GetPosition();
 
 	// Calculate the combined force from each steering behavior
-	QVector2D SteeringForce = owner->Pursuit(controller->GetHare());
+	QVector2D SteeringForce = owner->Evade(controller->GetHare());
 
 	// Acceleration = Force / Mass
 	QVector2D Acceleration = SteeringForce / owner->GetMass();
@@ -35,7 +36,7 @@ void CowChasingState::Update(Controller* controller, double time_elapsed)
 
 	// Update the position
 	QVector2D Position = owner->GetPosition();
-	Position += Velocity * time_elapsed;
+	Position += Velocity;
 
 	// Update the heading if the vehicle has a velocity greater than a very small value
 	if (Velocity.lengthSquared() > 0.00000001)
@@ -46,16 +47,6 @@ void CowChasingState::Update(Controller* controller, double time_elapsed)
 
 		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
 	}
-
-	if (Velocity.x() > 0.05)
-		Velocity.setX(0.05);
-	if (Velocity.y() > 0.05)
-		Velocity.setY(0.05);
-
-	if (Velocity.x() < -0.05)
-		Velocity.setX(-0.05);
-	if (Velocity.y() < -0.05)
-		Velocity.setY(-0.05);
 
 	// Treat the screen as a toroid
 	double max_x = controller->GetWidth();
@@ -75,11 +66,11 @@ void CowChasingState::Update(Controller* controller, double time_elapsed)
 	owner->SetPosition(Position);
 }
 
-std::string CowChasingState::GetAction()
+std::string CowFleeingState::GetAction()
 {
-	return "chasing the hare";
+	return "fleeing from the hare";
 }
 
-void CowChasingState::CheckState()
+void CowFleeingState::CheckState()
 {
 }

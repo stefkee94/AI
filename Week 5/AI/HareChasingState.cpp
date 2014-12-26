@@ -1,48 +1,64 @@
 #include "HareChasingState.h"
 #include "Controller.h"
-#include "Graph.h"
 
-HareChasingState::HareChasingState(std::shared_ptr<BaseUnit> owner) : BehaviorState(owner)
+HareChasingState::HareChasingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
+	owner->SetMaxSpeed(1);
 }
 
-
-HareChasingState::~HareChasingState()
+void HareChasingState::Update(Controller* controller, double time_elapsed)
 {
-}
+	// Keep record of its current position
+	QVector2D old_position = owner->GetPosition();
 
-std::vector<std::shared_ptr<Vertex>> HareChasingState::Move(std::shared_ptr<Graph> graph)
-{
-	if (!shotCow)
+	// Calculate the combined force from each steering behavior
+	QVector2D SteeringForce = owner->Pursuit(controller->GetCow());
+
+	// Acceleration = Force / Mass
+	QVector2D Acceleration = SteeringForce / owner->GetMass();
+
+	// Update velocity
+	QVector2D Velocity = owner->GetVelocity();
+	Velocity += Acceleration * time_elapsed;
+
+	// Make sure the unit does not exceed maximum velocity
+	float length = Velocity.length();
+	if (Velocity.length() > owner->GetMaxSpeed())
 	{
-		std::shared_ptr<Vertex> hare_pos = owner->GetVertex();
-		std::shared_ptr<Vertex> cow_pos = graph->GetCowPosition();
-		return graph->GetRoute(hare_pos, cow_pos);
+		Velocity.normalized();
+		Velocity *= owner->GetMaxSpeed();
 	}
-	else
+
+	// Update the position
+	QVector2D Position = owner->GetPosition();
+	Position += Velocity;
+
+	// Update the heading if the vehicle has a velocity greater than a very small value
+	if (Velocity.lengthSquared() > 0.00000001)
 	{
-		shotCow = false;
-		CheckState();
-		return std::vector<std::shared_ptr<Vertex>>();
+		QVector2D Heading = owner->GetHeading();
+		Heading.normalized();
+		owner->SetHeading(Heading);
+
+		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
 	}
-}
 
-void HareChasingState::Update(Controller* controller, std::shared_ptr<Graph> graph)
-{
-	if (Utils::InRange(owner->GetVertex(), graph->GetCowPosition()))
-	{
-		// Set the new position of the weapon
-		std::vector<std::shared_ptr<Vertex>> positions = graph->getPositions();
-		positions.at(Utils::RandomNumber(positions.size() - 1))->setWeapon(true);
+	// Treat the screen as a toroid
+	double max_x = controller->GetWidth();
+	double max_y = controller->GetHeight();
 
-		// Shoot the cow and let it respawn
-		std::cout << "The cow is shot" << std::endl;
-		controller->RespawnCow();
+	if (Position.x() > max_x)
+		Position.setX(0);
+	if (Position.x() < 0)
+		Position.setX(max_x);
+	if (Position.y() > max_y)
+		Position.setY(0);
+	if (Position.y() < 0)
+		Position.setY(max_y);
 
-		shotCow = true;
-		// Change the state because the cow is shot
-		//CheckState();
-	}
+	// Set velocity and position
+	owner->SetVelocity(Velocity);
+	owner->SetPosition(Position);
 }
 
 std::string HareChasingState::GetAction()
@@ -52,5 +68,8 @@ std::string HareChasingState::GetAction()
 
 void HareChasingState::CheckState()
 {
-	owner->ChangeState(EnumState::HARE_WANDERING);
+}
+
+HareChasingState::~HareChasingState()
+{
 }

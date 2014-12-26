@@ -4,10 +4,9 @@
 Hare::Hare()
 {
 	img_link = QDir::currentPath().append("/Resources/rabbit-3.png");
-	state = new HareWanderingState(std::shared_ptr<MovingEntity>(this));
+	state = new HareChasingState(std::shared_ptr<MovingEntity>(this));
 
 	Mass = 500;
-	MaxSpeed = 0.3;
 	MaxForce = 20;
 	MaxTurnRate = 40;
 }
@@ -16,10 +15,18 @@ Hare::~Hare()
 {
 }
 
-void Hare::Move(double time_elapsed)
+void Hare::Respawn()
 {
-	// Send behavior to state
-	//return state->Move();
+	// Reset values
+	Velocity = QVector2D(0, 0);
+	Heading = QVector2D(0, 0);
+	Side = QVector2D(0, 0);
+	Mass = 500;
+	MaxForce = 20;
+	MaxTurnRate = 40;
+
+	// Reset state
+	state = new HareChasingState(std::shared_ptr<MovingEntity>(this));
 }
 
 void Hare::Update(Controller* controller, double time_elapsed)

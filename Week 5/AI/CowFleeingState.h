@@ -1,18 +1,18 @@
 #pragma once
 
-#include <iostream>
 #include <vector>
-#include "Vertex.h"
 #include "BehaviorState.h"
 
-class HareChasingState : public BehaviorState
+class CowFleeingState : public BehaviorState
 {
 public:
-	HareChasingState(std::shared_ptr<MovingEntity> owner);
-	virtual ~HareChasingState();
+	CowFleeingState(std::shared_ptr<MovingEntity> owner);
+	~CowFleeingState();
 
 	void CheckState();
 	void Update(Controller* controller, double time_elapsed);
 	std::string GetAction();
-};
 
+private:
+	bool foundHare = false;
+};

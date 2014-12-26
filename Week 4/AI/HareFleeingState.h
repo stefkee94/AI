@@ -17,5 +17,6 @@ public:
 
 private:
 	double timer;
+	double start_time;
 };
 

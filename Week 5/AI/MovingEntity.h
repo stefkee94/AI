@@ -5,12 +5,13 @@
 #include <memory>
 
 #include "BaseUnit.h"
+#include "Item.h"
 
 class Utils;
 class MovingEntity : public BaseUnit
 {
 public:
-	virtual void Move(double time_elapsed);
+	virtual void Respawn();
 	virtual void Update(double time_elapsed);
 
 	virtual double GetMass();
@@ -35,6 +36,7 @@ public:
 	virtual QVector2D Flee(QVector2D TargetPos);
 	virtual QVector2D Arrive(QVector2D TargetPos);
 	virtual QVector2D Pursuit(const std::shared_ptr<MovingEntity> target);
+	virtual QVector2D Find(const std::shared_ptr<Item> item);
 	virtual QVector2D Evade(const std::shared_ptr<MovingEntity> pursuer);
 	virtual QVector2D Wander();
 	virtual QVector2D PointToWorldSpace(QVector2D target, QVector2D heading, QVector2D side, QVector2D position);

@@ -7,7 +7,7 @@ Cow::Cow()
 	state = new CowChasingState(std::shared_ptr<MovingEntity>(this));
 
 	Mass = 490;
-	MaxSpeed = 0.3;
+	MaxSpeed = 0.6;
 	MaxForce = 20;
 	MaxTurnRate = 40;
 }

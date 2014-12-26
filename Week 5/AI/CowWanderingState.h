@@ -1,22 +1,23 @@
 #pragma once
 
 #include <vector>
-#include "Vertex.h"
 #include "BehaviorState.h"
+#include "CowFindPillState.h"
+#include "CowFindWeaponState.h"
+#include "CowHideState.h"
+#include "CowFleeingState.h"
 
-class Vertex;
+class Utils;
 class CowWanderingState : public BehaviorState
 {
 public:
-	CowWanderingState(std::shared_ptr<BaseUnit> owner);
+	CowWanderingState(std::shared_ptr<MovingEntity> owner);
 	~CowWanderingState();
 
-	std::vector<std::shared_ptr<Vertex>> Move(std::shared_ptr<Graph> graph);
 	void CheckState();
-	void Update(Controller* controller, std::shared_ptr<Graph> graph);
+	void Update(Controller* controller, double time_elapsed);
 	std::string GetAction();
 
 private:
-	bool hasEatenPill = false;
+	bool foundHare = false;
 };
-

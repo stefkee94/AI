@@ -1,8 +1,9 @@
 #include "MovingEntity.h"
 #include "Utils.h"
 
-void MovingEntity::Move(double time_elapsed)
+void MovingEntity::Respawn()
 {}
+
 void MovingEntity::Update(double time_elapsed)
 {}
 
@@ -159,6 +160,12 @@ QVector2D MovingEntity::Pursuit(const std::shared_ptr<MovingEntity> target)
 
 	// Seek the predicted future position of the target
 	return Seek(target->GetPosition() + target->GetVelocity() * LookAheadTime);
+}
+
+QVector2D MovingEntity::Find(const std::shared_ptr<Item> item)
+{
+	// Seek the predicted future position of the target
+	return Seek(item->GetPosition());
 }
 
 QVector2D MovingEntity::Evade(const std::shared_ptr<MovingEntity> pursuer)

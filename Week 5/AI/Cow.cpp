@@ -4,10 +4,9 @@
 Cow::Cow()
 {
 	img_link = QDir::currentPath().append("/Resources/lemmling_Cartoon_cow.png");
-	state = new CowChasingState(std::shared_ptr<MovingEntity>(this));
+	state = new CowWanderingState(std::shared_ptr<MovingEntity>(this));
 
 	Mass = 490;
-	MaxSpeed = 0.3;
 	MaxForce = 20;
 	MaxTurnRate = 40;
 }
@@ -17,11 +16,18 @@ Cow::~Cow()
 
 }
 
-void Cow::Move(double time_elapsed)
+void Cow::Respawn()
 {
-	// Send behavior to state
-	//behavior->CheckState();
-	//return behavior->Move();
+	// Reset values
+	Velocity = QVector2D(0, 0);
+	Heading = QVector2D(0, 0);
+	Side = QVector2D(0, 0);
+	Mass = 490;
+	MaxForce = 20;
+	MaxTurnRate = 40;
+
+	// Reset State
+	state = new CowWanderingState(std::shared_ptr<MovingEntity>(this));
 }
 
 void Cow::Update(Controller* controller, double time_elapsed)

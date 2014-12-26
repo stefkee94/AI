@@ -1,18 +1,17 @@
 #include "Controller.h"
 
-int cow_x = 50;
-int cow_y = 500;
-int hare_x = 50;
-int hare_y = 200;
-
 Controller::Controller() : QObject()
 {
 	cow = std::make_shared<Cow>();
 	hare = std::make_shared<Hare>();
+	pill = std::make_shared<Pill>();
+	weapon = std::make_shared<Weapon>();
 
 	cow->SetPosition(QVector2D(cow_x, cow_y));
 	hare->SetPosition(QVector2D(hare_x, hare_y));
-	
+	pill->SetPosition(QVector2D(100, 100));
+	weapon->SetPosition(QVector2D(700, 700));
+
 	mainWindow = new MainWindow();
 	mainWindow->setWindowTitle(QObject::tr("Week 2 AI, FSM"));
 	mainWindow->resize(width_view, height_view);
@@ -36,6 +35,16 @@ std::shared_ptr<Hare> Controller::GetHare()
 	return hare;
 }
 
+std::shared_ptr<Pill> Controller::GetPill()
+{
+	return pill;
+}
+
+std::shared_ptr<Weapon> Controller::GetWeapon()
+{
+	return weapon;
+}
+
 double Controller::GetWidth()
 {
 	return mainWindow->width();
@@ -50,6 +59,8 @@ void Controller::Start()
 {
 	start_time = std::clock();
 	is_running = true;
+	timer = 30000;
+	round = 0;
 
 	while (is_running)
 	{
@@ -69,33 +80,58 @@ void Controller::Start()
 
 void Controller::Update(double elapsed_time)
 {
-	std::vector<std::shared_ptr<Vertex>> route_cow, route_hare;
-	
-	//// Update the units
-	hare->Update(this, elapsed_time);
-	cow->Update(this, elapsed_time);
+	if (timer > 0)
+	{
+		// Update the units
+		hare->Update(this, elapsed_time);
+		cow->Update(this, elapsed_time);
 
-	//// Get the routes of the units
-	//route_hare = hare->Move(0/*dt*/);
-	//route_cow = cow->Move(0/*dt*/);
+		// Decrease timer with the elapsed time
+		timer -= elapsed_time;
+	}
+	else
+	{
+		if (round == 5)
+		{
+			is_running = false;
 
-	//// Move the units
-	//MoveHare(route_hare);
-	//MoveCow(route_cow);
+			// Show the user you are finished
+			std::cout << "Finished!" << std::endl;
+		}
+		else
+		{
+			// Restart the timer and increase the round.
+			round++;
+			start_time = std::clock();
+			timer = 30000;
+
+			//Respawn the cow and hare
+			RespawnCow();
+			RespawnHare();
+
+			// Show the user you are in a other round
+			std::cout << "Next round! " << round << std::endl;
+		}
+	}
 }
 
 void Controller::Repaint()
 {
 	mainWindow->showGraph(this);
 	mainWindow->showPlayers(cow, hare);
+	mainWindow->showItems(pill, weapon);
 	mainWindow->update();
 	qApp->processEvents();
 }
 
 void Controller::RespawnCow()
 {
+	cow->Respawn();
+	cow->SetPosition(QVector2D(cow_x, cow_y));
 }
 
 void Controller::RespawnHare()
 {
+	hare->Respawn();
+	hare->SetPosition(QVector2D(hare_x, hare_y));
 }

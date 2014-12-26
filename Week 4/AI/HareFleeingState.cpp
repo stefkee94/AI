@@ -3,16 +3,21 @@
 
 HareFleeingState::HareFleeingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner), timer(2000)
 {
-	owner->SetMaxSpeed(1);
+	owner->SetMaxSpeed(2);
+	start_time = std::clock();
 }
 
 void HareFleeingState::Update(Controller* controller, double time_elapsed)
 {
+
+	double current_time = std::clock();
+	double elapsed_time = (current_time - start_time) / 1000;
+
 	// Keep record of its current position
 	QVector2D old_position = owner->GetPosition();
 
 	// Calculate the combined force from each steering behavior
-	QVector2D SteeringForce = owner->Flee(controller->GetCow()->GetPosition());
+	QVector2D SteeringForce = owner->Evade(controller->GetCow());
 
 	// Acceleration = Force / Mass
 	QVector2D Acceleration = SteeringForce / owner->GetMass();
@@ -31,7 +36,7 @@ void HareFleeingState::Update(Controller* controller, double time_elapsed)
 
 	// Update the position
 	QVector2D Position = owner->GetPosition();
-	Position += Velocity * time_elapsed;
+	Position += Velocity;// *time_elapsed;
 
 	// Update the heading if the vehicle has a velocity greater than a very small value
 	if (Velocity.lengthSquared() > 0.00000001)
@@ -61,7 +66,7 @@ void HareFleeingState::Update(Controller* controller, double time_elapsed)
 	owner->SetPosition(Position);
 
 	// If the counter is 0 let the hare wander
-	timer -= time_elapsed;
+	timer -= elapsed_time;
 	if (timer <= 0)
 		owner->SetState(new HareWanderingState(owner));
 }

@@ -4,7 +4,7 @@
 
 HareWanderingState::HareWanderingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
-	owner->SetMaxSpeed(1);
+	owner->SetMaxSpeed(0.6);
 }
 
 
@@ -35,7 +35,7 @@ void HareWanderingState::Update(Controller* controller, double time_elapsed)
 		Velocity *= owner->GetMaxSpeed();
 	}
 
-	if (Velocity.x() > 0.05)
+	/*if (Velocity.x() > 0.05)
 		Velocity.setX(0.05);
 	if (Velocity.y() > 0.05)
 		Velocity.setY(0.05);
@@ -43,11 +43,11 @@ void HareWanderingState::Update(Controller* controller, double time_elapsed)
 	if (Velocity.x() < -0.05)
 		Velocity.setX(-0.05);
 	if (Velocity.y() < -0.05)
-		Velocity.setY(-0.05);
+		Velocity.setY(-0.05);*/
 
 	// Update the position
 	QVector2D Position = owner->GetPosition();
-	Position += Velocity * time_elapsed;
+	Position += Velocity;// *time_elapsed;
 
 	// Update the heading if the vehicle has a velocity greater than a very small value
 	if (Velocity.lengthSquared() > 0.00000001)

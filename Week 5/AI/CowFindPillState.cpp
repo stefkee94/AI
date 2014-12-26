@@ -1,24 +1,23 @@
-#include "HareWanderingState.h"
-#include "HareFleeingState.h"
+#include "CowFindPillState.h"
 #include "Controller.h"
 
-HareWanderingState::HareWanderingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
+CowFindPillState::CowFindPillState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
-	owner->SetMaxSpeed(1);
+	owner->SetMaxSpeed(0.5);
 }
 
 
-HareWanderingState::~HareWanderingState()
+CowFindPillState::~CowFindPillState()
 {
 }
 
-void HareWanderingState::Update(Controller* controller, double time_elapsed)
+void CowFindPillState::Update(Controller* controller, double time_elapsed)
 {
 	// Keep record of its current position
 	QVector2D old_position = owner->GetPosition();
 
 	// Calculate the combined force from each steering behavior
-	QVector2D SteeringForce = owner->Wander();
+	QVector2D SteeringForce = owner->Find(controller->GetPill());
 
 	// Acceleration = Force / Mass
 	QVector2D Acceleration = SteeringForce / owner->GetMass();
@@ -35,19 +34,9 @@ void HareWanderingState::Update(Controller* controller, double time_elapsed)
 		Velocity *= owner->GetMaxSpeed();
 	}
 
-	if (Velocity.x() > 0.05)
-		Velocity.setX(0.05);
-	if (Velocity.y() > 0.05)
-		Velocity.setY(0.05);
-
-	if (Velocity.x() < -0.05)
-		Velocity.setX(-0.05);
-	if (Velocity.y() < -0.05)
-		Velocity.setY(-0.05);
-
 	// Update the position
 	QVector2D Position = owner->GetPosition();
-	Position += Velocity * time_elapsed;
+	Position += Velocity;
 
 	// Update the heading if the vehicle has a velocity greater than a very small value
 	if (Velocity.lengthSquared() > 0.00000001)
@@ -75,19 +64,13 @@ void HareWanderingState::Update(Controller* controller, double time_elapsed)
 	// Set velocity and position
 	owner->SetVelocity(Velocity);
 	owner->SetPosition(Position);
-
-	// If the cow is too close change the state to fleeing
-	QVector2D cow_position = controller->GetCow()->GetPosition();
-	if ((cow_position - Position).length() < 100)
-		owner->SetState(new HareFleeingState(owner));
 }
 
-std::string HareWanderingState::GetAction()
+std::string CowFindPillState::GetAction()
 {
-	return "wandering in the field";
+	return "looking for a pill";
 }
 
-void HareWanderingState::CheckState()
+void CowFindPillState::CheckState()
 {
-	
 }

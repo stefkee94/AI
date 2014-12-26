@@ -1,11 +1,10 @@
 #include "CowWanderingState.h"
-#include "Graph.h"
-//#include "BaseUnit.h"
+#include "Controller.h"
+#include "Utils.h"
 
-CowWanderingState::CowWanderingState(std::shared_ptr<BaseUnit> owner) : BehaviorState(owner)
+CowWanderingState::CowWanderingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
-	//this->owner = owner;
-	//this->current_vertex = current_vertex;
+	owner->SetMaxSpeed(0.5);
 }
 
 
@@ -13,54 +12,81 @@ CowWanderingState::~CowWanderingState()
 {
 }
 
-//Logic for moving cow in the wandering state
-std::vector<std::shared_ptr<Vertex>> CowWanderingState::Move(std::shared_ptr<Graph> graph)
+void CowWanderingState::Update(Controller* controller, double time_elapsed)
 {
-	std::vector<std::shared_ptr<Vertex>> route;
+	// Keep record of its current position
+	QVector2D old_position = owner->GetPosition();
 
-	// Always get first item to walk
-	std::vector<std::shared_ptr<Edge>> edges = owner->GetVertex()->GetEdges();
-	std::vector<std::shared_ptr<Vertex>> positions = edges.at(Utils::RandomNumber(edges.size() - 1))->GetDestinations();
-	std::shared_ptr<Vertex> next_pos;
+	// Calculate the combined force from each steering behavior
+	QVector2D SteeringForce = owner->Wander();
 
-	// Get next vertex
-	if (positions.at(0) != owner->GetVertex())
-		next_pos = positions.at(0);
-	else
-		next_pos = positions.at(1);
+	// Acceleration = Force / Mass
+	QVector2D Acceleration = SteeringForce / owner->GetMass();
 
-	route.push_back(next_pos);
+	// Update velocity
+	QVector2D Velocity = owner->GetVelocity();
+	Velocity += Acceleration * time_elapsed;
 
-	// Get route from owner vertex to next position
-	//owner->SetVertex(next_pos);
-	if (next_pos->hasNewPill())
+	// Make sure the unit does not exceed maximum velocity
+	float length = Velocity.length();
+	if (Velocity.length() > owner->GetMaxSpeed())
 	{
-		hasEatenPill = true;
-		next_pos->setPill(false);
-		std::vector<std::shared_ptr<Edge>> new_edges = next_pos->GetEdges();
-		std::vector<std::shared_ptr<Vertex>> new_positions = edges.at(Utils::RandomNumber(edges.size() - 1))->GetDestinations();
-		new_positions[0]->setPill(true);
-	}	
+		Velocity.normalized();
+		Velocity *= owner->GetMaxSpeed();
+	}
 
-	return route;
-}
+	// Update the position
+	QVector2D Position = owner->GetPosition();
+	Position += Velocity;
 
-void CowWanderingState::Update(Controller* controller, std::shared_ptr<Graph> graph)
-{
+	// Update the heading if the vehicle has a velocity greater than a very small value
+	if (Velocity.lengthSquared() > 0.00000001)
+	{
+		QVector2D Heading = owner->GetHeading();
+		Heading.normalized();
+		owner->SetHeading(Heading);
 
+		//Side = Heading.Perp(); --> Weet niet precies wat dit doet en zit niet in QT
+	}
+
+	// Treat the screen as a toroid
+	double max_x = controller->GetWidth();
+	double max_y = controller->GetHeight();
+
+	if (Position.x() > max_x)
+		Position.setX(0);
+	if (Position.x() < 0)
+		Position.setX(max_x);
+	if (Position.y() > max_y)
+		Position.setY(0);
+	if (Position.y() < 0)
+		Position.setY(max_y);
+
+	// Set velocity and position
+	owner->SetVelocity(Velocity);
+	owner->SetPosition(Position);
+
+	// If the hare is too close change the state
+	QVector2D hare_position = controller->GetHare()->GetPosition();
+	if ((hare_position - Position).length() < 300)
+	{
+		int number = Utils::RandomNumber(100);
+		if (number < 26)
+			owner->SetState(new CowFleeingState(owner));
+		else if (number < 51)
+			owner->SetState(new CowFindPillState(owner));
+		else if (number < 76)
+			owner->SetState(new CowFindWeaponState(owner));
+		else
+			owner->SetState(new CowHideState(owner));
+	}
 }
 
 std::string CowWanderingState::GetAction()
 {
-	return "wandering in the field";
+	return "wandering";
 }
 
 void CowWanderingState::CheckState()
 {
-	//TODO : IF PILL FOUND CHANGE STATE
-	if (hasEatenPill)
-	{
-		hasEatenPill = false;
-		owner->ChangeState(EnumState::COW_CHASING);
-	}
 }

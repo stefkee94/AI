@@ -1,18 +1,23 @@
-#include "HareFleeingState.h"
+#include "CowFindWeaponState.h"
 #include "Controller.h"
 
-HareFleeingState::HareFleeingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner), timer(2000)
+CowFindWeaponState::CowFindWeaponState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
-	owner->SetMaxSpeed(1);
+	owner->SetMaxSpeed(0.5);
 }
 
-void HareFleeingState::Update(Controller* controller, double time_elapsed)
+
+CowFindWeaponState::~CowFindWeaponState()
+{
+}
+
+void CowFindWeaponState::Update(Controller* controller, double time_elapsed)
 {
 	// Keep record of its current position
 	QVector2D old_position = owner->GetPosition();
 
 	// Calculate the combined force from each steering behavior
-	QVector2D SteeringForce = owner->Flee(controller->GetCow()->GetPosition());
+	QVector2D SteeringForce = owner->Find(controller->GetWeapon());
 
 	// Acceleration = Force / Mass
 	QVector2D Acceleration = SteeringForce / owner->GetMass();
@@ -31,7 +36,7 @@ void HareFleeingState::Update(Controller* controller, double time_elapsed)
 
 	// Update the position
 	QVector2D Position = owner->GetPosition();
-	Position += Velocity * time_elapsed;
+	Position += Velocity;
 
 	// Update the heading if the vehicle has a velocity greater than a very small value
 	if (Velocity.lengthSquared() > 0.00000001)
@@ -59,22 +64,13 @@ void HareFleeingState::Update(Controller* controller, double time_elapsed)
 	// Set velocity and position
 	owner->SetVelocity(Velocity);
 	owner->SetPosition(Position);
-
-	// If the counter is 0 let the hare wander
-	timer -= time_elapsed;
-	if (timer <= 0)
-		owner->SetState(new HareWanderingState(owner));
 }
 
-std::string HareFleeingState::GetAction()
+std::string CowFindWeaponState::GetAction()
 {
-	return "fleeing from the cow";
+	return "looking for a weapon";
 }
 
-void HareFleeingState::CheckState()
-{
-}
-
-HareFleeingState::~HareFleeingState()
+void CowFindWeaponState::CheckState()
 {
 }
