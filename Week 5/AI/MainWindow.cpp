@@ -37,10 +37,25 @@ void MainWindow::paintEvent(QPaintEvent *e)
 	QImage img_pill(QDir::currentPath().append("/Resources/pill.png"));
 	QImage img_weapon(QDir::currentPath().append("/Resources/weapon.png"));
 
+	QImage overlay_cow(t_cow->GetImageLink());
+	QImage overlay_hare(t_hare->GetImageLink());
+	QImage overlay_pill(QDir::currentPath().append("/Resources/pill.png"));
+	QImage overlay_weapon(QDir::currentPath().append("/Resources/weapon.png"));
+
+	PaintImage(&overlay_cow, qRgb(255, 0, 0));
+	PaintImage(&overlay_hare, qRgb(0, 255, 0));
+	PaintImage(&overlay_pill, qRgb(0, 0, 255));
+	PaintImage(&overlay_weapon, qRgb(100, 100, 100));
+
 	painter.drawImage(t_cow->GetPosition().x() - img_cow.width() / 2, t_cow->GetPosition().y() - img_cow.height() / 2, img_cow);
 	painter.drawImage(t_hare->GetPosition().x() - img_hare.width() / 2, t_hare->GetPosition().y() - img_hare.height() / 2, img_hare);
 	painter.drawImage(t_pill->GetPosition().x() - img_pill.width() / 2, t_pill->GetPosition().y() - img_pill.height() / 2, img_pill);
 	painter.drawImage(t_weapon->GetPosition().x() - img_weapon.width() / 2, t_weapon->GetPosition().y() - img_weapon.height() / 2, img_weapon);
+
+	painter.drawImage(t_cow->GetPosition().x() - img_cow.width() / 2, t_cow->GetPosition().y() - img_cow.height() / 2, overlay_cow);
+	painter.drawImage(t_hare->GetPosition().x() - img_hare.width() / 2, t_hare->GetPosition().y() - img_hare.height() / 2, overlay_hare);
+	painter.drawImage(t_pill->GetPosition().x() - img_pill.width() / 2, t_pill->GetPosition().y() - img_pill.height() / 2, overlay_pill);
+	painter.drawImage(t_weapon->GetPosition().x() - img_weapon.width() / 2, t_weapon->GetPosition().y() - img_weapon.height() / 2, overlay_weapon);
 
 	// Check state from cow and show on screen
 	QString cow_state = QString("The cow is ");
@@ -56,6 +71,15 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 	painter.drawText(450, 30, cow_state);
 	painter.drawText(450, 60, hare_state);
+}
+
+void MainWindow::PaintImage(QImage* image, QRgb color)
+{
+	QPainter paint(image);
+	paint.setCompositionMode(QPainter::CompositionMode_SourceIn);
+	paint.fillRect(image->rect(), color);
+	paint.setOpacity(50);
+	paint.end();
 }
 
 MainWindow::~MainWindow()

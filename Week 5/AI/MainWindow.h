@@ -6,6 +6,7 @@
 #include <qpainter.h>
 #include <memory>
 #include <iostream>
+#include <qrgb.h>
 
 #include "Cow.h"
 #include "Hare.h"
@@ -26,6 +27,7 @@ public:
 	void showGraph(Controller* p_controller);
 	void showPlayers(std::shared_ptr<Cow> p_cow, std::shared_ptr<Hare> p_hare);
 	void showItems(std::shared_ptr<Pill> p_pill, std::shared_ptr<Weapon> p_weapon);
+	void PaintImage(QImage* image, QRgb color);
 
 private:
 	Controller* controller;
