@@ -4,6 +4,9 @@
 void MovingEntity::Respawn()
 {}
 
+void MovingEntity::Reset()
+{}
+
 void MovingEntity::Update(double time_elapsed)
 {}
 

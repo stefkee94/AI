@@ -1,22 +1,27 @@
 #include "Controller.h"
+#include "Utils.h"
 
 Controller::Controller() : QObject()
 {
-	cow = std::make_shared<Cow>();
-	hare = std::make_shared<Hare>();
-	pill = std::make_shared<Pill>();
-	weapon = std::make_shared<Weapon>();
-
-	cow->SetPosition(QVector2D(cow_x, cow_y));
-	hare->SetPosition(QVector2D(hare_x, hare_y));
-	pill->SetPosition(QVector2D(100, 100));
-	weapon->SetPosition(QVector2D(700, 700));
-
+	// Create MainWindow
 	mainWindow = new MainWindow();
 	mainWindow->setWindowTitle(QObject::tr("Week 2 AI, FSM"));
 	mainWindow->resize(width_view, height_view);
 	mainWindow->show();
 
+	// Create entities and items
+	cow = std::make_shared<Cow>();
+	hare = std::make_shared<Hare>();
+	pill = std::make_shared<Pill>();
+	weapon = std::make_shared<Weapon>();
+
+	// Place the entities and items
+	cow->SetPosition(QVector2D(cow_x, cow_y));
+	hare->SetPosition(QVector2D(hare_x, hare_y));
+	pill->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
+	weapon->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
+
+	// Start game loop
 	std::thread* game_loop = new std::thread(&Controller::Start, this);
 	Repaint();
 }
@@ -87,13 +92,9 @@ void Controller::Update(double elapsed_time)
 		cow->Update(this, elapsed_time);
 
 		// Check if the hare caught the cow
-		if ((cow->GetPosition() - hare->GetPosition()).length() == 0)
+		if ((cow->GetPosition() - hare->GetPosition()).length() < 2)
 		{
 			hare->AddPoints(cow->Caught(this));
-			
-			//Respawn the cow and hare
-			RespawnCow();
-			RespawnHare();
 		}
 
 		// Decrease timer with the elapsed time
@@ -116,8 +117,9 @@ void Controller::Update(double elapsed_time)
 			timer = 30000;
 
 			//Respawn the cow and hare
-			RespawnCow();
-			RespawnHare();
+			ResetCow();
+			ResetHare();
+			RespawnItems();
 
 			// Show the user you are in a other round
 			std::cout << "Next round! " << round << std::endl;
@@ -134,6 +136,18 @@ void Controller::Repaint()
 	qApp->processEvents();
 }
 
+void Controller::ResetCow()
+{
+	cow->Reset();
+	cow->SetPosition(QVector2D(cow_x, cow_y));
+}
+
+void Controller::ResetHare()
+{
+	hare->Reset();
+	hare->SetPosition(QVector2D(hare_x, hare_y));
+}
+
 void Controller::RespawnCow()
 {
 	cow->Respawn();
@@ -144,4 +158,20 @@ void Controller::RespawnHare()
 {
 	hare->Respawn();
 	hare->SetPosition(QVector2D(hare_x, hare_y));
+}
+
+void Controller::RespawnPill()
+{
+	pill->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
+}
+
+void Controller::RespawnWeapon()
+{
+	weapon->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
+}
+
+void Controller::RespawnItems()
+{
+	pill->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
+	weapon->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
 }

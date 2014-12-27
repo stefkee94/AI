@@ -9,6 +9,7 @@ public:
 	Cow();
 	~Cow();
 
+	void Reset();
 	void Respawn();
 	void Update(Controller* controller, double time_elapsed);
 	int Caught(Controller* controller);

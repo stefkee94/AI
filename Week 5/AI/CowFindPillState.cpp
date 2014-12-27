@@ -64,6 +64,14 @@ void CowFindPillState::Update(Controller* controller, double time_elapsed)
 	// Set velocity and position
 	owner->SetVelocity(Velocity);
 	owner->SetPosition(Position);
+
+	// Check if the owner can get the pill
+	if ((owner->GetPosition() - controller->GetPill()->GetPosition()).length() < 2)
+	{
+		owner->SetPill(true);
+		controller->RespawnPill();
+		owner->SetState(new CowHideState(owner));
+	}
 }
 
 std::string CowFindPillState::GetAction()
@@ -77,13 +85,11 @@ void CowFindPillState::CheckState()
 
 int CowFindPillState::GetPoints(Controller* controller)
 {
-	if (owner->HasPill())
+	if (!owner->HasPill())
 	{
-		owner->AddPoints(1);
-		return 0;
-	}
-	else
-	{
-		return 0;
+		controller->RespawnCow();
+		controller->RespawnHare();
+		owner->SetState(new CowWanderingState(owner));
+		return 10;
 	}
 }

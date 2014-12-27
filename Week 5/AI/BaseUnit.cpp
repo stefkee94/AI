@@ -45,6 +45,16 @@ void BaseUnit::SetState(BehaviorState* state)
 	this->state = state;
 }
 
+void BaseUnit::SetPill(bool pill)
+{
+	this->pill = pill;
+}
+
+void BaseUnit::SetWeapon(bool weapon)
+{
+	this->weapon = weapon;
+}
+
 void BaseUnit::SetPoints(int points)
 {
 	this->points = points;

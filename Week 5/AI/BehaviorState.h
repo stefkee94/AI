@@ -5,6 +5,7 @@
 #include <vector>
 #include <qvector2d.h>
 
+class Utils;
 class Controller;
 class MovingEntity;
 class BehaviorState

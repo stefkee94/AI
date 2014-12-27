@@ -1,5 +1,6 @@
 #include "CowFindWeaponState.h"
 #include "Controller.h"
+#include "Utils.h"
 
 CowFindWeaponState::CowFindWeaponState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
@@ -64,6 +65,14 @@ void CowFindWeaponState::Update(Controller* controller, double time_elapsed)
 	// Set velocity and position
 	owner->SetVelocity(Velocity);
 	owner->SetPosition(Position);
+
+	// Check if the owner can get the pill
+	if ((owner->GetPosition() - controller->GetWeapon()->GetPosition()).length() < 2)
+	{
+		owner->SetWeapon(true);
+		controller->RespawnWeapon();
+		owner->SetState(new CowHideState(owner));
+	}
 }
 
 std::string CowFindWeaponState::GetAction()
@@ -77,12 +86,11 @@ void CowFindWeaponState::CheckState()
 
 int CowFindWeaponState::GetPoints(Controller* controller)
 {
-	if (owner->HasWeapon())
+	if (!owner->HasWeapon())
 	{
-		return 0;
-	}
-	else
-	{
-		return 0;
+		controller->RespawnHare();
+		controller->RespawnCow();
+		owner->SetState(new CowWanderingState(owner));
+		return 10;
 	}
 }

@@ -71,6 +71,13 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
 	painter.drawText(450, 30, cow_state);
 	painter.drawText(450, 60, hare_state);
+
+	// Check scores frome hare and cow and show on screen
+	QString cow_score = QString("Cow: %1").arg(t_cow->GetPoints());
+	QString hare_score = QString("Hare: %1").arg(t_hare->GetPoints());
+
+	painter.drawText(10, 30, cow_score);
+	painter.drawText(10, 60, hare_score);
 }
 
 void MainWindow::PaintImage(QImage* image, QRgb color)

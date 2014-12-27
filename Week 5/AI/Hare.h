@@ -9,6 +9,7 @@ public:
 	Hare();
 	~Hare();
 
+	void Reset();
 	void Respawn();
 	void Update(Controller* controller, double time_elapsed);
 };

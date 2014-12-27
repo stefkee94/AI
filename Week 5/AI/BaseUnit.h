@@ -13,10 +13,13 @@ class BaseUnit
 {
 public:
 	virtual void Respawn() = 0;
+	virtual void Reset() = 0;
 	virtual void Update(Controller* controller, double time_elapsed) = 0;
 
 	virtual void SetPosition(QVector2D position);
 	virtual void SetState(BehaviorState* state);
+	virtual void SetPill(bool pill);
+	virtual void SetWeapon(bool weapon);
 	virtual void SetPoints(int points);
 	virtual void AddPoints(int points);
 
@@ -35,5 +38,5 @@ protected:
 	QString img_link;
 	bool weapon = false;
 	bool pill = false;
-	int points;
+	int points = 0;
 };

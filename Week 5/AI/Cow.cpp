@@ -9,11 +9,27 @@ Cow::Cow()
 	Mass = 490;
 	MaxForce = 20;
 	MaxTurnRate = 40;
+	points = 0;
 }
 
 Cow::~Cow()
 {
 
+}
+
+void Cow::Reset()
+{
+	// Reset values
+	Velocity = QVector2D(0, 0);
+	Heading = QVector2D(0, 0);
+	Side = QVector2D(0, 0);
+	Mass = 100;
+	MaxForce = 20;
+	MaxTurnRate = 40;
+	points = 0;
+
+	// Set state
+	state = new CowWanderingState(std::shared_ptr<MovingEntity>(this));
 }
 
 void Cow::Respawn()
@@ -25,9 +41,6 @@ void Cow::Respawn()
 	Mass = 490;
 	MaxForce = 20;
 	MaxTurnRate = 40;
-
-	// Reset State
-	state = new CowWanderingState(std::shared_ptr<MovingEntity>(this));
 }
 
 void Cow::Update(Controller* controller, double time_elapsed)

@@ -9,10 +9,26 @@ Hare::Hare()
 	Mass = 500;
 	MaxForce = 20;
 	MaxTurnRate = 40;
+	points = 0;
 }
 
 Hare::~Hare()
 {
+}
+
+void Hare::Reset()
+{
+	// Reset values
+	Velocity = QVector2D(0, 0);
+	Heading = QVector2D(0, 0);
+	Side = QVector2D(0, 0);
+	Mass = 100;
+	MaxForce = 20;
+	MaxTurnRate = 40;
+	points = 0;
+
+	// Set state
+	state = new HareChasingState(std::shared_ptr<MovingEntity>(this));
 }
 
 void Hare::Respawn()
@@ -24,9 +40,6 @@ void Hare::Respawn()
 	Mass = 500;
 	MaxForce = 20;
 	MaxTurnRate = 40;
-
-	// Reset state
-	state = new HareChasingState(std::shared_ptr<MovingEntity>(this));
 }
 
 void Hare::Update(Controller* controller, double time_elapsed)

@@ -31,8 +31,13 @@ public:
 	double GetWidth();
 	double GetHeight();
 
+	void ResetCow();
+	void ResetHare();
 	void RespawnCow();
 	void RespawnHare();
+	void RespawnPill();
+	void RespawnWeapon();
+	void RespawnItems();
 
 private:
 	bool is_running;

@@ -77,5 +77,8 @@ void CowFleeingState::CheckState()
 
 int CowFleeingState::GetPoints(Controller* controller)
 {
-	return 0;
+	controller->RespawnCow();
+	controller->RespawnHare();
+	owner->SetState(new CowWanderingState(owner));
+	return 10;
 }

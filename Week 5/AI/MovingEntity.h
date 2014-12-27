@@ -12,6 +12,7 @@ class MovingEntity : public BaseUnit
 {
 public:
 	virtual void Respawn();
+	virtual void Reset();
 	virtual void Update(double time_elapsed);
 
 	virtual double GetMass();
