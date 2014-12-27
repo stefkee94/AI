@@ -42,10 +42,10 @@ void MainWindow::paintEvent(QPaintEvent *e)
 	QImage overlay_pill(QDir::currentPath().append("/Resources/pill.png"));
 	QImage overlay_weapon(QDir::currentPath().append("/Resources/weapon.png"));
 
-	PaintImage(&overlay_cow, qRgb(255, 0, 0));
-	PaintImage(&overlay_hare, qRgb(0, 255, 0));
-	PaintImage(&overlay_pill, qRgb(0, 0, 255));
-	PaintImage(&overlay_weapon, qRgb(100, 100, 100));
+	overlay_cow.fill(qRgba(255, 0, 0, 75));
+	overlay_hare.fill(qRgba(0, 255, 0, 75));
+	overlay_pill.fill(qRgba(0, 0, 255, 75));
+	overlay_weapon.fill(qRgba(255, 255, 0, 75));
 
 	painter.drawImage(t_cow->GetPosition().x() - img_cow.width() / 2, t_cow->GetPosition().y() - img_cow.height() / 2, img_cow);
 	painter.drawImage(t_hare->GetPosition().x() - img_hare.width() / 2, t_hare->GetPosition().y() - img_hare.height() / 2, img_hare);
@@ -76,9 +76,9 @@ void MainWindow::paintEvent(QPaintEvent *e)
 void MainWindow::PaintImage(QImage* image, QRgb color)
 {
 	QPainter paint(image);
-	paint.setCompositionMode(QPainter::CompositionMode_SourceIn);
+	paint.setCompositionMode(QPainter::CompositionMode_Overlay);
 	paint.fillRect(image->rect(), color);
-	paint.setOpacity(50);
+	paint.setOpacity(0.5);
 	paint.end();
 }
 
