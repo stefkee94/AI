@@ -109,10 +109,10 @@ QVector2D MovingEntity::Seek(QVector2D TargetPos)
 QVector2D MovingEntity::Flee(QVector2D TargetPos)
 {
 	// Only flee if the target is within 'panic distance'. Work in distance squared space.
-	const double PanicDistanceSq = 100 * 100;
-	if (GetPosition().distanceToPoint(TargetPos) > PanicDistanceSq)
+	const double PanicDistance = 300;
+	if ((GetPosition() - TargetPos).length() > PanicDistance)
 	{
-		return QVector2D();
+		return Seek(TargetPos);
 	}
 
 	TargetPos = GetPosition() - TargetPos;
