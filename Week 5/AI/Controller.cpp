@@ -86,6 +86,16 @@ void Controller::Update(double elapsed_time)
 		hare->Update(this, elapsed_time);
 		cow->Update(this, elapsed_time);
 
+		// Check if the hare caught the cow
+		if ((cow->GetPosition() - hare->GetPosition()).length() == 0)
+		{
+			hare->AddPoints(cow->Caught(this));
+			
+			//Respawn the cow and hare
+			RespawnCow();
+			RespawnHare();
+		}
+
 		// Decrease timer with the elapsed time
 		timer -= elapsed_time;
 	}

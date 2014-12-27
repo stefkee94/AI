@@ -74,3 +74,15 @@ std::string CowFindWeaponState::GetAction()
 void CowFindWeaponState::CheckState()
 {
 }
+
+int CowFindWeaponState::GetPoints(Controller* controller)
+{
+	if (owner->HasWeapon())
+	{
+		return 0;
+	}
+	else
+	{
+		return 0;
+	}
+}

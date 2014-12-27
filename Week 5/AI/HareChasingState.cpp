@@ -70,6 +70,11 @@ void HareChasingState::CheckState()
 {
 }
 
+int HareChasingState::GetPoints(Controller* controller)
+{
+	return 0;
+}
+
 HareChasingState::~HareChasingState()
 {
 }

@@ -74,3 +74,8 @@ std::string CowFleeingState::GetAction()
 void CowFleeingState::CheckState()
 {
 }
+
+int CowFleeingState::GetPoints(Controller* controller)
+{
+	return 0;
+}

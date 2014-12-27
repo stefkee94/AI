@@ -74,3 +74,16 @@ std::string CowFindPillState::GetAction()
 void CowFindPillState::CheckState()
 {
 }
+
+int CowFindPillState::GetPoints(Controller* controller)
+{
+	if (owner->HasPill())
+	{
+		owner->AddPoints(1);
+		return 0;
+	}
+	else
+	{
+		return 0;
+	}
+}

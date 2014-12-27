@@ -23,3 +23,8 @@ std::string CowHideState::GetAction()
 void CowHideState::CheckState()
 {
 }
+
+int CowHideState::GetPoints(Controller* controller)
+{
+	return 0;
+}

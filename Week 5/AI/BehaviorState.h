@@ -16,6 +16,7 @@ public:
 	virtual void CheckState() = 0;
 	virtual void Update(Controller* controller, double time_elapsed) = 0;
 	virtual std::string GetAction() = 0;
+	virtual int GetPoints(Controller* controller) = 0;
 
 protected:
 	std::shared_ptr<MovingEntity> owner;

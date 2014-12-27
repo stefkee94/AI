@@ -90,3 +90,8 @@ std::string CowWanderingState::GetAction()
 void CowWanderingState::CheckState()
 {
 }
+
+int CowWanderingState::GetPoints(Controller* controller)
+{
+	return 0;
+}
