@@ -21,6 +21,24 @@ Controller::Controller() : QObject()
 	pill->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
 	weapon->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
 
+	//Set the begin numbers for the chance instances
+	int firstNumber = Utils::RandomNumber(10, 30);
+	int secondNumber = Utils::RandomNumber(10, 30);
+	int thirdNumber = Utils::RandomNumber(10, 30);
+	int fourthNumber = Utils::RandomNumber(10, 30);
+
+	int total = firstNumber + secondNumber + thirdNumber + fourthNumber;
+
+	firstNumber = firstNumber * 100 / total;
+	secondNumber = secondNumber * 100 / total;
+	thirdNumber = thirdNumber * 100 / total;
+	fourthNumber = fourthNumber * 100 / total;
+
+	numbers.push_back(firstNumber);
+	numbers.push_back(firstNumber + secondNumber);
+	numbers.push_back(firstNumber + secondNumber + thirdNumber);
+	numbers.push_back(firstNumber + secondNumber + thirdNumber + fourthNumber);
+
 	// Start game loop
 	std::thread* game_loop = new std::thread(&Controller::Start, this);
 	Repaint();
@@ -174,4 +192,14 @@ void Controller::RespawnItems()
 {
 	pill->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
 	weapon->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
+}
+
+std::vector<int> Controller::GetNumbers()
+{
+	return numbers;
+}
+
+void Controller::SetNumber(int number, int placeOfNumber)
+{
+	numbers[placeOfNumber] = number;
 }

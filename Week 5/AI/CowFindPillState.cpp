@@ -92,4 +92,6 @@ int CowFindPillState::GetPoints(Controller* controller)
 		owner->SetState(new CowWanderingState(owner));
 		return 10;
 	}
+
+	return 0;
 }

@@ -70,12 +70,15 @@ void CowWanderingState::Update(Controller* controller, double time_elapsed)
 	QVector2D hare_position = controller->GetHare()->GetPosition();
 	if ((hare_position - Position).length() < 300)
 	{
+		std::vector<int> numbers = controller->GetNumbers();
+		
+
 		int number = Utils::RandomNumber(100);
-		if (number < 26)
-			owner->SetState(new CowFleeingState(owner));
-		else if (number < 51)
+		if (number < numbers[0])
 			owner->SetState(new CowFindPillState(owner));
-		else if (number < 76)
+		else if (number > numbers[0] && number < numbers[1])
+			owner->SetState(new CowFleeingState(owner));
+		else if (number > numbers[1] && number < numbers[2])
 			owner->SetState(new CowFindWeaponState(owner));
 		else
 			owner->SetState(new CowHideState(owner));

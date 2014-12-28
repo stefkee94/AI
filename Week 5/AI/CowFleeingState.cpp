@@ -64,6 +64,7 @@ void CowFleeingState::Update(Controller* controller, double time_elapsed)
 	// Set velocity and position
 	owner->SetVelocity(Velocity);
 	owner->SetPosition(Position);
+
 }
 
 std::string CowFleeingState::GetAction()

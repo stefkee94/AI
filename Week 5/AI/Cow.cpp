@@ -46,6 +46,12 @@ void Cow::Respawn()
 void Cow::Update(Controller* controller, double time_elapsed)
 {
 	state->Update(controller, time_elapsed);
+	//GetStatePoints(controller);
+}
+
+int Cow::GetStatePoints(Controller* controller)
+{
+	return state->GetPoints(controller);
 }
 
 int Cow::Caught(Controller* controller)

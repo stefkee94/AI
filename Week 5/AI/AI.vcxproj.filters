@@ -180,40 +180,38 @@
     <CustomBuild Include="Resources\weapon.png">
       <Filter>Resources</Filter>
     </CustomBuild>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="MovingEntity.h">
+    <CustomBuild Include="Item.h">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="SteeringBehaviors.h">
+    </CustomBuild>
+    <CustomBuild Include="MovingEntity.h">
       <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="HareChasingState.h">
+    </CustomBuild>
+    <CustomBuild Include="Pill.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="SteeringBehaviors.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Weapon.h">
+      <Filter>Header Files\Model</Filter>
+    </CustomBuild>
+    <CustomBuild Include="HareChasingState.h">
       <Filter>Header Files\Model\State\Hare</Filter>
-    </ClInclude>
-    <ClInclude Include="CowWanderingState.h">
+    </CustomBuild>
+    <CustomBuild Include="CowFindPillState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="CowFindPillState.h">
+    </CustomBuild>
+    <CustomBuild Include="CowFindWeaponState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="CowFleeingState.h">
+    </CustomBuild>
+    <CustomBuild Include="CowFleeingState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="CowHideState.h">
+    </CustomBuild>
+    <CustomBuild Include="CowHideState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="Pill.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Weapon.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="CowFindWeaponState.h">
+    </CustomBuild>
+    <CustomBuild Include="CowWanderingState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
-    </ClInclude>
-    <ClInclude Include="Item.h">
-      <Filter>Header Files\Model</Filter>
-    </ClInclude>
+    </CustomBuild>
   </ItemGroup>
 </Project>

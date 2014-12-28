@@ -31,6 +31,12 @@ public:
 	double GetWidth();
 	double GetHeight();
 
+	// For chance instances
+	void SetNumber(int number, int placeOfNumber);
+	std::vector<int> GetNumbers();
+
+	std::map<BehaviorState*, int> statePoints;
+
 	void ResetCow();
 	void ResetHare();
 	void RespawnCow();
@@ -51,6 +57,9 @@ private:
 	int cow_y = 400;
 	int hare_x = 200;
 	int hare_y = 400;
+
+	// For chance instances
+	std::vector<int> numbers;
 
 	// QT init
 	MainWindow* mainWindow;
