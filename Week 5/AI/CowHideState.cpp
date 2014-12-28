@@ -32,8 +32,6 @@ int CowHideState::GetPoints(Controller* controller)
 		owner->AddPoints(1);
 		controller->RespawnCow();
 		controller->RespawnHare();
-
-		return 1;
 	}
 	else if (owner->HasWeapon())
 	{
