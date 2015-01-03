@@ -5,6 +5,8 @@
 #include <vector>
 #include <qvector2d.h>
 
+#include "EnumState.h"
+
 class Utils;
 class Controller;
 class MovingEntity;
@@ -18,6 +20,7 @@ public:
 	virtual void Update(Controller* controller, double time_elapsed) = 0;
 	virtual std::string GetAction() = 0;
 	virtual int GetPoints(Controller* controller) = 0;
+	virtual EnumState GetType() = 0;
 
 protected:
 	std::shared_ptr<MovingEntity> owner;

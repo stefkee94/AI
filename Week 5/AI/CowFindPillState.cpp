@@ -95,3 +95,8 @@ int CowFindPillState::GetPoints(Controller* controller)
 
 	return 0;
 }
+
+EnumState CowFindPillState::GetType()
+{
+	return EnumState::COW_FIND_PILL;
+}

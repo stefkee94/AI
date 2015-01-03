@@ -75,6 +75,11 @@ int HareChasingState::GetPoints(Controller* controller)
 	return 0;
 }
 
+EnumState HareChasingState::GetType()
+{
+	return EnumState::HARE_CHASING;
+}
+
 HareChasingState::~HareChasingState()
 {
 }

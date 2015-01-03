@@ -1,5 +1,6 @@
 #include "Cow.h"
 #include "SteeringBehaviors.h"
+#include "EnumState.h"
 
 Cow::Cow()
 {
@@ -10,6 +11,15 @@ Cow::Cow()
 	MaxForce = 20;
 	MaxTurnRate = 40;
 	points = 0;
+
+	points_fleeing_hare = 0;
+	points_fleeing_cow = 0;
+	points_hiding_hare = 0;
+	points_hiding_cow = 0;
+	points_find_weapon_hare = 0;
+	points_find_weapon_cow = 0;
+	points_find_pill_hare = 0;
+	points_find_pill_cow = 0;
 }
 
 Cow::~Cow()
@@ -51,10 +61,69 @@ void Cow::Update(Controller* controller, double time_elapsed)
 
 int Cow::GetStatePoints(Controller* controller)
 {
-	return state->GetPoints(controller);
+	int points = state->GetPoints(controller);
+
+	switch (state->GetType())
+	{
+	case EnumState::COW_FIND_PILL:
+		points_find_pill_hare += points;
+		break;
+	case EnumState::COW_FIND_WEAPON:
+		points_find_weapon_hare += points;
+		break;
+	case EnumState::COW_FLEEING:
+		points_fleeing_hare += points;
+		break;
+	case EnumState::COW_HIDING:
+		if (HasPill)
+			points_find_pill_cow += 1;
+		break;
+	}
+
+	return points;
 }
 
 int Cow::Caught(Controller* controller)
 {
 	return state->GetPoints(controller);
+}
+
+int Cow::GetPointsFleeingHare()
+{
+	return points_fleeing_hare;
+}
+
+int Cow::GetPointsFleeingCow()
+{
+	return points_fleeing_cow;
+}
+
+int Cow::GetPointsHidingHare()
+{
+	return points_hiding_hare;
+}
+
+int Cow::GetPointsHidingCow()
+{
+	return points_hiding_cow;
+}
+
+int Cow::GetPointsFindWeaponHare()
+{
+	return points_find_weapon_hare;
+}
+
+int Cow::GetPointsFindWeaponCow()
+{
+	return points_find_weapon_cow;
+}
+
+int Cow::GetPointsFindPillHare()
+{
+	return points_find_pill_hare;
+}
+
+int Cow::GetPointsFindPillCow()
+{
+	return points_find_pill_cow;
 }

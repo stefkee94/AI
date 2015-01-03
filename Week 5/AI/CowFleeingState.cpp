@@ -83,3 +83,8 @@ int CowFleeingState::GetPoints(Controller* controller)
 	owner->SetState(new CowWanderingState(owner));
 	return 10;
 }
+
+EnumState CowFleeingState::GetType()
+{
+	return EnumState::COW_FLEEING;
+}

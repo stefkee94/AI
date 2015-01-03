@@ -47,3 +47,8 @@ int CowHideState::GetPoints(Controller* controller)
 	}
 	return 0;
 }
+
+EnumState CowHideState::GetType()
+{
+	return EnumState::COW_HIDING;
+}

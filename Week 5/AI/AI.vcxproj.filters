@@ -171,9 +171,6 @@
     <CustomBuild Include="BaseUnit.h">
       <Filter>Header Files\Model</Filter>
     </CustomBuild>
-    <CustomBuild Include="EnumState.h">
-      <Filter>Header Files\Model</Filter>
-    </CustomBuild>
     <CustomBuild Include="Resources\pill.png">
       <Filter>Resources</Filter>
     </CustomBuild>
@@ -212,6 +209,9 @@
     </CustomBuild>
     <CustomBuild Include="CowWanderingState.h">
       <Filter>Header Files\Model\State\Cow</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EnumState.h">
+      <Filter>Header Files\Model\State</Filter>
     </CustomBuild>
   </ItemGroup>
 </Project>

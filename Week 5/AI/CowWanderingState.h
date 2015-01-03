@@ -18,6 +18,7 @@ public:
 	void Update(Controller* controller, double time_elapsed);
 	std::string GetAction();
 	int GetPoints(Controller* controller);
+	EnumState GetType();
 
 private:
 	bool foundHare = false;

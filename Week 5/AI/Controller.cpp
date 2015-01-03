@@ -134,6 +134,18 @@ void Controller::Update(double elapsed_time)
 			start_time = std::clock();
 			timer = 30000;
 
+			// Genetic algorithm
+			int points_pill_cow = cow->GetPointsFindPillCow();
+			int points_weapon_cow = cow->GetPointsFindWeaponCow();
+			int points_hiding_cow = cow->GetPointsHidingCow();
+			int points_fleeing_cow = cow->GetPointsFleeingCow();
+
+			// TODO: 
+			// - Hoogste getal pakken
+			// - Daarna laagste getal weghalen (als die er is)
+			// - 1 ander state kiezen
+			// - State getallen aanpassen
+
 			//Respawn the cow and hare
 			ResetCow();
 			ResetHare();

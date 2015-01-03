@@ -96,3 +96,8 @@ int CowFindWeaponState::GetPoints(Controller* controller)
 
 	return 0;
 }
+
+EnumState CowFindWeaponState::GetType()
+{
+	return EnumState::COW_FIND_WEAPON;
+}

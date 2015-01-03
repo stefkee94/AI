@@ -98,3 +98,8 @@ int CowWanderingState::GetPoints(Controller* controller)
 {
 	return 0;
 }
+
+EnumState CowWanderingState::GetType()
+{
+	return EnumState::COW_WANDERING;
+}
