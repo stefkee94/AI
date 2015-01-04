@@ -3,7 +3,7 @@
 
 HareChasingState::HareChasingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
-	owner->SetMaxSpeed(1);
+	owner->SetMaxSpeed(1.6);
 }
 
 void HareChasingState::Update(Controller* controller, double time_elapsed)

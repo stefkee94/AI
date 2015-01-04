@@ -3,7 +3,7 @@
 
 CowFleeingState::CowFleeingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
-	owner->SetMaxSpeed(0.5);
+	owner->SetMaxSpeed(0.8);
 }
 
 

@@ -35,8 +35,20 @@ void Cow::Reset()
 	Side = QVector2D(0, 0);
 	Mass = 100;
 	MaxForce = 20;
-	MaxTurnRate = 40;
+	MaxTurnRate = 500;
 	points = 0;
+
+	pill = false;
+	weapon = false;
+
+	points_fleeing_hare = 0;
+	points_fleeing_cow = 0;
+	points_hiding_hare = 0;
+	points_hiding_cow = 0;
+	points_find_weapon_hare = 0;
+	points_find_weapon_cow = 0;
+	points_find_pill_hare = 0;
+	points_find_pill_cow = 0;
 
 	// Set state
 	state = new CowWanderingState(std::shared_ptr<MovingEntity>(this));
@@ -75,7 +87,7 @@ int Cow::GetStatePoints(Controller* controller)
 		points_fleeing_hare += points;
 		break;
 	case EnumState::COW_HIDING:
-		if (HasPill)
+		if (HasPill())
 			points_find_pill_cow += 1;
 		break;
 	}
@@ -85,7 +97,26 @@ int Cow::GetStatePoints(Controller* controller)
 
 int Cow::Caught(Controller* controller)
 {
-	return state->GetPoints(controller);
+	int points = state->GetPoints(controller);
+
+	switch (state->GetType())
+	{
+	case EnumState::COW_FIND_PILL:
+		points_find_pill_hare += points;
+		break;
+	case EnumState::COW_FIND_WEAPON:
+		points_find_weapon_hare += points;
+		break;
+	case EnumState::COW_FLEEING:
+		points_fleeing_hare += points;
+		break;
+	case EnumState::COW_HIDING:
+		if (HasPill())
+			points_find_pill_cow += 1;
+		break;
+	}
+
+	return points;
 }
 
 int Cow::GetPointsFleeingHare()

@@ -22,22 +22,12 @@ Controller::Controller() : QObject()
 	weapon->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
 
 	//Set the begin numbers for the chance instances
-	int firstNumber = Utils::RandomNumber(10, 30);
-	int secondNumber = Utils::RandomNumber(10, 30);
-	int thirdNumber = Utils::RandomNumber(10, 30);
-	int fourthNumber = Utils::RandomNumber(10, 30);
+	pill_number = Utils::RandomNumber(10, 30);
+	flee_number = Utils::RandomNumber(10, 30);
+	weapon_number = Utils::RandomNumber(10, 30);
+	hide_number = Utils::RandomNumber(10, 30);
 
-	int total = firstNumber + secondNumber + thirdNumber + fourthNumber;
-
-	firstNumber = firstNumber * 100 / total;
-	secondNumber = secondNumber * 100 / total;
-	thirdNumber = thirdNumber * 100 / total;
-	fourthNumber = fourthNumber * 100 / total;
-
-	numbers.push_back(firstNumber);
-	numbers.push_back(firstNumber + secondNumber);
-	numbers.push_back(firstNumber + secondNumber + thirdNumber);
-	numbers.push_back(firstNumber + secondNumber + thirdNumber + fourthNumber);
+	NextGeneration();
 
 	// Start game loop
 	std::thread* game_loop = new std::thread(&Controller::Start, this);
@@ -113,6 +103,7 @@ void Controller::Update(double elapsed_time)
 		if ((cow->GetPosition() - hare->GetPosition()).length() < 2)
 		{
 			hare->AddPoints(cow->Caught(this));
+			RespawnItems();
 		}
 
 		// Decrease timer with the elapsed time
@@ -140,11 +131,81 @@ void Controller::Update(double elapsed_time)
 			int points_hiding_cow = cow->GetPointsHidingCow();
 			int points_fleeing_cow = cow->GetPointsFleeingCow();
 
-			// TODO: 
-			// - Hoogste getal pakken
-			// - Daarna laagste getal weghalen (als die er is)
-			// - 1 ander state kiezen
-			// - State getallen aanpassen
+			// Create a collection of the points
+			std::vector<std::pair<EnumState, int>> collection;
+			collection.push_back(std::pair<EnumState, int>(EnumState::COW_FIND_PILL, points_pill_cow));
+			collection.push_back(std::pair<EnumState, int>(EnumState::COW_FIND_WEAPON, points_weapon_cow));
+			collection.push_back(std::pair<EnumState, int>(EnumState::COW_HIDING, points_hiding_cow));
+			collection.push_back(std::pair<EnumState, int>(EnumState::COW_FLEEING, points_fleeing_cow));
+
+			// Sort the collection
+			std::sort(collection.begin(), collection.end(), [](std::pair<EnumState, int>& first_elem, std::pair<EnumState, int>& second_elem)
+			{
+				return first_elem.second > second_elem.second;
+			});
+
+			// Select highest
+			bool different_numbers = false;
+			for (int i = 0; i < collection.size(); i++)
+			{
+				if (collection.at(0).second != collection.at(i).second)
+				{
+					different_numbers = true;
+					break;
+				}
+			}
+
+			std::pair<EnumState, int> highest;
+			std::pair<EnumState, int> random;
+
+			if (different_numbers)
+			{
+				highest = collection.at(0);
+				random = collection.at(Utils::RandomNumber(1, collection.size() - 1));
+			}
+			else
+			{
+				int a, b;
+				a = Utils::RandomNumber(collection.size() - 1);
+
+				do
+				{
+					b = Utils::RandomNumber(collection.size() - 1);
+				} while (a == b);
+
+				highest = collection.at(a);
+				random = collection.at(b);
+			}
+
+			// Change state chances
+			for (int i = 0; i < 2; i++)
+			{
+				std::pair<EnumState, int> temp;
+				if (i == 0)
+					temp = highest;
+				else
+					temp = random;
+
+				// Change the chance of the selected state
+				switch (temp.first)
+				{
+				case EnumState::COW_FIND_PILL:
+					pill_number += 10;
+					break;
+				case EnumState::COW_FIND_WEAPON:
+					weapon_number += 10;
+					break;
+				case EnumState::COW_HIDING:
+					hide_number += 10;
+					break;
+				case EnumState::COW_FLEEING:
+					flee_number += 10;
+					break;
+				}
+			}
+			
+			// Calculate the next generation
+			NextGeneration();
 
 			//Respawn the cow and hare
 			ResetCow();
@@ -155,6 +216,32 @@ void Controller::Update(double elapsed_time)
 			std::cout << "Next round! " << round << std::endl;
 		}
 	}
+}
+
+void Controller::NextGeneration()
+{
+	// Clear the numbers array
+	numbers.clear();
+	
+	// Calculate the next generation
+	int total = pill_number + flee_number + weapon_number + hide_number;
+
+	pill_number = pill_number * 100 / total;
+	flee_number = flee_number * 100 / total;
+	weapon_number = weapon_number * 100 / total;
+	hide_number = hide_number * 100 / total;
+
+	numbers.push_back(pill_number);
+	numbers.push_back(pill_number + flee_number);
+	numbers.push_back(pill_number + flee_number + weapon_number);
+	numbers.push_back(pill_number + flee_number + weapon_number + hide_number);
+
+	// Print the generation numbers
+	std::cout << "pill:   " << pill_number << std::endl;
+	std::cout << "flee:   " << flee_number << std::endl;
+	std::cout << "weapon: " << weapon_number << std::endl;
+	std::cout << "hide:   " << hide_number << std::endl;
+	std::cout << std::endl;
 }
 
 void Controller::Repaint()
@@ -202,8 +289,8 @@ void Controller::RespawnWeapon()
 
 void Controller::RespawnItems()
 {
-	pill->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
-	weapon->SetPosition(QVector2D(Utils::RandomNumber(GetWidth()), Utils::RandomNumber(GetHeight())));
+	pill->SetPosition(QVector2D(Utils::RandomNumber(150, GetWidth() - 150), Utils::RandomNumber(150, GetHeight() - 150)));
+	weapon->SetPosition(QVector2D(Utils::RandomNumber(150, GetWidth() - 150), Utils::RandomNumber(150, GetHeight() - 150)));
 }
 
 std::vector<int> Controller::GetNumbers()

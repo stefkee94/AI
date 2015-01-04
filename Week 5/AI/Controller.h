@@ -58,6 +58,11 @@ private:
 	int hare_x = 200;
 	int hare_y = 400;
 
+	int pill_number;
+	int flee_number;
+	int weapon_number;
+	int hide_number;
+
 	// For chance instances
 	std::vector<int> numbers;
 
@@ -75,7 +80,7 @@ private:
 	void MoveUnits();
 	void Update(double);
 	void Repaint();
-	
+	void NextGeneration();
 
 };
 

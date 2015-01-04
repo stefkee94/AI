@@ -4,7 +4,7 @@
 
 CowWanderingState::CowWanderingState(std::shared_ptr<MovingEntity> owner) : BehaviorState(owner)
 {
-	owner->SetMaxSpeed(0.5);
+	owner->SetMaxSpeed(0.8);
 }
 
 
@@ -71,7 +71,6 @@ void CowWanderingState::Update(Controller* controller, double time_elapsed)
 	if ((hare_position - Position).length() < 300)
 	{
 		std::vector<int> numbers = controller->GetNumbers();
-		
 
 		int number = Utils::RandomNumber(100);
 		if (number < numbers[0])
