@@ -81,6 +81,7 @@ private:
 	void Update(double);
 	void Repaint();
 	void NextGeneration();
+	void PrepareNextGeneration();
 
 };
 

@@ -215,9 +215,9 @@ QVector2D MovingEntity::PointToWorldSpace(QVector2D target, QVector2D heading, Q
 
 
 	//and translate
-	/*qreal x = position.x;
-	qreal y = position.y;
-	matrix.translate(x, y);*/
+	//qreal x = position.x;
+	//qreal y = position.y;
+	//matrix.translate(x, y);
 
 	//now transform the vertices
 	// TODO --> transform point with matrix

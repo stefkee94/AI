@@ -125,84 +125,8 @@ void Controller::Update(double elapsed_time)
 			start_time = std::clock();
 			timer = 30000;
 
-			// Genetic algorithm
-			int points_pill_cow = cow->GetPointsFindPillCow();
-			int points_weapon_cow = cow->GetPointsFindWeaponCow();
-			int points_hiding_cow = cow->GetPointsHidingCow();
-			int points_fleeing_cow = cow->GetPointsFleeingCow();
-
-			// Create a collection of the points
-			std::vector<std::pair<EnumState, int>> collection;
-			collection.push_back(std::pair<EnumState, int>(EnumState::COW_FIND_PILL, points_pill_cow));
-			collection.push_back(std::pair<EnumState, int>(EnumState::COW_FIND_WEAPON, points_weapon_cow));
-			collection.push_back(std::pair<EnumState, int>(EnumState::COW_HIDING, points_hiding_cow));
-			collection.push_back(std::pair<EnumState, int>(EnumState::COW_FLEEING, points_fleeing_cow));
-
-			// Sort the collection
-			std::sort(collection.begin(), collection.end(), [](std::pair<EnumState, int>& first_elem, std::pair<EnumState, int>& second_elem)
-			{
-				return first_elem.second > second_elem.second;
-			});
-
-			// Select highest
-			bool different_numbers = false;
-			for (int i = 0; i < collection.size(); i++)
-			{
-				if (collection.at(0).second != collection.at(i).second)
-				{
-					different_numbers = true;
-					break;
-				}
-			}
-
-			std::pair<EnumState, int> highest;
-			std::pair<EnumState, int> random;
-
-			if (different_numbers)
-			{
-				highest = collection.at(0);
-				random = collection.at(Utils::RandomNumber(1, collection.size() - 1));
-			}
-			else
-			{
-				int a, b;
-				a = Utils::RandomNumber(collection.size() - 1);
-
-				do
-				{
-					b = Utils::RandomNumber(collection.size() - 1);
-				} while (a == b);
-
-				highest = collection.at(a);
-				random = collection.at(b);
-			}
-
-			// Change state chances
-			for (int i = 0; i < 2; i++)
-			{
-				std::pair<EnumState, int> temp;
-				if (i == 0)
-					temp = highest;
-				else
-					temp = random;
-
-				// Change the chance of the selected state
-				switch (temp.first)
-				{
-				case EnumState::COW_FIND_PILL:
-					pill_number += 10;
-					break;
-				case EnumState::COW_FIND_WEAPON:
-					weapon_number += 10;
-					break;
-				case EnumState::COW_HIDING:
-					hide_number += 10;
-					break;
-				case EnumState::COW_FLEEING:
-					flee_number += 10;
-					break;
-				}
-			}
+			// Make changes before next generation starts
+			PrepareNextGeneration();
 			
 			// Calculate the next generation
 			NextGeneration();
@@ -214,6 +138,88 @@ void Controller::Update(double elapsed_time)
 
 			// Show the user you are in a other round
 			std::cout << "Next round! " << round << std::endl;
+		}
+	}
+}
+
+void Controller::PrepareNextGeneration()
+{
+	// Genetic algorithm
+	int points_pill_cow = cow->GetPointsFindPillCow();
+	int points_weapon_cow = cow->GetPointsFindWeaponCow();
+	int points_hiding_cow = cow->GetPointsHidingCow();
+	int points_fleeing_cow = cow->GetPointsFleeingCow();
+
+	// Create a collection of the points
+	std::vector<std::pair<EnumState, int>> collection;
+	collection.push_back(std::pair<EnumState, int>(EnumState::COW_FIND_PILL, points_pill_cow));
+	collection.push_back(std::pair<EnumState, int>(EnumState::COW_FIND_WEAPON, points_weapon_cow));
+	collection.push_back(std::pair<EnumState, int>(EnumState::COW_HIDING, points_hiding_cow));
+	collection.push_back(std::pair<EnumState, int>(EnumState::COW_FLEEING, points_fleeing_cow));
+
+	// Sort the collection
+	std::sort(collection.begin(), collection.end(), [](std::pair<EnumState, int>& first_elem, std::pair<EnumState, int>& second_elem)
+	{
+		return first_elem.second > second_elem.second;
+	});
+
+	// Select highest
+	bool different_numbers = false;
+	for (int i = 0; i < collection.size(); i++)
+	{
+		if (collection.at(0).second != collection.at(i).second)
+		{
+			different_numbers = true;
+			break;
+		}
+	}
+
+	std::pair<EnumState, int> highest;
+	std::pair<EnumState, int> random;
+
+	if (different_numbers)
+	{
+		highest = collection.at(0);
+		random = collection.at(Utils::RandomNumber(1, collection.size() - 1));
+	}
+	else
+	{
+		int a, b;
+		a = Utils::RandomNumber(collection.size() - 1);
+
+		do
+		{
+			b = Utils::RandomNumber(collection.size() - 1);
+		} while (a == b);
+
+		highest = collection.at(a);
+		random = collection.at(b);
+	}
+
+	// Change state chances
+	for (int i = 0; i < 2; i++)
+	{
+		std::pair<EnumState, int> temp;
+		if (i == 0)
+			temp = highest;
+		else
+			temp = random;
+
+		// Change the chance of the selected state
+		switch (temp.first)
+		{
+			case EnumState::COW_FIND_PILL:
+				pill_number += 10;
+				break;
+			case EnumState::COW_FIND_WEAPON:
+				weapon_number += 10;
+				break;
+			case EnumState::COW_HIDING:
+				hide_number += 10;
+				break;
+			case EnumState::COW_FLEEING:
+				flee_number += 10;
+				break;
 		}
 	}
 }
